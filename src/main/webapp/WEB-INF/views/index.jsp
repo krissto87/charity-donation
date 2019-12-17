@@ -18,15 +18,15 @@
 <section class="stats">
     <div class="container container--85">
         <div class="stats--item">
-            <em>13</em>
+            <em>${countOfBags}</em>
 
-            <h3>Oddanych worków</h3>
+            <h3><fmt:message key="pages.index.stats.bags.sum"/></h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius est beatae, quod accusamus illum
                 tempora!</p>
         </div>
 
         <div class="stats--item">
-            <em>${countInstitutions}</em>
+            <em>${countOfInstitutions}</em>
             <h3><fmt:message key="pages.index.stats.institutions.count"/></h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas
                 quam.</p>

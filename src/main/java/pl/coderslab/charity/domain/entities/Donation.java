@@ -3,6 +3,7 @@ package pl.coderslab.charity.domain.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -31,8 +32,10 @@ public class Donation {
     private String city;
     @Column(nullable = false)
     private String zipCode;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private LocalDate pickUpDate;
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(nullable = false)
     private LocalTime pickUpTime;
     private String pickUpComment;

@@ -1,6 +1,6 @@
-package pl.coderslab.charity.services;
+package krissto87.charity.services;
 
-import pl.coderslab.charity.domain.entities.Category;
+import krissto87.charity.domain.entities.Category;
 
 import java.util.List;
 

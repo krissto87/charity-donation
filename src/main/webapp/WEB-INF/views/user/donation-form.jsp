@@ -63,6 +63,17 @@
             <div data-step="1" class="active">
                 <h3><spring:message code="pages.form.step1.head"/></h3>
 
+<%--                    <c:forEach items="${categories}" var="category">--%>
+<%--                        <div class="form-group form-group--checkbox">--%>
+<%--                            <label>--%>
+<%--                                <form:checkbox path="categories" value="${category}"/>--%>
+<%--                                    <span class="checkbox"></span>--%>
+<%--                                    <span class="description">${category.name}</span>--%>
+<%--                                <form:errors path="categories" element="p"/>--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                    </c:forEach>--%>
+
                     <form:checkboxes path="categories" items="${categories}"
                                      itemValue="id" itemLabel="name" element="span class='checkbox'"/>
                     <form:errors path="categories" element="p"/>
@@ -94,8 +105,22 @@
             <div data-step="3">
                 <h3><spring:message code="pages.form.step3.head"/> </h3>
 
-                <form:select path="institution" items="${institutions}" itemValue="id" itemLabel="name"/>
-                <form:errors path="institution" element="p"/>
+                <c:forEach items="${institutions}" var="institution">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <form:radiobutton path="institution" value="${institution}"/>
+                            <span class="checkbox radio"></span>
+                            <span class="description">
+                                <div class="title">${institution.name}</div>
+                                <div class="subtitle">${institution.description}</div>
+                            </span>
+                            <form:errors path="institution" element="p"/>
+                        </label>
+                    </div>
+                </c:forEach>
+
+<%--                <form:select path="institution" items="${institutions}" itemValue="id" itemLabel="name"/>--%>
+<%--                <form:errors path="institution" element="p"/>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step"><spring:message code="pages.form.button.previous"/></button>
@@ -173,7 +198,7 @@
                 </div>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step"><spring:message code="pages.form.button.previous"/></button>
-                    <button type="button" class="btn next-step"><spring:message code="pages.form.button.next"/></button>
+                    <button id="summary" type="button" class="btn next-step"><spring:message code="pages.form.button.next"/></button>
                 </div>
             </div>
 
@@ -188,15 +213,11 @@
                             <li>
                                 <span class="icon icon-bag"></span>
                                 <span class="summary--text">
-                                ${donation.quantity}
-                                <spring:message code="pages.form.summary.first"/>
-                                ${donation.categories}</span>
+                                3 <spring:message code="pages.form.summary.first"/> książki</span>
                             </li>
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text">
-                                <spring:message code="pages.form.summary.second"/>
-                                ${donation.institution}</span>
+                                <span class="summary--text"><spring:message code="pages.form.summary.second"/> Fundacja “Bez domu”</span>
                             </li>
                         </ul>
                     </div>
@@ -231,7 +252,6 @@
         </form:form>
     </div>
 </section>
-
 
 <footer>
     <jsp:include page="/WEB-INF/views/fragments/footer.jsp"/>

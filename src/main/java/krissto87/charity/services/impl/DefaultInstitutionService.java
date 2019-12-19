@@ -1,10 +1,10 @@
-package pl.coderslab.charity.services.impl;
+package krissto87.charity.services.impl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.coderslab.charity.domain.entities.Institution;
-import pl.coderslab.charity.domain.repository.InstitutionRepository;
-import pl.coderslab.charity.services.InstitutionService;
+import krissto87.charity.domain.entities.Institution;
+import krissto87.charity.domain.repository.InstitutionRepository;
+import krissto87.charity.services.InstitutionService;
 
 import java.util.List;
 

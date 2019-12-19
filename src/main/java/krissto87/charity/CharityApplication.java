@@ -1,4 +1,4 @@
-package pl.coderslab.charity;
+package krissto87.charity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

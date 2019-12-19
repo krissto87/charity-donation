@@ -1,14 +1,13 @@
-package pl.coderslab.charity.services.impl;
+package krissto87.charity.services.impl;
 
 
+import krissto87.charity.services.DonationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import pl.coderslab.charity.domain.entities.Donation;
-import pl.coderslab.charity.domain.repository.DonationRepository;
-import pl.coderslab.charity.dtos.AddDonationDTO;
-import pl.coderslab.charity.services.DonationService;
+import krissto87.charity.domain.entities.Donation;
+import krissto87.charity.domain.repository.DonationRepository;
+import krissto87.charity.dtos.AddDonationDTO;
 
 @Service
 @Transactional

@@ -1,5 +1,6 @@
-package pl.coderslab.charity.controllers;
+package krissto87.charity.controllers;
 
+import krissto87.charity.services.DonationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.charity.dtos.AddDonationDTO;
-import pl.coderslab.charity.services.CategoryService;
-import pl.coderslab.charity.services.DonationService;
-import pl.coderslab.charity.services.InstitutionService;
+import krissto87.charity.dtos.AddDonationDTO;
+import krissto87.charity.services.CategoryService;
+import krissto87.charity.services.InstitutionService;
 
 import javax.validation.Valid;
 

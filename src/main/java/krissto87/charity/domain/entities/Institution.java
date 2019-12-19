@@ -1,4 +1,4 @@
-package pl.coderslab.charity.domain.entities;
+package krissto87.charity.domain.entities;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

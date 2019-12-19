@@ -1,5 +1,6 @@
 package pl.coderslab.charity.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,7 @@ import pl.coderslab.charity.services.InstitutionService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/donation")
+@RequestMapping("/donation") @Slf4j
 public class DonationController {
 
     private final CategoryService categoryService;
@@ -37,12 +38,14 @@ public class DonationController {
     }
 
     @PostMapping
-    public String processDonationForm(@ModelAttribute("donation") @Valid AddDonationDTO donationDTO,
-                                      BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "user/donation-form";
-//        }
+    public String processDonationForm(@ModelAttribute("donation")
+                                          @Valid AddDonationDTO donationDTO, BindingResult result) {
+        log.debug("Donation data: {}", donationDTO);
+        if (result.hasErrors()) {
+            return "user/donation-form";
+        }
         donationService.saveDonation(donationDTO);
+        log.info("Dodano kolejny dar!");
         return "redirect:/donation/form-confirmation";
     }
 }

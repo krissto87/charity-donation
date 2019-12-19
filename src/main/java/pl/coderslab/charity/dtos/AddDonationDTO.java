@@ -23,9 +23,9 @@ public class AddDonationDTO {
     private String street;
     @NotBlank
     private String city;
-    @NotBlank @Min(5) @Max(6)
+    @NotBlank
     private String zipCode;
-    @NotBlank @Min(9) @Max(13)
+    @NotBlank
     private String phoneNumber;
     @NotNull @FutureOrPresent @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;

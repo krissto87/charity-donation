@@ -3,12 +3,14 @@ package pl.coderslab.charity.domain.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
 @Getter @Setter
+@ToString
 @EqualsAndHashCode(of = "id")
 public class Category {
 

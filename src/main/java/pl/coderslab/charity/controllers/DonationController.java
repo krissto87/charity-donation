@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.charity.dtos.AddDonationDTO;
 import pl.coderslab.charity.services.CategoryService;
 import pl.coderslab.charity.services.DonationService;
 import pl.coderslab.charity.services.InstitutionService;
@@ -26,6 +27,7 @@ public class DonationController {
     public String prepareDonationForm(Model model) {
         model.addAttribute("categories", categoryService.findAllCategory());
         model.addAttribute("institutions", institutionService.findAllInstitutions());
+        model.addAttribute("donation", new AddDonationDTO());
         return "/user/donation-form";
     }
 }

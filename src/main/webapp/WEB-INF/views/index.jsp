@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <fmt:message key="pages.index.head.title" var="title"/>
+    <spring:message code="pages.index.head.title" var="title"/>
     <jsp:include page="/WEB-INF/views/fragments/head.jsp">
         <jsp:param name="title" value="${title}"/>
     </jsp:include>
@@ -20,14 +20,14 @@
         <div class="stats--item">
             <em>${countOfBags}</em>
 
-            <h3><fmt:message key="pages.index.stats.bags.sum"/></h3>
+            <h3><spring:message code="pages.index.stats.bags.sum"/></h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius est beatae, quod accusamus illum
                 tempora!</p>
         </div>
 
         <div class="stats--item">
             <em>${countOfInstitutions}</em>
-            <h3><fmt:message key="pages.index.stats.institutions.count"/></h3>
+            <h3><spring:message code="pages.index.stats.institutions.count"/></h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas
                 quam.</p>
         </div>
@@ -76,11 +76,11 @@
 </section>
 
 <section class="help">
-    <h2><fmt:message key="pages.index.institutions"/></h2>
+    <h2><spring:message code="pages.index.institutions"/></h2>
 
     <!-- SLIDE 1 -->
     <div class="help--slides active" data-id="1">
-        <p><fmt:message key="pages.index.institutions.slogan"/></p>
+        <p><spring:message code="pages.index.institutions.slogan"/></p>
 
         <ul class="help--slides-items">
             <li>

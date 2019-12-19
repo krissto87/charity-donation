@@ -11,7 +11,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Data
-public class GiveDonationDTO {
+public class AddDonationDTO {
 
     @NotNull
     private Integer quantity;

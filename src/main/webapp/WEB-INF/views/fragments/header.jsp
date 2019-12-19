@@ -6,24 +6,24 @@
 <%--<header>--%>
 <nav class="container container--70">
     <ul class="nav--actions">
-        <li><a href="" class="btn btn--small btn--without-border"><fmt:message key="pages.header.login"/></a></li>
-        <li><a href="#" class="btn btn--small btn--highlighted"><fmt:message key="pages.header.register"/></a></li>
+        <li><a href="" class="btn btn--small btn--without-border"><spring:message code="pages.header.login"/></a></li>
+        <li><a href="#" class="btn btn--small btn--highlighted"><spring:message code="pages.header.register"/></a></li>
     </ul>
 
     <ul>
-        <li><a href="#" class="btn btn--without-border active"><fmt:message key="pages.header.menu.start"/></a></li>
-        <li><a href="#" class="btn btn--without-border"><fmt:message key="pages.header.menu.what"/></a></li>
-        <li><a href="#" class="btn btn--without-border"><fmt:message key="pages.header.menu.about"/></a></li>
-        <li><a href="#" class="btn btn--without-border"><fmt:message key="pages.header.menu.fund"/></a></li>
-        <li><a href="#" class="btn btn--without-border"><fmt:message key="pages.header.menu.contact"/></a></li>
+        <li><a href="#" class="btn btn--without-border active"><spring:message code="pages.header.menu.start"/></a></li>
+        <li><a href="#" class="btn btn--without-border"><spring:message code="pages.header.menu.what"/></a></li>
+        <li><a href="#" class="btn btn--without-border"><spring:message code="pages.header.menu.about"/></a></li>
+        <li><a href="#" class="btn btn--without-border"><spring:message code="pages.header.menu.fund"/></a></li>
+        <li><a href="#" class="btn btn--without-border"><spring:message code="pages.header.menu.contact"/></a></li>
     </ul>
 </nav>
 
 <div class="slogan container container--90">
     <div class="slogan--item">
         <h1>
-            <fmt:message key="pages.header.menu.slogan.main"/> <br/>
-            <fmt:message key="pages.header.menu.slogan.sub"/>
+            <spring:message code="pages.header.menu.slogan.main"/> <br/>
+            <spring:message code="pages.header.menu.slogan.sub"/>
         </h1>
     </div>
 </div>

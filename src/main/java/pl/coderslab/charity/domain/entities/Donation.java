@@ -30,14 +30,15 @@ public class Donation {
     private String street;
     @Column(nullable = false)
     private String city;
-    @Column(nullable = false)
+    @Column(name = "zip_code", nullable = false)
     private String zipCode;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(nullable = false)
+    @Column(name="pick_up_date", nullable = false)
     private LocalDate pickUpDate;
     @DateTimeFormat(pattern = "HH:mm")
-    @Column(nullable = false)
+    @Column(name = "pick_up_time", nullable = false)
     private LocalTime pickUpTime;
+    @Column(name = "pick_up_comment")
     private String pickUpComment;
 
 }

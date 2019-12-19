@@ -13,10 +13,12 @@ import java.util.List;
 @Data
 public class AddDonationDTO {
 
-    @NotNull
+    @NotNull @Min(1)
     private Integer quantity;
+    @NotNull
     private List<Category> categories;
-    private Institution institutions;
+    @NotNull
+    private Institution institution;
     @NotBlank
     private String street;
     @NotBlank
@@ -25,9 +27,9 @@ public class AddDonationDTO {
     private String zipCode;
     @NotBlank @Min(9) @Max(13)
     private String phoneNumber;
-    @NotBlank @FutureOrPresent @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull @FutureOrPresent @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
-    @NotBlank @DateTimeFormat(pattern = "HH:mm")
+    @NotNull @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickUpTime;
     private String pickUpComment;
 

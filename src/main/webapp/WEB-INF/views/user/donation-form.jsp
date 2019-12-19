@@ -15,21 +15,42 @@
 <body>
 <header class="header--form-page">
     <jsp:include page="/WEB-INF/views/user/user-header.jsp"/>
+
+    <div class="slogan container container--90">
+        <div class="slogan--item">
+            <h1>
+                Oddaj rzeczy, których już nie chcesz<br />
+                <span class="uppercase">potrzebującym</span>
+            </h1>
+
+            <div class="slogan--steps">
+                <div class="slogan--steps-title">Wystarczą 4 proste kroki:</div>
+                <ul class="slogan--steps-boxes">
+                    <li>
+                        <div><em>1</em><span>Wybierz rzeczy</span></div>
+                    </li>
+                    <li>
+                        <div><em>2</em><span>Spakuj je w worki</span></div>
+                    </li>
+                    <li>
+                        <div><em>3</em><span>Wybierz fundację</span></div>
+                    </li>
+                    <li>
+                        <div><em>4</em><span>Zamów kuriera</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </header>
 
 <section class="form--steps">
     <div class="form--steps-instructions">
         <div class="form--steps-container">
             <h3><spring:message code="pages.form.instructions.head"/></h3>
-            <p data-step="1" class="active">
-                <spring:message code="pages.form.instructions.step1"/>
-            </p>
-            <p data-step="2">
-                <spring:message code="pages.form.instructions.step2"/>
-            </p>
-            <p data-step="3">
-                <spring:message code="pages.form.instructions.step3"/>
-            </p>
+            <p data-step="1" class="active"><spring:message code="pages.form.instructions.step1"/></p>
+            <p data-step="2"><spring:message code="pages.form.instructions.step2"/></p>
+            <p data-step="3"><spring:message code="pages.form.instructions.step3"/></p>
             <p data-step="4"><spring:message code="pages.form.instructions.step4"/></p>
         </div>
     </div>
@@ -37,13 +58,13 @@
     <div class="form--steps-container">
         <div class="form--steps-counter"><spring:message code="pages.form.steps.counter"/><span>1</span>/4</div>
 
-        <form action="form-confirmation.html" method="post">
+        <form:form modelAttribute="donation" method="post">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3><spring:message code="pages.form.step1.head"/></h3>
 
                     <form:checkboxes path="categories" items="${categories}"
-                                     itemValue="id" itemLabel="name"/>
+                                     itemValue="id" itemLabel="name" element="span class='checkbox'"/>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step"><spring:message code="pages.form.button.next"/></button>
@@ -57,7 +78,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         <spring:message code="pages.form.step2.label"/>
-                        <input type="number" name="bags" step="1" min="1" />
+                        <form:input path="quantity" required="true" type="number" step="1" min="1"/>
                     </label>
                 </div>
 
@@ -71,18 +92,7 @@
             <div data-step="3">
                 <h3><spring:message code="pages.form.step3.head"/> </h3>
 
-                <c:forEach items="${institutions}" var="institution">
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input type="radio" name="institution" value="old" />
-                            <span class="checkbox radio"></span>
-                            <span class="description">
-                  <div class="title">${institution.name}</div>
-                  <div class="subtitle">${institution.description}</div>
-                </span>
-                        </label>
-                    </div>
-                </c:forEach>
+                <form:select path="institution" items="${institutions}" itemValue="id" itemLabel="name"/>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step"><spring:message code="pages.form.button.previous"/></button>
@@ -97,35 +107,57 @@
                 <div class="form-section form-section--columns">
                     <div class="form-section--column">
                         <h4><spring:message code="pages.form.step4.address"/></h4>
+
                         <div class="form-group form-group--inline">
-                            <label><spring:message code="pages.form.step4.street"/> <input type="text" name="address" /> </label>
+                            <form:label path="street">
+                                <spring:message code="pages.form.step4.street"/>
+                                <form:input type="text" path="street" required="true"/>
+                            </form:label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label><spring:message code="pages.form.step4.city"/> <input type="text" name="city" /> </label>
+                            <form:label path="city">
+                                <spring:message code="pages.form.step4.city"/>
+                                <form:input type="text" path="city" required="true"/>
+                            </form:label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label><spring:message code="pages.form.step4.zip"/> <input type="text" name="postcode" /> </label>
+                            <form:label path="zipCode">
+                                <spring:message code="pages.form.step4.zip"/>
+                                <form:input type="text" path="zipCode" required="true"/>
+                            </form:label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label><spring:message code="pages.form.step4.phone"/> <input type="phone" name="phone" /> </label>
+                            <form:label path="phoneNumber">
+                                <spring:message code="pages.form.step4.phone"/>
+                                <form:input type="phone" path="phoneNumber" required="true"/>
+                            </form:label>
                         </div>
                     </div>
 
                     <div class="form-section--column">
                         <h4><spring:message code="pages.form.step4.date"/></h4>
                         <div class="form-group form-group--inline">
-                            <label><spring:message code="pages.form.step4.day"/> <input type="date" name="data" /> </label>
+                            <form:label path="pickUpDate">
+                                <spring:message code="pages.form.step4.day"/>
+                                <form:input type="date" path="pickUpDate" required="true"/>
+                            </form:label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label><spring:message code="pages.form.step4.hour"/> <input type="time" name="time" /> </label>
+                            <form:label path="pickUpTime">
+                                <spring:message code="pages.form.step4.hour"/>
+                                <form:input type="time" path="pickUpTime" required="true"/>
+                            </form:label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label><spring:message code="pages.form.step4.comment"/> <textarea name="more_info" rows="5"></textarea> </label>
+                            <form:label path="pickUpComment">
+                                <spring:message code="pages.form.step4.comment"/>
+                                <form:textarea path="pickUpComment"/>
+                            </form:label>
                         </div>
                     </div>
                 </div>
@@ -145,16 +177,14 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >${bags} worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                <span class="summary--text">
+                                        ${donation.quantity} worki ubrań w dobrym stanie dla dzieci</span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla ${institution}</span
-                                >
+                                <span class="summary--text">
+                                    Dla ${donation.institution}</span>
                             </li>
                         </ul>
                     </div>
@@ -186,7 +216,8 @@
                     <button type="submit" class="btn">Potwierdzam</button>
                 </div>
             </div>
-        </form>
+        </form:form>
+<%--        </form>--%>
     </div>
 </section>
 

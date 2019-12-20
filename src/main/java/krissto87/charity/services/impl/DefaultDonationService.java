@@ -30,4 +30,9 @@ public class DefaultDonationService implements DonationService {
         Donation donation = mapper.map(donationDTO, Donation.class);
         donationRepository.save(donation);
     }
+
+    @Override
+    public Long countOfInstitutionsWithDonations() {
+        return donationRepository.countOfInstitutionWithDonation();
+    }
 }

@@ -24,7 +24,7 @@ public class HomeController {
     @GetMapping
     public String homeAction(Model model){
         model.addAttribute("institutions", institutionService.findAllInstitutions());
-        model.addAttribute("countOfInstitutions", institutionService.countOfInstitutions());
+        model.addAttribute("countOfInstitutions", donationService.countOfInstitutionsWithDonations());
         model.addAttribute("countOfBags", donationService.sumBagsFromAllDonations());
         return "index";
     }

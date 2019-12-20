@@ -16,9 +16,9 @@ public class AddDonationDTO {
     @NotNull @Min(1)
     private Integer quantity;
     @NotNull
-    private List<Category> categories;
+    private List<Category> categories; //lista obiektow kageorii dto, moze starczy tylko id? lista longow a pole cagetogiresId
     @NotNull
-    private Institution institution;
+    private Institution institution; // zamiast instytucja to long i instytution id
     @NotBlank
     private String street;
     @NotBlank

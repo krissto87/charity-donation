@@ -75,7 +75,7 @@
 <%--                    </c:forEach>--%>
 
                     <form:checkboxes path="categories" items="${categories}"
-                                     itemValue="id" itemLabel="name" element="span class='checkbox'"/>
+                                     itemValue="id" itemLabel="name"/>
                     <form:errors path="categories" element="p"/>
 
                 <div class="form-group form-group--buttons">

@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface InstitutionService {
     List<Institution> findAllInstitutions();
-
-    Long countOfInstitutions();
 }

@@ -6,4 +6,6 @@ public interface DonationService {
     Long sumBagsFromAllDonations();
 
     void saveDonation(AddDonationDTO donationDTO);
+
+    Long countOfInstitutionsWithDonations();
 }

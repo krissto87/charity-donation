@@ -22,9 +22,4 @@ public class DefaultInstitutionService implements InstitutionService {
     public List<Institution> findAllInstitutions() {
         return institutionRepository.findAll();
     }
-
-    @Override
-    public Long countOfInstitutions() {
-        return institutionRepository.count();
-    }
 }

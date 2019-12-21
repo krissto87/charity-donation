@@ -12,7 +12,7 @@
     </jsp:include>
 </head>
 <body>
-<header class="header--main-page">
+<header>
 <nav class="container container--70">
     <ul class="nav--actions">
         <li><a href="#"><spring:message code="pages.header.login"/></a></li>

@@ -19,11 +19,11 @@
     </ul>
 
     <ul>
-        <li><a href="index.html" class="btn btn--without-border active"><spring:message code="pages.header.menu.start"/></a></li>
-        <li><a href="index.html#steps" class="btn btn--without-border"><spring:message code="pages.header.menu.what"/></a></li>
-        <li><a href="index.html#about-us" class="btn btn--without-border"><spring:message code="pages.header.menu.about"/></a></li>
-        <li><a href="index.html#help" class="btn btn--without-border"><spring:message code="pages.header.menu.fund"/></a></li>
-        <li><a href="index.html#contact" class="btn btn--without-border"><spring:message code="pages.header.menu.contact"/></a></li>
+        <li><a href="/" class="btn btn--without-border active"><spring:message code="pages.header.menu.start"/></a></li>
+        <li><a href="/#steps" class="btn btn--without-border"><spring:message code="pages.header.menu.what"/></a></li>
+        <li><a href="/#about-us" class="btn btn--without-border"><spring:message code="pages.header.menu.about"/></a></li>
+        <li><a href="/#help" class="btn btn--without-border"><spring:message code="pages.header.menu.fund"/></a></li>
+        <li><a href="/#contact" class="btn btn--without-border"><spring:message code="pages.header.menu.contact"/></a></li>
     </ul>
 </nav>
 

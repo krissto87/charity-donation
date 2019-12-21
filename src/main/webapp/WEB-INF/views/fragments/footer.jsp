@@ -4,7 +4,7 @@
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<footer>--%>
-<div class="contact">
+<div class="contact" id="contact">
     <h2><spring:message code="pages.footer.contact"/></h2>
     <h3><spring:message code="pages.footer.contact-form"/></h3>
     <form class="form--contact">

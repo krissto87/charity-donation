@@ -63,16 +63,15 @@
             <div data-step="1" class="active">
                 <h3><spring:message code="pages.form.step1.head"/></h3>
 
-<%--                    <c:forEach items="${categories}" var="category">--%>
-<%--                        <div class="form-group form-group--checkbox">--%>
-<%--                            <label>--%>
-<%--                                <form:checkbox path="categories" value="${category}"/>--%>
-<%--                                    <span class="checkbox"></span>--%>
-<%--                                    <span class="description">${category.name}</span>--%>
-<%--                                <form:errors path="categories" element="p"/>--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                    </c:forEach>--%>
+<%--                <c:forEach items="${categories}" var="category">--%>
+<%--                    <div class="form-group form-group--checkbox">--%>
+<%--                        <label>--%>
+<%--                            <form:checkbox path="categories" value="${category}"/>--%>
+<%--                            <span class="checkbox"></span>--%>
+<%--                            <span class="description">${category.name}</span>--%>
+<%--                        </label>--%>
+<%--                    </div>--%>
+<%--                </c:forEach>--%>
 
                     <form:checkboxes path="categories" items="${categories}"
                                      itemValue="id" itemLabel="name"/>

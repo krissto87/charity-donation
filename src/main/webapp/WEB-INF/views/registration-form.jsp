@@ -33,6 +33,11 @@
     <h2><spring:message code="pages.header.register"/></h2>
     <form:form method="post" modelAttribute="registrationData">
         <div class="form-group">
+            <spring:message code="pages.register.email" var="emailPlaceholder"/>
+            <form:input path="email" required="true" placeholder="${emailPlaceholder}"/>
+            <form:errors path="email" element="p"/>
+        </div>
+        <div class="form-group">
             <spring:message code="pages.register.name" var="namePlaceholder"/>
             <form:input path="name" required="true" placeholder="${namePlaceholder}"/>
             <form:errors path="name" element="p"/>
@@ -41,11 +46,6 @@
             <spring:message code="pages.register.surname" var="surnamePlaceholder"/>
             <form:input path="surname" required="true" placeholder="${surnamePlaceholder}"/>
             <form:errors path="surname" element="p"/>
-        </div>
-        <div class="form-group">
-            <spring:message code="pages.register.email" var="emailPlaceholder"/>
-            <form:input path="email" required="true" placeholder="${emailPlaceholder}"/>
-            <form:errors path="email" element="p"/>
         </div>
         <div class="form-group">
             <spring:message code="pages.register.password" var="passwordPlaceholder"/>

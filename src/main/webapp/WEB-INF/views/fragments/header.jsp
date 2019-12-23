@@ -7,7 +7,7 @@
 <nav class="container container--70">
     <ul class="nav--actions">
         <li><a href="" class="btn btn--small btn--without-border"><spring:message code="pages.header.login"/></a></li>
-        <li><a href="#" class="btn btn--small btn--highlighted"><spring:message code="pages.header.register"/></a></li>
+        <li><a href="/registration" class="btn btn--small btn--highlighted"><spring:message code="pages.header.register"/></a></li>
     </ul>
 
     <ul>

@@ -6,12 +6,12 @@ import javax.validation.constraints.*;
 @Data
 public class RegistrationDataDTO {
 
+    @NotBlank @Email
+    private String email;
     @NotBlank
     private String name;
     @NotBlank
     private String surname;
-    @NotBlank @Email
-    private String email;
     @NotBlank @Size(min = 4, max = 12)
     private String password;
     @NotBlank @Size(min = 4, max = 12)

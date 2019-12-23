@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import krissto87.charity.dtos.AddDonationDTO;
+import krissto87.charity.dtos.DonationDTO;
 import krissto87.charity.services.CategoryService;
 import krissto87.charity.services.InstitutionService;
 
@@ -33,13 +33,13 @@ public class DonationController {
     public String prepareDonationForm(Model model) {
         model.addAttribute("categories", categoryService.findAllCategory());
         model.addAttribute("institutions", institutionService.findAllInstitutions());
-        model.addAttribute("donation", new AddDonationDTO());
+        model.addAttribute("donation", new DonationDTO());
         return "/user/donation-form";
     }
 
     @PostMapping
     public String processDonationForm(@ModelAttribute("donation")
-                                          @Valid AddDonationDTO donationDTO, BindingResult result) {
+                                          @Valid DonationDTO donationDTO, BindingResult result) {
         log.debug("Donation data: {}", donationDTO);
         if (result.hasErrors()) {
             return "user/donation-form";

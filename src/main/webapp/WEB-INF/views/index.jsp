@@ -36,37 +36,37 @@
 </section>
 
 <section class="steps" id="steps">
-    <h2>Wystarczą 4 proste kroki</h2>
+    <h2><spring:message code="pages.form.header.slogan.steps"/></h2>
 
     <div class="steps--container">
         <div class="steps--item">
             <span class="icon icon--hands"></span>
-            <h3>Wybierz rzeczy</h3>
-            <p>ubrania, zabawki, sprzęt i inne</p>
+            <h3><spring:message code="pages.form.header.slogan.step1"/></h3>
+            <p><spring:message code="pages.index.steps.items"/></p>
         </div>
         <div class="steps--item">
             <span class="icon icon--arrow"></span>
-            <h3>Spakuj je</h3>
-            <p>skorzystaj z worków na śmieci</p>
+            <h3><spring:message code="pages.index.steps.pack"/></h3>
+            <p><spring:message code="pages.index.steps.use"/></p>
         </div>
         <div class="steps--item">
             <span class="icon icon--glasses"></span>
-            <h3>Zdecyduj komu chcesz pomóc</h3>
-            <p>wybierz zaufane miejsce</p>
+            <h3><spring:message code="pages.index.steps.who"/></h3>
+            <p><spring:message code="pages.index.steps.target"/></p>
         </div>
         <div class="steps--item">
             <span class="icon icon--courier"></span>
-            <h3>Zamów kuriera</h3>
-            <p>kurier przyjedzie w dogodnym terminie</p>
+            <h3><spring:message code="pages.index.steps.courier"/></h3>
+            <p><spring:message code="pages.index.steps.term"/></p>
         </div>
     </div>
 
-    <a href="/registration" class="btn btn--large">Załóż konto</a>
+    <a href="/registration" class="btn btn--large"><spring:message code="pages.header.register"/></a>
 </section>
 
 <section class="about-us" id="about-us">
     <div class="about-us--text">
-        <h2>O nas</h2>
+        <h2><spring:message code="pages.header.menu.about"/></h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero
             optio esse quisquam illo omnis.</p>
         <img src="<c:url value="/resources/images/signature.svg"/>" class="about-us--text-signature" alt="Signature"/>

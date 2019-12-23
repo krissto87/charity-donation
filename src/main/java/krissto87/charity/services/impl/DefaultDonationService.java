@@ -7,16 +7,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import krissto87.charity.domain.entities.Donation;
 import krissto87.charity.domain.repository.DonationRepository;
-import krissto87.charity.dtos.AddDonationDTO;
+import krissto87.charity.dtos.DonationDTO;
 
 @Service
 @Transactional
 public class DefaultDonationService implements DonationService {
 
     private final DonationRepository donationRepository;
+    private final ModelMapper mapper;
 
-    public DefaultDonationService(DonationRepository donationRepository) {
+    public DefaultDonationService(DonationRepository donationRepository, ModelMapper mapper) {
         this.donationRepository = donationRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -25,8 +27,7 @@ public class DefaultDonationService implements DonationService {
     }
 
     @Override
-    public void saveDonation(AddDonationDTO donationDTO) {
-        ModelMapper mapper = new ModelMapper();
+    public void saveDonation(DonationDTO donationDTO) {
         Donation donation = mapper.map(donationDTO, Donation.class);
         donationRepository.save(donation);
     }

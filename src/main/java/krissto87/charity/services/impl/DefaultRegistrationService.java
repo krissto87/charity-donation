@@ -18,16 +18,17 @@ public class DefaultRegistrationService implements RegistrationService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ModelMapper mapper;
 
-    public DefaultRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
+    public DefaultRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository, ModelMapper mapper) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.mapper = mapper;
     }
 
     @Override
     public void register(RegistrationDataDTO registrationData) {
-        ModelMapper mapper = new ModelMapper();
         User user = mapper.map(registrationData, User.class);
         user.setActive(Boolean.TRUE);
         String encodedPassword = passwordEncoder.encode(registrationData.getPassword());

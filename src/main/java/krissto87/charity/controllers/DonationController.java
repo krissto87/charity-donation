@@ -16,7 +16,7 @@ import krissto87.charity.services.InstitutionService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/donation") @Slf4j
+@RequestMapping("/user/donation") @Slf4j
 public class DonationController {
 
     private final CategoryService categoryService;
@@ -46,6 +46,6 @@ public class DonationController {
         }
         donationService.saveDonation(donationDTO);
         log.info("Dodano kolejny dar!");
-        return "redirect:/donation/form-confirmation";
+        return "redirect:/user/donation/form-confirmation";
     }
 }

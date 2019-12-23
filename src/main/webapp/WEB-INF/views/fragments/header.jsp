@@ -6,7 +6,7 @@
 <%--<header>--%>
 <nav class="container container--70">
     <ul class="nav--actions">
-        <li><a href="" class="btn btn--small btn--without-border"><spring:message code="pages.header.login"/></a></li>
+        <li><a href="/login" class="btn btn--small btn--without-border"><spring:message code="pages.header.login"/></a></li>
         <li><a href="/registration" class="btn btn--small btn--highlighted"><spring:message code="pages.header.register"/></a></li>
     </ul>
 
@@ -15,17 +15,8 @@
         <li><a href="#steps" class="btn btn--without-border"><spring:message code="pages.header.menu.what"/></a></li>
         <li><a href="#about-us" class="btn btn--without-border"><spring:message code="pages.header.menu.about"/></a></li>
         <li><a href="#help" class="btn btn--without-border"><spring:message code="pages.header.menu.fund"/></a></li>
-        <li><a href="/donation" class="btn btn--without-border"><spring:message code="pages.header.menu.give"/></a></li>
+        <li><a href="/user/donation" class="btn btn--without-border"><spring:message code="pages.header.menu.give"/></a></li>
         <li><a href="#contact" class="btn btn--without-border"><spring:message code="pages.header.menu.contact"/></a></li>
     </ul>
 </nav>
-
-<div class="slogan container container--90">
-    <div class="slogan--item">
-        <h1>
-            <spring:message code="pages.header.menu.slogan.main"/> <br/>
-            <spring:message code="pages.header.menu.slogan.sub"/>
-        </h1>
-    </div>
-</div>
 <%--</header>--%>

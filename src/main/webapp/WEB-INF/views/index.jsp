@@ -13,6 +13,15 @@
 <body>
 <header class="header--main-page">
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
+
+    <div class="slogan container container--90">
+        <div class="slogan--item">
+            <h1>
+                <spring:message code="pages.header.menu.slogan.main"/> <br/>
+                <spring:message code="pages.header.menu.slogan.sub"/>
+            </h1>
+        </div>
+    </div>
 </header>
 
 <section class="stats">

@@ -13,9 +13,24 @@
 
                 <ul class="dropdown">
                     <sec:authorize access="hasRole('USER')">
-                    <li><a href="/user"><spring:message code="pages.user.header.profile"/></a></li>
-                    <li><a href="/user/settings"><spring:message code="pages.user.header.settings"/></a></li>
-                    <li><a href="/user/collection"><spring:message code="pages.user.header.collection"/></a></li>
+                    <li>
+                        <c:url var="userDashboard" value="/user"/>
+                        <a href="${userDashboard}">
+                            <spring:message code="pages.user.header.profile"/>
+                        </a>
+                    </li>
+                    <li>
+                        <c:url var="userSettings" value="/user/settings"/>
+                        <a href="${userSettings}">
+                            <spring:message code="pages.user.header.settings"/>
+                        </a>
+                    </li>
+                    <li>
+                        <c:url var="userCollection" value="/user/collection"/>
+                        <a href="${userCollection}">
+                            <spring:message code="pages.user.header.collection"/>
+                        </a>
+                    </li>
                     </sec:authorize>
                     <li>
                         <c:url var="logoutURL" value="/logout"/>
@@ -32,19 +47,52 @@
 
     <ul class="nav--actions">
         <sec:authorize access="!isAuthenticated()">
-        <li><a href="/login" class="btn btn--small btn--without-border"><spring:message code="pages.header.login"/></a></li>
-        <li><a href="/registration" class="btn btn--small btn--highlighted"><spring:message code="pages.header.register"/></a></li>
+        <li>
+            <c:url var="login" value="/login"/>
+            <a href="${login}" class="btn btn--small btn--without-border">
+                <spring:message code="pages.header.login"/>
+            </a>
+        </li>
+        <li>
+            <c:url var="registration" value="/registration"/>
+            <a href="${registration}" class="btn btn--small btn--highlighted">
+                <spring:message code="pages.header.register"/>
+            </a>
+        </li>
         </sec:authorize>
     </ul>
 
     <ul>
-        <li><a href="/" class="btn btn--without-border active"><spring:message code="pages.header.menu.start"/></a></li>
-        <li><a href="#steps" class="btn btn--without-border"><spring:message code="pages.header.menu.what"/></a></li>
-        <li><a href="#about-us" class="btn btn--without-border"><spring:message code="pages.header.menu.about"/></a></li>
-        <li><a href="#help" class="btn btn--without-border"><spring:message code="pages.header.menu.fund"/></a></li>
-        <sec:authorize access="!isAuthenticated()">
-        <li><a href="/user/donation" class="btn btn--without-border"><spring:message code="pages.header.menu.give"/></a></li>
-        </sec:authorize>
+        <li>
+            <c:url var="home" value="/"/>
+            <a href="${home}" class="btn btn--without-border active">
+                <spring:message code="pages.header.menu.start"/>
+            </a>
+        </li>
+        <li>
+            <c:url var="steps" value="/#steps"/>
+            <a href="${steps}" class="btn btn--without-border">
+                <spring:message code="pages.header.menu.what"/>
+            </a>
+        </li>
+        <li>
+            <c:url var="aboutUs" value="/#about-us"/>
+            <a href="${aboutUs}" class="btn btn--without-border">
+                <spring:message code="pages.header.menu.about"/>
+            </a>
+        </li>
+        <li>
+            <c:url var="help" value="/#help"/>
+            <a href="${help}" class="btn btn--without-border">
+                <spring:message code="pages.header.menu.fund"/>
+            </a>
+        </li>
+        <li>
+            <c:url var="userDonation" value="/user/donation"/>
+            <a href="${userDonation}" class="btn btn--without-border">
+                <spring:message code="pages.header.menu.give"/>
+            </a>
+        </li>
         <li><a href="#contact" class="btn btn--without-border"><spring:message code="pages.header.menu.contact"/></a></li>
     </ul>
 </nav>

@@ -28,16 +28,24 @@
                 <div class="slogan--steps-title"><spring:message code="pages.form.header.slogan.steps"/></div>
                 <ul class="slogan--steps-boxes">
                     <li>
-                        <div><em>1</em><span><spring:message code="pages.form.header.slogan.step1"/></span></div>
+                        <div>
+                            <em>1</em><span><spring:message code="pages.form.header.slogan.step1"/></span>
+                        </div>
                     </li>
                     <li>
-                        <div><em>2</em><span><spring:message code="pages.form.header.slogan.step2"/></span></div>
+                        <div>
+                            <em>2</em><span><spring:message code="pages.form.header.slogan.step2"/></span>
+                        </div>
                     </li>
                     <li>
-                        <div><em>3</em><span><spring:message code="pages.form.header.slogan.step3"/></span></div>
+                        <div>
+                            <em>3</em><span><spring:message code="pages.form.header.slogan.step3"/></span>
+                        </div>
                     </li>
                     <li>
-                        <div><em>4</em><span><spring:message code="pages.form.header.slogan.step4"/></span></div>
+                        <div>
+                            <em>4</em><span><spring:message code="pages.form.header.slogan.step4"/></span>
+                        </div>
                     </li>
                 </ul>
             </div>

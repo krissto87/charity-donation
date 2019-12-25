@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FormConfirmController {
 
-    @RequestMapping("/donation/form-confirmation")
+    @RequestMapping("user/donation/confirmation")
     public String processFormConfirmation() {
-        return "user/form-confirmation";
+        return "/user/form-confirmation";
     }
 }

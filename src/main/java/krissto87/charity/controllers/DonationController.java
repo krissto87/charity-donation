@@ -46,6 +46,6 @@ public class DonationController {
         }
         donationService.saveDonation(donationDTO);
         log.info("Dodano kolejny dar!");
-        return "redirect:/user/donation/form-confirmation";
+        return "redirect:/user/donation/confirmation";
     }
 }

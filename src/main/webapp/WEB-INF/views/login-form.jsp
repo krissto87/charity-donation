@@ -14,7 +14,20 @@
 </head>
 <body>
 <header>
-    <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
+    <nav class="container container--70">
+        <ul class="nav--actions">
+            <li><a href="/login"><spring:message code="pages.header.login"/></a></li>
+            <li class="highlighted"><a href="#"><spring:message code="pages.header.register"/></a></li>
+        </ul>
+
+        <ul>
+            <li><a href="/" class="btn btn--without-border active"><spring:message code="pages.header.menu.start"/></a></li>
+            <li><a href="/#steps" class="btn btn--without-border"><spring:message code="pages.header.menu.what"/></a></li>
+            <li><a href="/#about-us" class="btn btn--without-border"><spring:message code="pages.header.menu.about"/></a></li>
+            <li><a href="/#help" class="btn btn--without-border"><spring:message code="pages.header.menu.fund"/></a></li>
+            <li><a href="/#contact" class="btn btn--without-border"><spring:message code="pages.header.menu.contact"/></a></li>
+        </ul>
+    </nav>
 </header>
 
 <section class="login-page">

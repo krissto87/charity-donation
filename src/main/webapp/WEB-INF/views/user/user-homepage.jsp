@@ -7,18 +7,18 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <spring:message code="pages.form.confirmation.title" var="title"/>
+    <spring:message code="pages.user.home.title" var="title"/>
     <jsp:include page="/WEB-INF/views/fragments/head.jsp">
         <jsp:param name="title" value="${title}"/>
     </jsp:include>
 </head>
 <body>
 <header class="header--form-page">
-    <jsp:include page="/WEB-INF/views/user/user-header.jsp"/>
+    <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
 
     <div class="slogan container container--90">
         <h2>
-            Strona usera w budowie ;-)
+
         </h2>
     </div>
 </header>

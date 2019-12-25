@@ -14,13 +14,10 @@
 </head>
 <body>
 <header class="header--form-page">
-    <jsp:include page="/WEB-INF/views/user/user-header.jsp"/>
+    <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
 
     <div class="slogan container container--90">
-        <h2>
-            Dziękujemy za przesłanie formularza Na maila prześlemy wszelkie
-            informacje o odbiorze.
-        </h2>
+        <h2><spring:message code="pages.form.confirmation.slogan"/></h2>
     </div>
 </header>
 

@@ -15,7 +15,7 @@
 </head>
 <body>
 <header class="header--form-page">
-    <jsp:include page="/WEB-INF/views/user/user-header.jsp"/>
+    <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
 
     <div class="slogan container container--90">
         <div class="slogan--item">

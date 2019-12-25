@@ -7,14 +7,16 @@
 <%--<header>--%>
 <nav class="container container--70">
     <ul class="nav--actions">
-        <sec:authorize access="hasRole('USER')">
+        <sec:authorize access="isAuthenticated()">
         <li class="logged-user">
                 <spring:message code="pages.user.header.welcome"/> ${pageContext.request.userPrincipal.name}
 
                 <ul class="dropdown">
+                    <sec:authorize access="hasRole('USER')">
                     <li><a href="/user"><spring:message code="pages.user.header.profile"/></a></li>
                     <li><a href="/user/settings"><spring:message code="pages.user.header.settings"/></a></li>
                     <li><a href="/user/collection"><spring:message code="pages.user.header.collection"/></a></li>
+                    </sec:authorize>
                     <li>
                         <c:url var="logoutURL" value="/logout"/>
                         <form method="post" action="${logoutURL}">

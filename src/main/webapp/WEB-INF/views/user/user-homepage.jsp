@@ -16,11 +16,9 @@
 <header class="header--form-page">
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
 
-    <div class="slogan container container--90">
-        <h2>
-
-        </h2>
-    </div>
+    <section class="login-page">
+        <h2><spring:message code="pages.user.slogan"/></h2>
+    </section>>
 </header>
 
 <footer>

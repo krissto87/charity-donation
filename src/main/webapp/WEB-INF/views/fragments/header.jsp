@@ -13,29 +13,29 @@
 
                 <ul class="dropdown">
                     <sec:authorize access="hasRole('USER')">
-                    <li>
-                        <c:url var="userDashboard" value="/user"/>
+                    <li class="btn btn--small nav--actions">
+                        <c:url var="userDashboard" value="/user/profile"/>
                         <a href="${userDashboard}">
                             <spring:message code="pages.user.header.profile"/>
                         </a>
                     </li>
-                    <li>
+                    <li class="btn btn--small nav--actions">
                         <c:url var="userSettings" value="/user/settings"/>
                         <a href="${userSettings}">
                             <spring:message code="pages.user.header.settings"/>
                         </a>
                     </li>
-                    <li>
+                    <li class="btn btn--small nav--actions">
                         <c:url var="userCollection" value="/user/collection"/>
                         <a href="${userCollection}">
                             <spring:message code="pages.user.header.collection"/>
                         </a>
                     </li>
                     </sec:authorize>
-                    <li>
+                    <li class="btn btn--small nav--actions">
                         <c:url var="logoutURL" value="/logout"/>
                         <form method="post" action="${logoutURL}">
-                            <button class="btn btn--small btn--without-border" type="submit">
+                            <button class="btn btn--small nav--actions" type="submit">
                                 <spring:message code="pages.user.header.logout"/></button>
                             <sec:csrfInput/>
                         </form>

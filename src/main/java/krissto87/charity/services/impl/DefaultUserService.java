@@ -6,6 +6,7 @@ import krissto87.charity.dtos.UserDTO;
 import krissto87.charity.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +17,14 @@ public class DefaultUserService implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper mapper;
+    private final PasswordEncoder encoder;
 
-    public DefaultUserService(UserRepository userRepository, ModelMapper mapper) {
+    public DefaultUserService(UserRepository userRepository, ModelMapper mapper,
+                              PasswordEncoder encoder) {
         this.userRepository = userRepository;
 
         this.mapper = mapper;
+        this.encoder = encoder;
     }
 
     @Override
@@ -39,5 +43,12 @@ public class DefaultUserService implements UserService {
         log.debug("User surname: {}", newSurname);
         log.debug("User id: {}", id);
         userRepository.updateUser(newName, newSurname, id);
+    }
+
+    @Override
+    public void changeUserPassword(String username, String password) {
+        log.debug("New password pre encoding: {}", password);
+        String encodedPassword = encoder.encode(password);
+        userRepository.changeUserPasswordByUsername(username, encodedPassword);
     }
 }

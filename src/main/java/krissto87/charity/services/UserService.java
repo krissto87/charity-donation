@@ -6,4 +6,6 @@ public interface UserService {
     UserDTO findUserByName(String username);
 
     void updateUser(UserDTO userDTO);
+
+    void changeUserPassword(String username, String password);
 }

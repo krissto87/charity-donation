@@ -36,11 +36,6 @@
             <spring:message code="pages.register.surname" var="surnamePlaceholder"/>
             <form:input path="surname" required="true" placeholder="${surnamePlaceholder}"/>
             <form:errors path="surname" element="p"/>
-<%--        </div>        <div class="form-group">--%>
-<%--            <spring:message code="pages.register.password" var="newPasswordPlaceholder"/>--%>
-<%--            <form:input path="password" required="true" placeholder="${newPasswordPlaceholder}"/>--%>
-<%--            <form:errors path="password" element="p"/>--%>
-<%--        </div>--%>
         <div class="form-group form-group--buttons">
             <button class="btn" type="submit"><spring:message code="pages.edit.data.confirm"/></button>
         </div>

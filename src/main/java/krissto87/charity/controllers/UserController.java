@@ -31,14 +31,14 @@ public class UserController {
     }
 
     @PostMapping("/profile")
-    public String processEditUserData(@Valid UserDTO userDTO, BindingResult result) {
+    public String processEditUserData(@Valid UserDTO user, BindingResult result) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
         }
-        if (userDTO != null) {
-            userService.updateUser(userDTO);
+        if (user != null) {
+            userService.updateUser(user);
         }
-        return "redirect:/user";
+        return "redirect:/login";
     }
 
     @GetMapping("/settings")
@@ -53,13 +53,13 @@ public class UserController {
     }
 
     @PostMapping("settings/password-change")
-    public String processPasswordChange(@ModelAttribute("user") @Valid UserDTO userDTO,
+    public String processPasswordChange(@ModelAttribute("user") @Valid UserDTO user,
                                         BindingResult result, Principal principal) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
         }
-        if (userDTO != null) {
-            String password = userDTO.getPassword();
+        if (user != null) {
+            String password = user.getPassword();
             String username = principal.getName();
             userService.changeUserPassword(username, password);
         }

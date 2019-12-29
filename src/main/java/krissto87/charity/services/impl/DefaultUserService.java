@@ -35,14 +35,16 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void updateUser(UserDTO userDTO) {
-        String newName = userDTO.getName();
-        String newSurname = userDTO.getSurname();
-        Long id = userDTO.getId();
+    public void updateUser(UserDTO user) {
+        String newName = user.getName();
+        String newSurname = user.getSurname();
+        String email = user.getEmail();
+        Long id = user.getId();
         log.debug("User name: {}", newName);
         log.debug("User surname: {}", newSurname);
         log.debug("User id: {}", id);
-        userRepository.updateUser(newName, newSurname, id);
+        log.debug("User email: {}", email);
+        userRepository.updateUser(newName, newSurname, email, id);
     }
 
     @Override

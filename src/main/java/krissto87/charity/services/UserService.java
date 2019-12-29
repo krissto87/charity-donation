@@ -5,7 +5,7 @@ import krissto87.charity.dtos.UserDTO;
 public interface UserService {
     UserDTO findUserByName(String username);
 
-    void updateUser(UserDTO userDTO);
+    void updateUser(UserDTO user);
 
     void changeUserPassword(String username, String password);
 }

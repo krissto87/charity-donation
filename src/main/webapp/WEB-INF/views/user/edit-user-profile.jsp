@@ -18,13 +18,15 @@
 
 <section class="login-page">
     <h2><spring:message code="pages.header.edit.data"/></h2>
+    <p><spring:message code="pages.header.edit.warning"/></p>
     <form:form method="post" modelAttribute="user">
         <form:hidden path="id"/>
-<%--        <div class="form-group">--%>
-<%--            <spring:message code="pages.register.email" var="emailPlaceholder"/>--%>
-<%--            <form:input path="email" required="true" placeholder="${emailPlaceholder}"/>--%>
-<%--            <form:errors path="email" element="p"/>--%>
-<%--        </div>--%>
+        <div class="form-group">
+            <form:label path="name"><spring:message code="pages.edit.data.email"/></form:label>
+            <spring:message code="pages.register.email" var="emailPlaceholder"/>
+            <form:input path="email" required="true" placeholder="${emailPlaceholder}"/>
+            <form:errors path="email" element="p"/>
+        </div>
         <div class="form-group">
             <form:label path="name"><spring:message code="pages.edit.data.name"/></form:label>
             <spring:message code="pages.register.name" var="namePlaceholder"/>
@@ -36,6 +38,7 @@
             <spring:message code="pages.register.surname" var="surnamePlaceholder"/>
             <form:input path="surname" required="true" placeholder="${surnamePlaceholder}"/>
             <form:errors path="surname" element="p"/>
+        </div>
         <div class="form-group form-group--buttons">
             <button class="btn" type="submit"><spring:message code="pages.edit.data.confirm"/></button>
         </div>

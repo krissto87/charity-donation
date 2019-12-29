@@ -1,9 +1,9 @@
 package krissto87.charity.dtos;
 
 import krissto87.charity.domain.entities.Category;
+import krissto87.charity.domain.entities.Institution;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-import krissto87.charity.domain.entities.Institution;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;

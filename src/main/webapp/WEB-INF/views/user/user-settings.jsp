@@ -18,19 +18,12 @@
 
     <section class="login-page">
         <h2><spring:message code="pages.user.settings.slogan"/></h2>
-        <div class="about-us--text">
-            <p>
-                <c:url var="usernameChange" value="/user/settings/username-change"/>
-                <a href="${usernameChange}">
-                    <spring:message code="pages.user.setting.email-change"/>
-                </a>
-
+            <h3>
                 <c:url var="PasswordChange" value="/user/settings/password-change"/>
                 <a href="${PasswordChange}">
                     <spring:message code="pages.user.setting.password-change"/>
                 </a>
-            </p>
-        </div>
+            </h3>
     </section>
 </header>
 

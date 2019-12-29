@@ -39,12 +39,12 @@ public class DonationController {
 
     @PostMapping
     public String processDonationForm(@ModelAttribute("donation")
-                                          @Valid DonationDTO donationDTO, BindingResult result) {
-        log.debug("Donation data: {}", donationDTO);
+                                          @Valid DonationDTO donation, BindingResult result) {
+        log.debug("Donation data: {}", donation);
         if (result.hasErrors()) {
             return "user/donation-form";
         }
-        donationService.saveDonation(donationDTO);
+        donationService.saveDonation(donation);
         log.info("Dodano kolejny dar!");
         return "redirect:/user/donation/confirmation";
     }

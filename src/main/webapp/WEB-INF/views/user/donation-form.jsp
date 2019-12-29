@@ -72,19 +72,20 @@
             <div data-step="1" class="active">
                 <h3><spring:message code="pages.form.step1.head"/></h3>
 
-<%--                <c:forEach items="${categories}" var="category">--%>
-<%--                    <div class="form-group form-group--checkbox">--%>
-<%--                        <label>--%>
-<%--                            <form:checkbox path="categories" value="${category}"/>--%>
-<%--                            <span class="checkbox"></span>--%>
-<%--                            <span class="description">${category.name}</span>--%>
-<%--                        </label>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
+                <c:forEach items="${categories}" var="category">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <form:checkbox path="categoriesId" value="${category.id}"/>
+                            <form:errors path="categoriesId" element="p"/>
+                            <span class="checkbox"></span>
+                            <span class="description">${category.name}</span>
+                        </label>
+                    </div>
+                </c:forEach>
 
-                    <form:checkboxes path="categories" items="${categories}"
-                                     itemValue="id" itemLabel="name"/>
-                    <form:errors path="categories" element="p"/>
+<%--                    <form:checkboxes path="categoriesId" items="${categories}"--%>
+<%--                                     itemValue="id" itemLabel="name"/>--%>
+<%--                    <form:errors path="categoriesId" element="p"/>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step"><spring:message code="pages.form.button.next"/></button>
@@ -113,22 +114,22 @@
             <div data-step="3">
                 <h3><spring:message code="pages.form.step3.head"/> </h3>
 
-<%--                <c:forEach items="${institutions}" var="institution">--%>
-<%--                    <div class="form-group form-group--checkbox">--%>
-<%--                        <label>--%>
-<%--                            <form:radiobutton path="institutionId" value="${institution}"/>--%>
-<%--                            <span class="checkbox radio"></span>--%>
-<%--                            <span class="description">--%>
-<%--                                <div class="title">${institution.name}</div>--%>
-<%--                                <div class="subtitle">${institution.description}</div>--%>
-<%--                            </span>--%>
-<%--                            <form:errors path="institutionId" element="p"/>--%>
-<%--                        </label>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
+                <c:forEach items="${institutions}" var="institution">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <form:radiobutton path="institutionId" value="${institution.id}"/>
+                            <span class="checkbox radio"></span>
+                            <span class="description">
+                                <div class="title">${institution.name}</div>
+                                <div class="subtitle">${institution.description}</div>
+                            </span>
+                            <form:errors path="institutionId" element="p"/>
+                        </label>
+                    </div>
+                </c:forEach>
 
-                <form:select path="institution" items="${institutions}" itemValue="id" itemLabel="name"/>
-                <form:errors path="institution" element="p"/>
+<%--                <form:select path="institutionId" items="${institutions}" itemValue="id" itemLabel="name"/>--%>
+<%--                <form:errors path="institutionId" element="p"/>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step"><spring:message code="pages.form.button.previous"/></button>

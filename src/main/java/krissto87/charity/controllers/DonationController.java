@@ -40,7 +40,7 @@ public class DonationController {
     @PostMapping
     public String processDonationForm(@ModelAttribute("donation")
                                           @Valid DonationDTO donation, BindingResult result) {
-        log.debug("Donation data: {}", donation);
+        log.debug("DonationDTO data: {}", donation);
         if (result.hasErrors()) {
             return "user/donation-form";
         }

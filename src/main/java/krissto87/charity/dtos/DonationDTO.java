@@ -1,7 +1,5 @@
 package krissto87.charity.dtos;
 
-import krissto87.charity.domain.entities.Category;
-import krissto87.charity.domain.entities.Institution;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,9 +14,9 @@ public class DonationDTO {
     @NotNull @Min(1)
     private Integer quantity;
     @NotNull
-    private List<Category> categories; //lista obiektow kageorii dto, moze starczy tylko id? lista longow a pole cagetogiresId
+    private List<Long> categoriesId;
     @NotNull
-    private Institution institution; // zamiast instytucja to long i instytution id
+    private Long institutionId;
     @NotBlank
     private String street;
     @NotBlank

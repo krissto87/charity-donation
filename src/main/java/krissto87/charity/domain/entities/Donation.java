@@ -42,4 +42,5 @@ public class Donation {
     @Column(name = "pick_up_comment")
     private String pickUpComment;
 
+
 }

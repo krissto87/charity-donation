@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository <User, Long> {
     @Transactional
     @Query(value = "UPDATE users SET password = ?2 WHERE email = ?1",nativeQuery = true)
     void changeUserPasswordByUsername(String username, String encodedPassword);
+
 }
+

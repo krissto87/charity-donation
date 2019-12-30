@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;

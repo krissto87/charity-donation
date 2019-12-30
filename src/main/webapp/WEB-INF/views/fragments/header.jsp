@@ -26,8 +26,8 @@
                         </a>
                     </li>
                     <li class="btn btn--small nav--actions">
-                        <c:url var="userCollection" value="/user/collection"/>
-                        <a href="${userCollection}">
+                        <c:url var="userDonations" value="/user/donation/all"/>
+                        <a href="${userDonations}">
                             <spring:message code="pages.user.header.collection"/>
                         </a>
                     </li>

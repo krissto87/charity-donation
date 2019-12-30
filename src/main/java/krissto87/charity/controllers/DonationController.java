@@ -1,6 +1,7 @@
 package krissto87.charity.controllers;
 
 import krissto87.charity.services.DonationService;
+import krissto87.charity.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import krissto87.charity.services.CategoryService;
 import krissto87.charity.services.InstitutionService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/donation") @Slf4j
@@ -47,5 +49,13 @@ public class DonationController {
         donationService.saveDonation(donation);
         log.info("Dodano kolejny dar!");
         return "redirect:/user/donation/confirmation";
+    }
+
+    @GetMapping("/all")
+    public String displayAllUserDonation(Model model) {
+        String username = SecurityUtils.getUsername();
+        List<DonationDTO> donations = donationService.findAllByUser(username);
+        model.addAttribute("donations", donations);
+        return "user/donation-all";
     }
 }

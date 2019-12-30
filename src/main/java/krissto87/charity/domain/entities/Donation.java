@@ -3,10 +3,12 @@ package krissto87.charity.domain.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @Table (name = "donations")
 @Getter @Setter
+@ToString
 @EqualsAndHashCode(of = "id")
 public class Donation {
 
@@ -42,5 +45,15 @@ public class Donation {
     @Column(name = "pick_up_comment")
     private String pickUpComment;
 
+    @ManyToOne
+    @JoinColumn(name = "donor_id")
+    private User donor;
+    private Boolean delivered;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "create_time")
+    private LocalDateTime createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "deliver_time")
+    private LocalDateTime deliverTime;
 
 }

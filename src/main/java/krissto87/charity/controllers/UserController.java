@@ -2,6 +2,7 @@ package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.UserDTO;
 import krissto87.charity.services.UserService;
+import krissto87.charity.utils.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -23,8 +23,8 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String prepareEditUserDataPage(Model model, Principal principal) {
-        String username = principal.getName();
+    public String prepareEditUserDataPage(Model model) {
+        String username = SecurityUtils.getUsername();
         UserDTO user = userService.findUserByName(username);
         model.addAttribute("user", user);
         return "user/edit-user-profile";
@@ -54,13 +54,13 @@ public class UserController {
 
     @PostMapping("settings/password-change")
     public String processPasswordChange(@ModelAttribute("user") @Valid UserDTO user,
-                                        BindingResult result, Principal principal) {
+                                        BindingResult result) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
         }
         if (user != null) {
             String password = user.getPassword();
-            String username = principal.getName();
+            String username = SecurityUtils.getUsername();
             userService.changeUserPassword(username, password);
         }
         return "redirect:/user";

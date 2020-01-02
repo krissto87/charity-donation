@@ -1,15 +1,13 @@
 package krissto87.charity.controllers;
 
+import krissto87.charity.dtos.CourierStatusDTO;
 import krissto87.charity.services.DonationService;
 import krissto87.charity.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import krissto87.charity.dtos.DonationDTO;
 import krissto87.charity.services.CategoryService;
 import krissto87.charity.services.InstitutionService;
@@ -57,5 +55,21 @@ public class DonationController {
         List<DonationDTO> donations = donationService.findAllByUser(username);
         model.addAttribute("donations", donations);
         return "user/donation-all";
+    }
+
+    @GetMapping("/pick-up-confirm/{id}")
+    public String prepareConfirmCourierVisit(Model model, @PathVariable Long id) {
+        CourierStatusDTO status = donationService.findById(id);
+        model.addAttribute("status", status);
+        return "user/pick-up-confirmation";
+    }
+
+    @PostMapping("/pick-up-confirm/{id}")
+    public String processConfirmCourierVisit(@Valid CourierStatusDTO statusDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "user/donation-all";
+        }
+        donationService.confirmCourierVisit(statusDTO);
+        return "redirect:/user/donation/all";
     }
 }

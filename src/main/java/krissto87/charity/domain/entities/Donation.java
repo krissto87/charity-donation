@@ -49,10 +49,10 @@ public class Donation {
     @JoinColumn(name = "donor_id")
     private User donor;
     private Boolean delivered;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "create_time")
     private LocalDateTime createTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "deliver_time")
     private LocalDateTime deliverTime;
 

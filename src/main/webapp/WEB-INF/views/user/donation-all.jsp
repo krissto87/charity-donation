@@ -21,34 +21,41 @@
         <h2>Moje dary</h2>
             <table>
                     <tr>
-                        <td> Lp: </td>
+
+                        <td> <b> Lp: </b></td>
                         <td> Ilość worków: </td>
                         <td> Status: </td>
                         <td> Data dodania: </td>
                         <td> Szczegóły obioru kuriera:</td>
                         <td> Szczegóły daru:</td>
+
                     </tr>
                     <for:forEach items="${donations}" var="donation" varStatus="stat">
+
                         <tr>
                             <td>${stat.count}</td>
                             <td>${donation.quantity}</td>
+
                             <td>
                             <c:choose>
-                                <c:when test = "${donation.delivered=!true}">
-                                <p> <c:out value ="odebrany"/><p>
+                                <c:when test = "${donation.delivered==false}">
+                                <p> <c:out value ="nieoebrany"/><p>
                                 </c:when>
                                 <c:otherwise>
-                                    <p> <c:out value="nieodebrany"/></p>
+                                    <p> <c:out value="odebrany"/></p>
                                 </c:otherwise>
                             </c:choose>
-                                <c:url var="pickUpConfirm" value="/user/donation/pick-up-confirm"/>
-                                <c:if test="${donation.delivered=true}">
+                                <c:url var="pickUpConfirm" value="/user/donation/pick-up-confirm/${donation.id}"/>
+                                <c:if test="${donation.delivered==false}">
                                     <a href="${pickUpConfirm}">
                                         <strong><c:out value="Potwierdz odbiór"/></strong>
                                     </a>
                                 </c:if>
                             </td>
-                            <td> ${donation.createTime} </td>
+                            <td>
+                            <fmt:parseDate value="${donation.createTime}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
+                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${parsedDateTime}" />
+                            </td>
                             <td>
                                 <c:url var="donationDetails" value="/user/donation/details"/>
                                 <a href="${donationDetails}">Wiecej</a>

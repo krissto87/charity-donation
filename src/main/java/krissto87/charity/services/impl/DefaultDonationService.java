@@ -3,6 +3,7 @@ package krissto87.charity.services.impl;
 import krissto87.charity.domain.repository.CategoryRepository;
 import krissto87.charity.domain.repository.InstitutionRepository;
 import krissto87.charity.domain.repository.UserRepository;
+import krissto87.charity.dtos.CourierStatusDTO;
 import krissto87.charity.services.DonationService;
 import krissto87.charity.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import krissto87.charity.domain.repository.DonationRepository;
 import krissto87.charity.dtos.DonationDTO;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,14 +30,17 @@ public class DefaultDonationService implements DonationService {
     private final InstitutionRepository institutionRepository;
     private final CategoryRepository categoryRepository;
     private final ModelMapper mapper;
+    private final DateTimeFormatter dateTimeFormatter;
 
     public DefaultDonationService(DonationRepository donationRepository, UserRepository userRepository,
-                                  InstitutionRepository institutionRepository, CategoryRepository categoryRepository, ModelMapper mapper) {
+                                  InstitutionRepository institutionRepository, CategoryRepository categoryRepository,
+                                  ModelMapper mapper, DateTimeFormatter dateTimeFormatter) {
         this.donationRepository = donationRepository;
         this.userRepository = userRepository;
         this.institutionRepository = institutionRepository;
         this.categoryRepository = categoryRepository;
         this.mapper = mapper;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
@@ -58,7 +63,9 @@ public class DefaultDonationService implements DonationService {
         donation.setPickUpComment(donationDTO.getPickUpComment());
         donation.setDonor(userRepository.findUserByEmail(SecurityUtils.getUsername()));
         log.debug("Donor: {}", donation.getDonor());
-        donation.setCreateTime(LocalDateTime.now());
+        String now = LocalDateTime.now().format(dateTimeFormatter);
+        donation.setCreateTime(LocalDateTime.parse(now, dateTimeFormatter));
+        donation.setDelivered(false);
         log.debug("Donation object before save {}", donation);
         donationRepository.save(donation);
     }
@@ -72,6 +79,18 @@ public class DefaultDonationService implements DonationService {
     public List<DonationDTO> findAllByUser(String username) {
         List<Donation> donations = donationRepository.findAllWithUser(username);
         log.debug("Donations by User: {}", donations);
-        return donations.stream().map(d-> mapper.map(d, DonationDTO.class)).collect(Collectors.toList());
+        return donations.stream().map(d -> mapper.map(d, DonationDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public CourierStatusDTO findById(Long id) {
+       return mapper.map((donationRepository.findById(id)).get(), CourierStatusDTO.class);
+
+    }
+
+    @Override
+    public void confirmCourierVisit(CourierStatusDTO statusDTO) {
+        donationRepository.updateUserStatus(statusDTO.getDelivered(), statusDTO.getId(),
+                LocalDateTime.now().format(dateTimeFormatter));
     }
 }

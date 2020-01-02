@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 public class DonationDTO {
 
+    private Long id;
     @NotNull @Min(1)
     private Integer quantity;
     @NotNull
@@ -33,7 +34,7 @@ public class DonationDTO {
     private String pickUpComment;
 
     private Boolean delivered;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
 }

@@ -3,13 +3,14 @@ package krissto87.charity.domain.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "institutions")
 @Getter @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id") @ToString
 public class Institution {
 
     @Id

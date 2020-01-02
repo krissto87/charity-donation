@@ -16,59 +16,52 @@
 <body>
 <header class="header--form-page">
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
-
-    <section class="login-page">
-        <h2>Moje dary</h2>
-            <table>
-                    <tr>
-
-                        <td> <b> Lp: </b></td>
-                        <td> Ilość worków: </td>
-                        <td> Status: </td>
-                        <td> Data dodania: </td>
-                        <td> Szczegóły obioru kuriera:</td>
-                        <td> Szczegóły daru:</td>
-
-                    </tr>
-                    <for:forEach items="${donations}" var="donation" varStatus="stat">
-
-                        <tr>
-                            <td>${stat.count}</td>
-                            <td>${donation.quantity}</td>
-
-                            <td>
-                            <c:choose>
-                                <c:when test = "${donation.delivered==false}">
-                                <p> <c:out value ="nieoebrany"/><p>
-                                </c:when>
-                                <c:otherwise>
-                                    <p> <c:out value="odebrany"/></p>
-                                </c:otherwise>
-                            </c:choose>
-                                <c:url var="pickUpConfirm" value="/user/donation/pick-up-confirm/${donation.id}"/>
-                                <c:if test="${donation.delivered==false}">
-                                    <a href="${pickUpConfirm}">
-                                        <strong><c:out value="Potwierdz odbiór"/></strong>
-                                    </a>
-                                </c:if>
-                            </td>
-                            <td>
-                            <fmt:parseDate value="${donation.createTime}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
-                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${parsedDateTime}" />
-                            </td>
-                            <td>
-                                <c:url var="donationDetails" value="/user/donation/details"/>
-                                <a href="${donationDetails}">Wiecej</a>
-                            </td>
-                            <td>
-                                <c:url var="pickUpDetails" value="/user/donation/pick-up-details"/>
-                                <a href="${pickUpDetails}">Wiecej</a>
-                            </td>
-                        </tr>
-                    </for:forEach>
-            </table>
-    </section>
+    <h2>Moje dary:</h2>
 </header>
+<section class="login-page">
+    <table>
+        <tr>
+            <td><strong>Lp:</strong></td>
+            <td><strong>Status:</strong></td>
+            <td><strong>Data dodania:</strong></td>
+            <td><strong>Szczegóły daru:</strong></td>
+            <td><strong>Kurier szczegóły:</strong></td>
+        </tr>
+        <for:forEach items="${donations}" var="donation" varStatus="stat">
+            <tr>
+                <td>${stat.count}</td>
+                <td>
+                    <c:choose>
+                        <c:when test = "${donation.delivered==false}">
+                            <p> <c:out value ="nieoebrany"/><p>
+                        </c:when>
+                        <c:otherwise>
+                            <p> <c:out value="odebrany"/></p>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:url var="pickUpConfirm" value="/user/donation/pick-up-confirm/${donation.id}"/>
+                    <c:if test="${donation.delivered==false}">
+                        <a href="${pickUpConfirm}">
+                            <strong><c:out value="Potwierdz odbiór"/></strong>
+                        </a>
+                    </c:if>
+                </td>
+                <td>
+                    <fmt:parseDate value="${donation.createTime}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
+                    <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${parsedDateTime}" />
+                </td>
+                <td>
+                    <c:url var="donationDetails" value="/user/donation/${donation.id}/details"/>
+                    <a href="${donationDetails}">Wiecej</a>
+                </td>
+                <td>
+                    <c:url var="pickUpDetails" value="/user/donation/pick-up-details"/>
+                    <a href="${pickUpDetails}">Wiecej</a>
+                </td>
+            </tr>
+        </for:forEach>
+    </table>
+</section>
 
 <footer>
     <jsp:include page="/WEB-INF/views/fragments/footer.jsp"/>

@@ -10,8 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "categories")
 @Getter @Setter
-@ToString
-@EqualsAndHashCode(of = "id")
+@ToString @EqualsAndHashCode(of = "id")
 public class Category {
 
     @Id

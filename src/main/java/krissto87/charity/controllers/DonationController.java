@@ -59,7 +59,7 @@ public class DonationController {
 
     @GetMapping("/pick-up-confirm/{id}")
     public String prepareConfirmCourierVisit(Model model, @PathVariable Long id) {
-        CourierStatusDTO status = donationService.findById(id);
+        CourierStatusDTO status = donationService.findToSetStatusById(id);
         model.addAttribute("status", status);
         return "user/pick-up-confirmation";
     }
@@ -71,5 +71,11 @@ public class DonationController {
         }
         donationService.confirmCourierVisit(statusDTO);
         return "redirect:/user/donation/all";
+    }
+
+    @GetMapping("/{id}/details")
+    public String displayDonationDetails(Model model, @PathVariable Long id) {
+        model.addAttribute("donation", donationService.findById(id));
+        return "user/donation-details";
     }
 }

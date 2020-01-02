@@ -1,9 +1,13 @@
 package krissto87.charity.services.impl;
 
+import krissto87.charity.domain.entities.Category;
+import krissto87.charity.domain.entities.Institution;
 import krissto87.charity.domain.repository.CategoryRepository;
 import krissto87.charity.domain.repository.InstitutionRepository;
 import krissto87.charity.domain.repository.UserRepository;
+import krissto87.charity.dtos.CategoryDTO;
 import krissto87.charity.dtos.CourierStatusDTO;
+import krissto87.charity.dtos.DonationDetailsDTO;
 import krissto87.charity.services.DonationService;
 import krissto87.charity.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +18,12 @@ import krissto87.charity.domain.entities.Donation;
 import krissto87.charity.domain.repository.DonationRepository;
 import krissto87.charity.dtos.DonationDTO;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -83,9 +90,8 @@ public class DefaultDonationService implements DonationService {
     }
 
     @Override
-    public CourierStatusDTO findById(Long id) {
+    public CourierStatusDTO findToSetStatusById(Long id) {
        return mapper.map((donationRepository.findById(id)).get(), CourierStatusDTO.class);
-
     }
 
     @Override
@@ -93,4 +99,14 @@ public class DefaultDonationService implements DonationService {
         donationRepository.updateUserStatus(statusDTO.getDelivered(), statusDTO.getId(),
                 LocalDateTime.now().format(dateTimeFormatter));
     }
+
+    @Override
+    public DonationDetailsDTO findById(Long id) {
+        Donation donation = donationRepository.findById(id).get();
+        DonationDetailsDTO donationDTO = mapper.map(donation, DonationDetailsDTO.class);
+        log.debug("DonationDetailsDTO: {}", donationDTO);
+        return donationDTO;
+    }
+
 }
+

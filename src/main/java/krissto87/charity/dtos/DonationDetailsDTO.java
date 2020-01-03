@@ -3,6 +3,7 @@ package krissto87.charity.dtos;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,4 +21,7 @@ public class DonationDetailsDTO {
     private LocalDate pickUpDate;
     private LocalTime pickUpTime;
     private String pickUpComment;
+    private Boolean delivered;
+    private LocalDateTime createTime;
+    private LocalDateTime deliverTime;
 }

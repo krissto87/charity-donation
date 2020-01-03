@@ -78,4 +78,10 @@ public class DonationController {
         model.addAttribute("donation", donationService.findById(id));
         return "user/donation-details";
     }
+
+    @GetMapping("{id}/pick-up-details")
+    public String displayCourierDetails(Model model, @PathVariable Long id) {
+        model.addAttribute("donation", donationService.findById(id));
+        return "user/donation-courier";
+    }
 }

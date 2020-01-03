@@ -25,7 +25,7 @@
             <td><strong>Status:</strong></td>
             <td><strong>Data dodania:</strong></td>
             <td><strong>Szczegóły daru:</strong></td>
-            <td><strong>Kurier szczegóły:</strong></td>
+            <td><strong>Szczegóły kuriera:</strong></td>
         </tr>
         <for:forEach items="${donations}" var="donation" varStatus="stat">
             <tr>
@@ -55,7 +55,7 @@
                     <a href="${donationDetails}">Wiecej</a>
                 </td>
                 <td>
-                    <c:url var="pickUpDetails" value="/user/donation/pick-up-details"/>
+                    <c:url var="pickUpDetails" value="/user/donation/${donation.id}/pick-up-details"/>
                     <a href="${pickUpDetails}">Wiecej</a>
                 </td>
             </tr>

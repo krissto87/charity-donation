@@ -84,7 +84,7 @@ public class DefaultDonationService implements DonationService {
 
     @Override
     public List<DonationDTO> findAllByUser(String username) {
-        List<Donation> donations = donationRepository.findAllWithUser(username);
+        List<Donation> donations = donationRepository.findAllByDonorEmailOrderByDelivered(username);
         log.debug("Donations by User: {}", donations);
         return donations.stream().map(d -> mapper.map(d, DonationDTO.class)).collect(Collectors.toList());
     }

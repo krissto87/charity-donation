@@ -27,8 +27,14 @@
             </tr>
             <tr>
                 <td>${donation.institution.name}<br></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <fmt:parseDate value="${donation.createTime}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
+                    <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${parsedDateTime}" />
+                </td>
+                <td>
+                    <fmt:parseDate value="${donation.deliverTime}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
+                    <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${parsedDateTime}" />
+                </td>
                 <td>
                     <c:forEach items="${donation.categories}" var="singleDonation">
                         ${singleDonation.name}<br>

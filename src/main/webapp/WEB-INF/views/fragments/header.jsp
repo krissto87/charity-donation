@@ -107,12 +107,14 @@
                 <spring:message code="pages.header.menu.fund"/>
             </a>
         </li>
+        <sec:authorize access="hasRole('USER')">
         <li>
             <c:url var="userDonation" value="/user/donation"/>
             <a href="${userDonation}" class="btn btn--without-border">
                 <spring:message code="pages.header.menu.give"/>
             </a>
         </li>
+        </sec:authorize>
         <li><a href="#contact" class="btn btn--without-border"><spring:message code="pages.header.menu.contact"/></a></li>
     </ul>
 </nav>

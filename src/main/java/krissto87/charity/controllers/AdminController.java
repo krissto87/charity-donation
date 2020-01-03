@@ -1,77 +1,28 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.dtos.InstitutionDTO;
-import krissto87.charity.services.InstitutionService;
-import lombok.extern.slf4j.Slf4j;
+import krissto87.charity.dtos.AdminDTO;
+import krissto87.charity.services.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin") @Slf4j
+@RequestMapping("/admin/admins-all")
 public class AdminController {
 
-    private final InstitutionService institutionService;
+    private final AdminService adminService;
 
-    public AdminController(InstitutionService institutionService) {
-        this.institutionService = institutionService;
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
     }
 
-    @GetMapping("/institutions")
-    public String displayAllInstitutionPage(Model model) {
-        List<InstitutionDTO> institutions = institutionService.findAllInstitutions();
-        model.addAttribute("institutions", institutions);
-        return "admin/institution-all";
-    }
-
-    @GetMapping("/institutions/add")
-    public String prepareNewInstitutionPage(Model model) {
-        model.addAttribute("institution", new InstitutionDTO());
-        return "admin/institution-form";
-    }
-
-    @PostMapping("/institutions/add")
-    public String processCreateNewInstitution(@ModelAttribute("institution")
-                                                  @Valid InstitutionDTO institution, BindingResult result) {
-        log.debug("InstitutionDTO data: {}", institution);
-        if (result.hasErrors()) {
-            return "admin/institution-form";
-        }
-        institutionService.save(institution);
-        log.info("New institution added!");
-        return "redirect:/admin/institutions";
-    }
-
-    @GetMapping("/institutions/{id}/edit")
-    public String prepareInstitutionEditPage(Model model, @PathVariable Long id) {
-        InstitutionDTO institution = institutionService.findById(id);
-        model.addAttribute("institution", institution);
-        return "admin/edit-institution";
-    }
-
-    @PostMapping("/institutions/{id}/edit")
-    public String processInstitutionUpdate(@Valid InstitutionDTO institutionDTO, BindingResult result) {
-        if (result.hasErrors()) {
-            return "admin/edit-institution";
-        }
-        institutionService.update(institutionDTO);
-        return "redirect:/admin/institutions";
-    }
-
-    @GetMapping("/institutions/{id}/delete")
-    public String prepareEditInstitutionPage(Model model, @PathVariable Long id) {
-        InstitutionDTO institution = institutionService.findById(id);
-        model.addAttribute("institution", institution);
-        return "admin/delete-institution";
-    }
-
-    @PostMapping("/institutions/{id}/delete")
-    public String processDeleteInstitution(@PathVariable Long id) {
-        institutionService.deleteInstitutionById(id);
-        return "redirect:/admin/institutions";
+    @GetMapping
+    public String displayAllAdmins(Model model) {
+        List<AdminDTO> admins = adminService.findAll();
+        model.addAttribute("admins", admins);
+        return "/admin/admins-all";
     }
 }

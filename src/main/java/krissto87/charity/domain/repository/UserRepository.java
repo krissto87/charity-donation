@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface UserRepository extends JpaRepository <User, Long> {
     User findUserByEmail(String username);
 
@@ -19,5 +21,9 @@ public interface UserRepository extends JpaRepository <User, Long> {
     @Query(value = "UPDATE users SET password = ?2 WHERE email = ?1",nativeQuery = true)
     void changeUserPasswordByUsername(String username, String encodedPassword);
 
+    @Query(value = "SELECT * FROM users u JOIN users_roles ur on u.id = ur.user_id WHERE ur.roles_id=1;",nativeQuery = true)
+    List<User> findAllUsersByRoles();
+
+//    List<User> findAllByRoles(Long roleId);
 }
 

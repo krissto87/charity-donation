@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -46,6 +43,22 @@ public class AdminController {
         }
         institutionService.save(institution);
         log.info("New institution added!");
+        return "redirect:/admin/institutions";
+    }
+
+    @GetMapping("/institutions/{id}/edit")
+    public String prepareInstitutionEditPage(Model model, @PathVariable Long id) {
+        InstitutionDTO institution = institutionService.findById(id);
+        model.addAttribute("institution", institution);
+        return "admin/edit-institution";
+    }
+
+    @PostMapping("/institutions/{id}/edit")
+    public String processInstitutionUpdate(@Valid InstitutionDTO institutionDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin/edit-institution";
+        }
+        institutionService.update(institutionDTO);
         return "redirect:/admin/institutions";
     }
 }

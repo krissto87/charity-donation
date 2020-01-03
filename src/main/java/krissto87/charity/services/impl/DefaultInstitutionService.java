@@ -42,4 +42,14 @@ public class DefaultInstitutionService implements InstitutionService {
         log.debug("Institution object before save {}", institution);
         institutionRepository.save(institution);
     }
+
+    @Override
+    public InstitutionDTO findById(Long id) {
+        return mapper.map(institutionRepository.findById(id).get(), InstitutionDTO.class);
+    }
+
+    @Override
+    public void update(InstitutionDTO institutionDTO) {
+        institutionRepository.save(mapper.map(institutionDTO, Institution.class));
+    }
 }

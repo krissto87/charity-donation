@@ -17,7 +17,7 @@
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
 
     <section class="login-page">
-        <h2>Twój pulpit admina</h2>
+        <h2><spring:message code="pages.admin.home.title"/></h2>
     </section>
 </header>
 

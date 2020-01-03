@@ -9,4 +9,8 @@ public interface InstitutionService {
     List<InstitutionDTO> findAllInstitutions();
 
     void save(InstitutionDTO institutionDTO);
+
+    InstitutionDTO findById(Long id);
+
+    void update(InstitutionDTO institutionDTO);
 }

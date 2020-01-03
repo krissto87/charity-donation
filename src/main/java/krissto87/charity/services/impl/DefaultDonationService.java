@@ -1,11 +1,9 @@
 package krissto87.charity.services.impl;
 
-import krissto87.charity.domain.entities.Category;
-import krissto87.charity.domain.entities.Institution;
+
 import krissto87.charity.domain.repository.CategoryRepository;
 import krissto87.charity.domain.repository.InstitutionRepository;
 import krissto87.charity.domain.repository.UserRepository;
-import krissto87.charity.dtos.CategoryDTO;
 import krissto87.charity.dtos.CourierStatusDTO;
 import krissto87.charity.dtos.DonationDetailsDTO;
 import krissto87.charity.services.DonationService;
@@ -18,12 +16,9 @@ import krissto87.charity.domain.entities.Donation;
 import krissto87.charity.domain.repository.DonationRepository;
 import krissto87.charity.dtos.DonationDTO;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -84,7 +79,7 @@ public class DefaultDonationService implements DonationService {
 
     @Override
     public List<DonationDTO> findAllByUser(String username) {
-        List<Donation> donations = donationRepository.findAllByDonorEmailOrderByDelivered(username);
+        List<Donation> donations = donationRepository.findAllWithUserSorted(username);
         log.debug("Donations by User: {}", donations);
         return donations.stream().map(d -> mapper.map(d, DonationDTO.class)).collect(Collectors.toList());
     }

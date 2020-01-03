@@ -32,6 +32,26 @@
                         </a>
                     </li>
                     </sec:authorize>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li class="btn btn--small nav--actions">
+                            <c:url var="allInstitutions" value="/admin/istitution"/>
+                            <a href="${allInstitutions}">
+                                <spring:message code="pages.user.header.admin.institution"/>
+                            </a>
+                        </li>
+                        <li class="btn btn--small nav--actions">
+                            <c:url var="allAdmins" value="/admin/admins-all"/>
+                            <a href="${allAdmins}">
+                                <spring:message code="pages.user.header.admin.all-admins"/>
+                            </a>
+                        </li>
+                        <li class="btn btn--small nav--actions">
+                            <c:url var="allUsers" value="/admin/users-all"/>
+                            <a href="${allUsers}">
+                                <spring:message code="pages.user.header.admin.all-users"/>
+                            </a>
+                        </li>
+                    </sec:authorize>
                     <li class="btn btn--small nav--actions">
                         <c:url var="logoutURL" value="/logout"/>
                         <form method="post" action="${logoutURL}">

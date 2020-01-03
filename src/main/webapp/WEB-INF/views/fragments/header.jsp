@@ -34,7 +34,7 @@
                     </sec:authorize>
                     <sec:authorize access="hasRole('ADMIN')">
                         <li class="btn btn--small nav--actions">
-                            <c:url var="allInstitutions" value="/admin/istitution"/>
+                            <c:url var="allInstitutions" value="/admin/institutions"/>
                             <a href="${allInstitutions}">
                                 <spring:message code="pages.user.header.admin.institution"/>
                             </a>

@@ -16,14 +16,14 @@
 <header class="header--form-page">
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
     <section class="login-page">
-        <h2>Szczegóły daru:</h2>
+        <h2><spring:message code="pages.user.donation-details.header"/></h2>
         <table>
             <tr>
-                <td><strong>Instytucja:</strong></td>
-                <td><strong>Data utworzenia:</strong></td>
-                <td><strong>Data przekazania:</strong></td>
-                <td><strong>Kategoria darów:</strong></td>
-                <td><strong>Ilość worków:</strong></td>
+                <td><strong><spring:message code="pages.user.donation-details.institution"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation-details.create"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation-details.date"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation-details.category"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation-details.bags"/></strong></td>
             </tr>
             <tr>
                 <td>${donation.institution.name}<br></td>

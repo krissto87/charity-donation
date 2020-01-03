@@ -16,16 +16,16 @@
 <body>
 <header class="header--form-page">
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
-    <h2>Moje dary:</h2>
+    <h2><spring:message code="pages.user.donation-all.header"/></h2>
 </header>
 <section class="login-page">
     <table>
         <tr>
-            <td><strong>Lp:</strong></td>
-            <td><strong>Status:</strong></td>
-            <td><strong>Data dodania:</strong></td>
-            <td><strong>Szczegóły daru:</strong></td>
-            <td><strong>Szczegóły kuriera:</strong></td>
+            <td><strong><spring:message code="pages.user.donation-all.order-number"/></strong></td>
+            <td><strong><spring:message code="pages.user.donation-all.status"/></strong></td>
+            <td><strong><spring:message code="pages.user.donation-all.add-date"/></strong></td>
+            <td><strong><spring:message code="pages.user.donation-all.details"/></strong></td>
+            <td><strong><spring:message code="pages.user.donation-all.courier-details"/></strong></td>
         </tr>
         <for:forEach items="${donations}" var="donation" varStatus="stat">
             <tr>
@@ -33,16 +33,16 @@
                 <td>
                     <c:choose>
                         <c:when test = "${donation.delivered==false}">
-                            <p> <c:out value ="nieoebrany"/><p>
+                            <p><spring:message code="pages.user.donation-all.no-picked-up"/><p>
                         </c:when>
                         <c:otherwise>
-                            <p> <c:out value="odebrany"/></p>
+                            <p><spring:message code="pages.user.donation-all.picked-up"/></p>
                         </c:otherwise>
                     </c:choose>
                     <c:url var="pickUpConfirm" value="/user/donation/pick-up-confirm/${donation.id}"/>
                     <c:if test="${donation.delivered==false}">
                         <a href="${pickUpConfirm}">
-                            <strong><c:out value="Potwierdz odbiór"/></strong>
+                            <strong><spring:message code="pages.user.donation-all.confirm"/></strong>
                         </a>
                     </c:if>
                 </td>
@@ -52,11 +52,11 @@
                 </td>
                 <td>
                     <c:url var="donationDetails" value="/user/donation/${donation.id}/details"/>
-                    <a href="${donationDetails}">Wiecej</a>
+                    <a href="${donationDetails}"><spring:message code="pages.user.donation-all.more"/></a>
                 </td>
                 <td>
                     <c:url var="pickUpDetails" value="/user/donation/${donation.id}/pick-up-details"/>
-                    <a href="${pickUpDetails}">Wiecej</a>
+                    <a href="${pickUpDetails}"><spring:message code="pages.user.donation-all.more"/></a>
                 </td>
             </tr>
         </for:forEach>

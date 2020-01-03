@@ -16,15 +16,15 @@
 <header class="header--form-page">
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
     <section class="login-page">
-        <h2>Szczegóły zamówienia kuriera:</h2>
+        <h2><spring:message code="pages.user.donation.courier-details.header"/></h2>
         <table>
             <tr>
-                <td><strong>Ulica:</strong></td>
-                <td><strong>Miasto:</strong></td>
-                <td><strong>Kod pocztowy:</strong></td>
-                <td><strong>Data przyjazdu:</strong></td>
-                <td><strong>Godzina przyjazdu:</strong></td>
-                <td><strong>Wiadomość dla kuriera:</strong></td>
+                <td><strong><spring:message code="pages.user.donation.courier-details.street"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation.courier-details.city"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation.courier-details.zip-code"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation.courier-details.arrival"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation.courier-details.arrival-hour"/></strong></td>
+                <td><strong><spring:message code="pages.user.donation.courier-details.message"/></strong></td>
             </tr>
             <tr>
                 <td>${donation.street}<br></td>

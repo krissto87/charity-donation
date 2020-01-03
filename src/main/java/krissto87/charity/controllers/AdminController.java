@@ -61,4 +61,17 @@ public class AdminController {
         institutionService.update(institutionDTO);
         return "redirect:/admin/institutions";
     }
+
+    @GetMapping("/institutions/{id}/delete")
+    public String prepareEditInstitutionPage(Model model, @PathVariable Long id) {
+        InstitutionDTO institution = institutionService.findById(id);
+        model.addAttribute("institution", institution);
+        return "admin/delete-institution";
+    }
+
+    @PostMapping("/institutions/{id}/delete")
+    public String processDeleteInstitution(@PathVariable Long id) {
+        institutionService.deleteInstitutionById(id);
+        return "redirect:/admin/institutions";
+    }
 }

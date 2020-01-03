@@ -52,4 +52,9 @@ public class DefaultInstitutionService implements InstitutionService {
     public void update(InstitutionDTO institutionDTO) {
         institutionRepository.save(mapper.map(institutionDTO, Institution.class));
     }
+
+    @Override
+    public void deleteInstitutionById(Long id) {
+        institutionRepository.deleteById(id);
+    }
 }

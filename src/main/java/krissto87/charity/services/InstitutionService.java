@@ -13,4 +13,6 @@ public interface InstitutionService {
     InstitutionDTO findById(Long id);
 
     void update(InstitutionDTO institutionDTO);
+
+    void deleteInstitutionById(Long id);
 }

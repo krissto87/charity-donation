@@ -1,9 +1,10 @@
 package krissto87.charity.services;
 
 import krissto87.charity.dtos.UserDTO;
+import krissto87.charity.dtos.UserProfileDTO;
 
 public interface UserService {
-    UserDTO findUserByName(String username);
+    UserProfileDTO findUserByName(String username);
 
     void updateUser(UserDTO user);
 

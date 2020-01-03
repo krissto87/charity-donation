@@ -23,6 +23,4 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
     @Query(value = "UPDATE donations SET delivered = ?1, deliver_time = ?3 WHERE id = ?2", nativeQuery = true)
     void updateUserStatus(Boolean delivered, Long id, String deliveredTime);
 
-    @Query(value = "SELECT * FROM donations d JOIN donations_categories dc on d.id = dc.donation_id JOIN institutions i on d.institution_id = i.id WHERE d.id = ?1;", nativeQuery = true)
-    Donation findByIdWithInstitutionAndCategories(Long id);
 }

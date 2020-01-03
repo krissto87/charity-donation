@@ -19,7 +19,7 @@
 <section class="login-page">
     <h2><spring:message code="pages.header.edit.data"/></h2>
     <p><spring:message code="pages.header.edit.warning"/></p>
-    <form:form method="post" modelAttribute="user">
+    <form:form method="post" modelAttribute="profile">
         <form:hidden path="id"/>
         <div class="form-group">
             <form:label path="name"><spring:message code="pages.edit.data.email"/></form:label>

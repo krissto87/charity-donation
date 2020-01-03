@@ -1,6 +1,8 @@
 package krissto87.charity.controllers;
 
+import krissto87.charity.dtos.ChangePasswordDTO;
 import krissto87.charity.dtos.UserDTO;
+import krissto87.charity.dtos.UserProfileDTO;
 import krissto87.charity.services.UserService;
 import krissto87.charity.utils.SecurityUtils;
 import org.springframework.stereotype.Controller;
@@ -25,8 +27,8 @@ public class UserController {
     @GetMapping("/profile")
     public String prepareEditUserDataPage(Model model) {
         String username = SecurityUtils.getUsername();
-        UserDTO user = userService.findUserByName(username);
-        model.addAttribute("user", user);
+        UserProfileDTO profile = userService.findUserByName(username);
+        model.addAttribute("profile", profile);
         return "user/edit-user-profile";
     }
 
@@ -48,18 +50,18 @@ public class UserController {
 
     @GetMapping("settings/password-change")
     public String prepareUserPasswordChange(Model model){
-        model.addAttribute("user", new UserDTO());
+        model.addAttribute("user", new ChangePasswordDTO());
         return "user/password-change";
     }
 
     @PostMapping("settings/password-change")
-    public String processPasswordChange(@ModelAttribute("user") @Valid UserDTO user,
+    public String processPasswordChange(@ModelAttribute("user") @Valid ChangePasswordDTO changePassword,
                                         BindingResult result) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
         }
-        if (user != null) {
-            String password = user.getPassword();
+        if (changePassword != null) {
+            String password = changePassword.getPassword();
             String username = SecurityUtils.getUsername();
             userService.changeUserPassword(username, password);
         }

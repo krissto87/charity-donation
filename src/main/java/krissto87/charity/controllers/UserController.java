@@ -1,10 +1,8 @@
 package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.ChangePasswordDTO;
-import krissto87.charity.dtos.UserDTO;
 import krissto87.charity.dtos.UserProfileDTO;
 import krissto87.charity.services.UserService;
-import krissto87.charity.utils.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,20 +24,17 @@ public class UserController {
 
     @GetMapping("/profile")
     public String prepareEditUserDataPage(Model model) {
-        String username = SecurityUtils.getUsername();
-        UserProfileDTO profile = userService.findUserByName(username);
+        UserProfileDTO profile = userService.findUser();
         model.addAttribute("profile", profile);
         return "user/edit-user-profile";
     }
 
     @PostMapping("/profile")
-    public String processEditUserData(@Valid UserDTO user, BindingResult result) {
+    public String processEditUserData(@Valid UserProfileDTO profile, BindingResult result) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
         }
-        if (user != null) {
-            userService.updateUser(user);
-        }
+        userService.updateUser(profile);
         return "redirect:/login";
     }
 
@@ -60,11 +55,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
         }
-        if (changePassword != null) {
-            String password = changePassword.getPassword();
-            String username = SecurityUtils.getUsername();
-            userService.changeUserPassword(username, password);
-        }
+        userService.changeUserPassword(changePassword);
         return "redirect:/user";
     }
 }

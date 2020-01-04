@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <spring:message code="pages.user.pick-up-confirm" var="title"/>
+    <spring:message code="pages.user.pick-up-confirm.title" var="title"/>
     <jsp:include page="/WEB-INF/views/fragments/head.jsp">
         <jsp:param name="title" value="${title}"/>
     </jsp:include>
@@ -17,14 +17,16 @@
 </header>
 
 <section class="login-page">
-    <h2>Jeśli chcesz zmienić status paczki i potwierdzasz wizytę kuriera kliknij potwierdzam</h2>
+    <h2><spring:message code="pages.user.pick-up-confirm.header"/></h2>
 
         <div class="form-group">
             <form:form method="post" modelAttribute="status">
                 <form:hidden path="delivered" value="true"/>
                 <form:hidden path="id"/>
                 <div class="form-group form-group--buttons">
-                    <button class="btn" type="submit">Potwierdź</button>
+                    <button class="btn" type="submit">
+                        <spring:message code="pages.user.pick-up-confirm.confirm"/>
+                    </button>
                 </div>
                 <sec:csrfInput/>
             </form:form>
@@ -32,7 +34,9 @@
         <div class="form-group">
             <form:form method="get" action="/user/donation/all" modelAttribute="status">
                 <div class="form-group form-group--buttons">
-                    <button class="btn" type="submit">Anuluj</button>
+                    <button class="btn" type="submit">
+                        <spring:message code="pages.user.pick-up-confirm.cancel"/>
+                    </button>
                 </div>
                 <sec:csrfInput/>
             </form:form>

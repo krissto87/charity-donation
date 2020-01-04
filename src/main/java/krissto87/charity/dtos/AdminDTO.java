@@ -10,6 +10,5 @@ public class AdminDTO {
     private String surname;
     private String email;
     private String password;
-    private String rePassword;
     private Boolean active;
 }

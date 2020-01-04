@@ -15,9 +15,4 @@ public class BeansConfig {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper;
     }
-    @Bean
-    public DateTimeFormatter dateTimeFormatter(){
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    }
-
 }

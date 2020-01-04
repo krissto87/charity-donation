@@ -5,9 +5,10 @@ import krissto87.charity.domain.entities.User;
 import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.dtos.AdminDTO;
-import krissto87.charity.dtos.UserDTO;
+import krissto87.charity.dtos.ChangePasswordDTO;
 import krissto87.charity.dtos.UserProfileDTO;
 import krissto87.charity.services.UserService;
+import krissto87.charity.utils.GeneralUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,27 +34,30 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public UserProfileDTO findUserByName(String username) {
-        User user = userRepository.findUserByEmail(username);
-        log.debug("User data to edit: {}", user);
+    public UserProfileDTO findUser() {
+        User user = userRepository.findUserByEmail(GeneralUtils.getUsername());
         return mapper.map(user, UserProfileDTO.class);
     }
 
     @Override
-    public void updateUser(UserDTO user) {
-        String newName = user.getName();
-        String newSurname = user.getSurname();
-        String email = user.getEmail();
-        Long id = user.getId();
-        log.debug("User name, surname, id, email: {} {} {} {}", newName, newSurname, id, email);
-        userRepository.updateUser(newName, newSurname, email, id);
+    public void updateUser(UserProfileDTO profile) {
+        User user = userRepository.findUserByEmail(GeneralUtils.getUsername());
+        log.debug("User from db: {}", user);
+        user.setName(profile.getName());
+        user.setSurname(profile.getSurname());
+        user.setEmail(profile.getEmail());
+        log.debug("User before save: {}", user);
+        userRepository.save(user);
     }
 
     @Override
-    public void changeUserPassword(String username, String password) {
-        log.debug("New password pre encoding: {}", password);
-        String encodedPassword = encoder.encode(password);
-        userRepository.changeUserPasswordByUsername(username, encodedPassword);
+    public void changeUserPassword(ChangePasswordDTO changePasswordDTO) {
+        String username = GeneralUtils.getUsername();
+        User user = userRepository.findUserByEmail(username);
+        log.debug("User from db: {}", user);
+        user.setPassword(encoder.encode(changePasswordDTO.getPassword()));
+        log.debug("User before save: {}", user);
+        userRepository.save(user);
     }
 
     @Override

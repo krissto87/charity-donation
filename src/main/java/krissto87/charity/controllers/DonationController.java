@@ -2,7 +2,7 @@ package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.CourierStatusDTO;
 import krissto87.charity.services.DonationService;
-import krissto87.charity.utils.SecurityUtils;
+import krissto87.charity.utils.GeneralUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +51,7 @@ public class DonationController {
 
     @GetMapping("/all")
     public String displayAllUserDonation(Model model) {
-        String username = SecurityUtils.getUsername();
+        String username = GeneralUtils.getUsername();
         List<DonationDTO> donations = donationService.findAllByUser(username);
         model.addAttribute("donations", donations);
         return "user/donation-all";

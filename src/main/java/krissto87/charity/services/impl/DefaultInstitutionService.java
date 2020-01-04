@@ -45,7 +45,7 @@ public class DefaultInstitutionService implements InstitutionService {
 
     @Override
     public InstitutionDTO findById(Long id) {
-        return mapper.map(institutionRepository.findById(id).get(), InstitutionDTO.class);
+        return mapper.map(institutionRepository.getOne(id), InstitutionDTO.class);
     }
 
     @Override

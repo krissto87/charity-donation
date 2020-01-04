@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import krissto87.charity.domain.repository.CategoryRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,12 +26,7 @@ public class DefaultCategoryService implements CategoryService {
     @Override
     public List<CategoryDTO> findAllCategory() {
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryDTO> categoryDTOS = new ArrayList<>();
-        for (Category category:
-             categories) {
-            CategoryDTO categoryDTO = mapper.map(category, CategoryDTO.class);
-            categoryDTOS.add(categoryDTO);
-        }
-        return categoryDTOS;
+        return categories.stream()
+                .map(c->mapper.map(c, CategoryDTO.class)).collect(Collectors.toList());
     }
 }

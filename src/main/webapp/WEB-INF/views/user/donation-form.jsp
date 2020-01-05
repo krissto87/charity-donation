@@ -75,17 +75,23 @@
                 <c:forEach items="${categories}" var="category">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:checkbox path="categoriesId" value="${category.id}"/>
-                            <form:errors path="categoriesId" element="p"/>
+                            <input name="categoriesId" type="checkbox" value="${category.id}">
                             <span class="checkbox"></span>
-                            <span class="description">${category.name}</span>
+                            <span  class="description">${category.name}</span>
                         </label>
                     </div>
                 </c:forEach>
 
-<%--                    <form:checkboxes path="categoriesId" items="${categories}"--%>
-<%--                                     itemValue="id" itemLabel="name"/>--%>
-<%--                    <form:errors path="categoriesId" element="p"/>--%>
+<%--                <c:forEach items="${categories}" var="category">--%>
+<%--                    <div class="form-group form-group--checkbox">--%>
+<%--                        <label>--%>
+<%--                            <span class="checkbox"></span>--%>
+<%--                            <form:checkbox path="categoriesId" element="checked" cssClass="checkbox" value="${category.id}" />--%>
+<%--                            <form:errors path="categoriesId" element="p"/>--%>
+<%--                            <span class="description">${category.name}</span>--%>
+<%--                        </label>--%>
+<%--                    </div>--%>
+<%--                </c:forEach>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step"><spring:message code="pages.form.button.next"/></button>
@@ -99,7 +105,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         <spring:message code="pages.form.step2.label"/>
-                        <form:input path="quantity" required="true" type="number" step="1" min="1"/>
+                        <form:input id="bags" path="quantity" required="true" type="number" step="1" min="1"/>
                         <form:errors path="quantity" element="p"/>
                     </label>
                 </div>
@@ -117,7 +123,7 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:radiobutton path="institutionId" value="${institution.id}"/>
+                            <form:radiobutton path="institutionId" cssClass="radio" value="${institution.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                                 <div class="title">${institution.name}</div>
@@ -127,9 +133,6 @@
                         </label>
                     </div>
                 </c:forEach>
-
-<%--                <form:select path="institutionId" items="${institutions}" itemValue="id" itemLabel="name"/>--%>
-<%--                <form:errors path="institutionId" element="p"/>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step"><spring:message code="pages.form.button.previous"/></button>
@@ -148,7 +151,7 @@
                         <div class="form-group form-group--inline">
                             <form:label path="street">
                                 <spring:message code="pages.form.step4.street"/>
-                                <form:input type="text" path="street" required="true"/>
+                                <form:input id="street" type="text" path="street" required="true"/>
                                 <form:errors path="street" element="p"/>
                             </form:label>
                         </div>
@@ -156,7 +159,7 @@
                         <div class="form-group form-group--inline">
                             <form:label path="city">
                                 <spring:message code="pages.form.step4.city"/>
-                                <form:input type="text" path="city" required="true"/>
+                                <form:input id="city" type="text" path="city" required="true"/>
                                 <form:errors path="city" element="p"/>
                             </form:label>
                         </div>
@@ -164,7 +167,7 @@
                         <div class="form-group form-group--inline">
                             <form:label path="zipCode">
                                 <spring:message code="pages.form.step4.zip"/>
-                                <form:input type="text" path="zipCode" required="true"/>
+                                <form:input id="zip-code" type="text" path="zipCode" required="true"/>
                                 <form:errors path="zipCode" element="p"/>
                             </form:label>
                         </div>
@@ -172,7 +175,7 @@
                         <div class="form-group form-group--inline">
                             <form:label path="phoneNumber">
                                 <spring:message code="pages.form.step4.phone"/>
-                                <form:input type="phone" path="phoneNumber" required="true"/>
+                                <form:input id="phone" type="phone" path="phoneNumber" required="true"/>
                                 <form:errors path="phoneNumber" element="p"/>
                             </form:label>
                         </div>
@@ -183,7 +186,7 @@
                         <div class="form-group form-group--inline">
                             <form:label path="pickUpDate">
                                 <spring:message code="pages.form.step4.day"/>
-                                <form:input type="date" path="pickUpDate" required="true"/>
+                                <form:input id="data" type="date" path="pickUpDate" required="true"/>
                                 <form:errors path="pickUpDate" element="p"/>
                             </form:label>
                         </div>
@@ -191,7 +194,7 @@
                         <div class="form-group form-group--inline">
                             <form:label path="pickUpTime">
                                 <spring:message code="pages.form.step4.hour"/>
-                                <form:input type="time" path="pickUpTime" required="true"/>
+                                <form:input id="time" type="time" path="pickUpTime" required="true"/>
                                 <form:errors path="pickUpTime" element="p"/>
                             </form:label>
                         </div>
@@ -199,7 +202,7 @@
                         <div class="form-group form-group--inline">
                             <form:label path="pickUpComment">
                                 <spring:message code="pages.form.step4.comment"/>
-                                <form:textarea path="pickUpComment"/>
+                                <form:textarea id="comment" path="pickUpComment"/>
                                 <form:errors path="pickUpComment" element="p"/>
                             </form:label>
                         </div>
@@ -221,12 +224,11 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text">
-                                3 <spring:message code="pages.form.summary.first"/> książki</span>
+                                <span class="summary--text" id="quantity-sum"></span>
                             </li>
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"><spring:message code="pages.form.summary.second"/> Fundacja “Bez domu”</span>
+                                <span class="summary--text" id="institution-sum"></span>
                             </li>
                         </ul>
                     </div>
@@ -235,19 +237,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li id="street-sum"> </li>
+                                <li id="city-sum"> </li>
+                                <li id="zip-code-sum"> </li>
+                                <li id="phone-sum"> </li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li id="data-sum"> </li>
+                                <li id="time-sum"> </li>
+                                <li id="comment-sum"> </li>
                             </ul>
                         </div>
                     </div>

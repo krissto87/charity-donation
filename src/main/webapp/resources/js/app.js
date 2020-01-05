@@ -32,20 +32,20 @@ document.addEventListener("DOMContentLoaded", function() {
       // All list options
       this.options.forEach((el, i) => {
         const li = document.createElement("li");
-        li.dataset.value = el.value;
-        li.innerText = el.innerText;
+      li.dataset.value = el.value;
+      li.innerText = el.innerText;
 
-        if (i === 0) {
-          // First clickable option
-          this.current = document.createElement("div");
-          this.current.innerText = el.innerText;
-          this.dropdown.appendChild(this.current);
-          this.valueInput.value = el.value;
-          li.classList.add("selected");
-        }
+      if (i === 0) {
+        // First clickable option
+        this.current = document.createElement("div");
+        this.current.innerText = el.innerText;
+        this.dropdown.appendChild(this.current);
+        this.valueInput.value = el.value;
+        li.classList.add("selected");
+      }
 
-        this.ul.appendChild(li);
-      });
+      this.ul.appendChild(li);
+    });
 
       this.dropdown.appendChild(this.ul);
       this.dropdown.appendChild(this.valueInput);
@@ -55,19 +55,19 @@ document.addEventListener("DOMContentLoaded", function() {
     addEvents() {
       this.dropdown.addEventListener("click", e => {
         const target = e.target;
-        this.dropdown.classList.toggle("selecting");
+      this.dropdown.classList.toggle("selecting");
 
-        // Save new value only when clicked on li
-        if (target.tagName === "LI") {
-          this.valueInput.value = target.dataset.value;
-          this.current.innerText = target.innerText;
-        }
-      });
+      // Save new value only when clicked on li
+      if (target.tagName === "LI") {
+        this.valueInput.value = target.dataset.value;
+        this.current.innerText = target.innerText;
+      }
+    });
     }
   }
   document.querySelectorAll(".form-group--dropdown select").forEach(el => {
     new FormSelect(el);
-  });
+});
 
   /**
    * Hide elements when clicked on document
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelectorAll(".form-group--dropdown .dropdown").forEach(el => {
       el.classList.remove("selecting");
-    });
+  });
   });
 
   /**
@@ -125,19 +125,19 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
-          this.currentStep++;
-          this.updateForm();
-        });
-      });
+      this.currentStep++;
+      this.updateForm();
+    });
+    });
 
       // Previous step
       this.$prev.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
-          this.currentStep--;
-          this.updateForm();
-        });
-      });
+      this.currentStep--;
+      this.updateForm();
+    });
+    });
 
       // Form submit
       this.$form.querySelector("form").addEventListener("submit", e => this.submit(e));
@@ -155,15 +155,40 @@ document.addEventListener("DOMContentLoaded", function() {
       this.slides.forEach(slide => {
         slide.classList.remove("active");
 
-        if (slide.dataset.step == this.currentStep) {
-          slide.classList.add("active");
-        }
-      });
+      if (slide.dataset.step == this.currentStep) {
+        slide.classList.add("active");
+      }
+    });
 
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
-      // TODO: get data from inputs and show them in summary
+    /**get data from inputs and show them in summary */
+
+      let categories = document.querySelectorAll('.checkbox:checked');
+      let categoriesArray = [];
+      for (let i = 0; i < categories.length; i++) {
+        categoriesArray.push(categories[i].value);
+      }
+      let quantity = document.getElementById('bags').value;
+      let institutions = document.querySelector('.radio:checked').value;
+      let street = document.getElementById('street').value;
+      let city = document.getElementById('city').value;
+      let zipCode = document.getElementById('zip-code').value;
+      let phone = document.getElementById('phone').value;
+      let data = document.getElementById('data').value;
+      let time = document.getElementById('time').value;
+      let comment = document.getElementById('comment').value;
+
+      document.getElementById('quantity-sum').innerText = quantity + ' worki zawierające ' + categoriesArray.join(', ');
+      document.getElementById('institution-sum').innerText = institutions;
+      document.getElementById('street-sum').innerText = street;
+      document.getElementById('city-sum').innerText = city;
+      document.getElementById('zip-code-sum').innerText = zipCode;
+      document.getElementById('phone-sum').innerText = phone;
+      document.getElementById('data-sum').innerText = data;
+      document.getElementById('time-sum').innerText = time;
+      document.getElementById('comment-sum').innerText = comment;
     }
 
   }

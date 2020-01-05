@@ -59,4 +59,17 @@ public class AdminController {
         adminService.update(admin);
         return "redirect:/admin/admins-all";
     }
+
+    @GetMapping("/{id}/delete")
+    public String prepareEditAdminPage(Model model, @PathVariable Long id) {
+        EditAdminDTO admin = adminService.findUserById(id);
+        model.addAttribute("admin", admin);
+        return "admin/delete-admin";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String processDeleteAdmin(@PathVariable Long id) {
+        adminService.deleteUserById(id);
+        return "redirect:/admin/admins-all";
+    }
 }

@@ -76,4 +76,9 @@ public class DefaultAdminService implements AdminService {
         log.debug("Admin before save to user table: {}", user);
         userRepository.save(user);
     }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
 }

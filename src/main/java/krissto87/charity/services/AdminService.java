@@ -15,4 +15,7 @@ public interface AdminService {
     EditAdminDTO findUserById(Long id);
 
     void update(EditAdminDTO adminDTO);
+
+    void deleteUserById(Long id);
+
 }

@@ -20,22 +20,22 @@
     <h2><spring:message code="pages.admin.admins-all.add.header"/></h2>
     <form:form method="post" modelAttribute="admin">
         <div class="form-group">
-            <spring:message code="pages.register.email" var="emailPlaceholder"/>
+            <spring:message code="pages.admin.admins-all.add.email" var="emailPlaceholder"/>
             <form:input path="email" required="true" placeholder="${emailPlaceholder}"/>
             <form:errors path="email" element="p"/>
         </div>
         <div class="form-group">
-            <spring:message code="pages.register.name" var="namePlaceholder"/>
+            <spring:message code="pages.admin.admins-all.add.name" var="namePlaceholder"/>
             <form:input path="name" required="true" placeholder="${namePlaceholder}"/>
             <form:errors path="name" element="p"/>
         </div>
         <div class="form-group">
-            <spring:message code="pages.register.surname" var="surnamePlaceholder"/>
+            <spring:message code="pages.admin.admins-all.add.surname" var="surnamePlaceholder"/>
             <form:input path="surname" required="true" placeholder="${surnamePlaceholder}"/>
             <form:errors path="surname" element="p"/>
         </div>
         <div class="form-group">
-            <spring:message code="pages.register.password" var="passwordPlaceholder"/>
+            <spring:message code="pages.admin.admins-all.add.password" var="passwordPlaceholder"/>
             <form:password path="password" required="true" placeholder="${passwordPlaceholder}"/>
             <form:errors path="password" element="p"/>
         </div>

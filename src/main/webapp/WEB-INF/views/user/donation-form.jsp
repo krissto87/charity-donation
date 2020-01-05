@@ -72,26 +72,27 @@
             <div data-step="1" class="active">
                 <h3><spring:message code="pages.form.step1.head"/></h3>
 
-                <c:forEach items="${categories}" var="category">
-                    <div class="form-group form-group--checkbox">
-                        <label>
-                            <input name="categoriesId" type="checkbox" value="${category.id}">
-                            <span class="checkbox"></span>
-                            <span  class="description">${category.name}</span>
-                        </label>
-                    </div>
-                </c:forEach>
-
 <%--                <c:forEach items="${categories}" var="category">--%>
 <%--                    <div class="form-group form-group--checkbox">--%>
 <%--                        <label>--%>
+<%--                            <input name="categoriesId" type="checkbox" value="${category.id}">--%>
 <%--                            <span class="checkbox"></span>--%>
-<%--                            <form:checkbox path="categoriesId" element="checked" cssClass="checkbox" value="${category.id}" />--%>
-<%--                            <form:errors path="categoriesId" element="p"/>--%>
-<%--                            <span class="description">${category.name}</span>--%>
+<%--                            <span  class="description">${category.name}</span>--%>
 <%--                        </label>--%>
 <%--                    </div>--%>
 <%--                </c:forEach>--%>
+
+                <c:forEach items="${categories}" var="category">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <span class="checkbox"></span>
+                            <form:checkbox path="categoriesId" element="checked"
+                                           cssClass="checkbox" value="${category.id}" />
+                            <form:errors path="categoriesId" element="p"/>
+                            <span class="description">${category.name}</span>
+                        </label>
+                    </div>
+                </c:forEach>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step"><spring:message code="pages.form.button.next"/></button>

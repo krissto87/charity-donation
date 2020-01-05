@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <spring:message code="pages.admin.admins-all.add.title" var="title"/>
+    <spring:message code="pages.admin.edit-admin.title" var="title"/>
     <jsp:include page="/WEB-INF/views/fragments/head.jsp">
         <jsp:param name="title" value="${title}"/>
     </jsp:include>
@@ -17,7 +17,7 @@
 </header>
 
 <section class="login-page">
-    <h2><spring:message code="pages.admin.admins-all.add.header"/></h2>
+    <h2><spring:message code="pages.admin.edit-admin.header"/></h2>
     <form:form method="post" modelAttribute="admin">
         <div class="form-group">
             <spring:message code="pages.register.email" var="emailPlaceholder"/>
@@ -39,9 +39,8 @@
             <form:password path="password" required="true" placeholder="${passwordPlaceholder}"/>
             <form:errors path="password" element="p"/>
         </div>
-
         <div class="form-group form-group--buttons">
-            <button class="btn" type="submit"><spring:message code="pages.admin.admins-all.add"/></button>
+            <button class="btn" type="submit"><spring:message code="pages.edit.data.confirm"/></button>
         </div>
         <sec:csrfInput/>
     </form:form>

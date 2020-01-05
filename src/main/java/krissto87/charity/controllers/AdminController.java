@@ -1,32 +1,27 @@
 package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.AdminDTO;
+import krissto87.charity.dtos.EditAdminDTO;
 import krissto87.charity.services.AdminService;
-import krissto87.charity.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/admins-all")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;
-    private final UserService userService;
 
-    public AdminController(AdminService adminService, UserService userService) {
+    public AdminController(AdminService adminService) {
         this.adminService = adminService;
-        this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/admins-all")
     public String displayAllAdmins(Model model) {
         List<AdminDTO> admins = adminService.findAll();
         model.addAttribute("admins", admins);
@@ -45,7 +40,23 @@ public class AdminController {
         if (result.hasErrors()) {
             return "admin/admin-form";
         }
-        userService.save(admin);
+        adminService.save(admin);
+        return "redirect:/admin/admins-all";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String prepareAdminEditPage(Model model, @PathVariable Long id) {
+        EditAdminDTO admin = adminService.findUserById(id);
+        model.addAttribute("admin", admin);
+        return "admin/edit-admin";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String processAdminUpdate(@Valid EditAdminDTO admin, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin/edit-admin";
+        }
+        adminService.update(admin);
         return "redirect:/admin/admins-all";
     }
 }

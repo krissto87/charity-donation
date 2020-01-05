@@ -18,7 +18,7 @@
     <h2><spring:message code="pages.admin.admins-all.header"/></h2>
     <section class="login-page">
         <div class="btn btn--small">
-            <c:url var="addAdmin" value="/admin/admins-all/add"/>
+            <c:url var="addAdmin" value="/admin/add"/>
             <a href="${addAdmin}">
                 <spring:message code="pages.admin.admins-all.add"/>
             </a>
@@ -38,14 +38,10 @@
                     <td>${admin.name}</td>
                     <td>${admin.surname}</td>
                     <td>
-                        <c:url var="updateAdmin" value="/admin/admins-all/${admin.id}/edit"/>
-                        <a href="${updateAdmin}">
-                            <spring:message code="pages.admin.institutions.edit"/>
-                        </a>
-                        <c:url var="deleteAdmin" value="/admin/admins-all/${admin.id}/delete"/>
-                        <a href="${deleteAdmin}">
-                            <spring:message code="pages.admin.institutions.delete"/>
-                        </a>
+                        <c:url var="updateAdmin" value="/admin/${admin.id}/edit"/>
+                        <a href="${updateAdmin}"><spring:message code="pages.admin.institutions.edit"/></a>
+                        <c:url var="deleteAdmin" value="/admin/${admin.id}/delete"/>
+                        <a href="${deleteAdmin}"><spring:message code="pages.admin.institutions.delete"/></a>
                     </td>
                 </tr>
             </for:forEach>

@@ -1,10 +1,7 @@
 package krissto87.charity.services.impl;
 
-import krissto87.charity.domain.entities.Role;
 import krissto87.charity.domain.entities.User;
-import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
-import krissto87.charity.dtos.AdminDTO;
 import krissto87.charity.dtos.ChangePasswordDTO;
 import krissto87.charity.dtos.UserProfileDTO;
 import krissto87.charity.services.UserService;
@@ -23,14 +20,12 @@ public class DefaultUserService implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper mapper;
     private final PasswordEncoder encoder;
-    private final RoleRepository roleRepository;
 
     public DefaultUserService(UserRepository userRepository, ModelMapper mapper,
-                              PasswordEncoder encoder, RoleRepository roleRepository) {
+                              PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.encoder = encoder;
-        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -58,21 +53,5 @@ public class DefaultUserService implements UserService {
         user.setPassword(encoder.encode(changePasswordDTO.getPassword()));
         log.debug("User before save: {}", user);
         userRepository.save(user);
-    }
-
-    @Override
-    public void save(AdminDTO admin) {
-        log.debug("Admin from form: {}", admin);
-        User user = new User();
-        user.setName(admin.getName());
-        user.setSurname(admin.getSurname());
-        user.setEmail(admin.getEmail());
-        user.setActive(Boolean.TRUE);
-        user.setPassword(encoder.encode(admin.getPassword()));
-        Role adminRole = roleRepository.getByName("ROLE_ADMIN");
-        user.getRoles().add(adminRole);
-        log.debug("Admin before save: {}", user);
-        userRepository.save(user);
-        log.info("Added new admin!");
     }
 }

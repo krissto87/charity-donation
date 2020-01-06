@@ -6,7 +6,7 @@ import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.dtos.AdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
-import krissto87.charity.dtos.UserDTO;
+import krissto87.charity.dtos.EditUserDTO;
 import krissto87.charity.services.AdminService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class DefaultAdminService implements AdminService {
     }
 
     @Override
-    public List<AdminDTO> findAll() {
+    public List<AdminDTO> findAllAdmins() {
         List<User> admins = userRepository.findAllByRoles(getAdminRole());
         log.debug("Admins from db: {}", admins);
         return admins.stream().map(a -> mapper.map(a, AdminDTO.class)).collect(Collectors.toList());
@@ -60,12 +60,12 @@ public class DefaultAdminService implements AdminService {
     }
 
     @Override
-    public EditAdminDTO findUserById(Long id) {
+    public EditAdminDTO findAdminById(Long id) {
         return mapper.map(userRepository.getOne(id), EditAdminDTO.class);
     }
 
     @Override
-    public void update(EditAdminDTO adminDTO) {
+    public void updateAdmin(EditAdminDTO adminDTO) {
         log.debug("Admin DTO: {}", adminDTO);
         User user = mapper.map(adminDTO, User.class);
         user.setActive(Boolean.TRUE);
@@ -84,14 +84,47 @@ public class DefaultAdminService implements AdminService {
     }
 
     @Override
+    public void deleteAdminById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<EditUserDTO> findAllUsers() {
+        return userRepository.findAllByRoles(getUserRole())
+                .stream().map(m -> mapper.map(m, EditUserDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public EditUserDTO findUserById(Long id) {
+        return mapper.map(userRepository.getOne(id), EditUserDTO.class);
+    }
+
+    @Override
+    public void updateUser(EditUserDTO userDTO) {
+        User user = mapper.map(userDTO, User.class);
+        user.setActive(Boolean.TRUE);
+        user.getRoles().add(getUserRole());
+        user.setPassword(encoder.encode(userDTO.getPassword()));
+        userRepository.save(user);
+    }
+
+    @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 
     @Override
-    public List<UserDTO> findAllUsers() {
-        return userRepository.findAllByRoles(getUserRole())
-                .stream().map(m -> mapper.map(m, UserDTO.class)).collect(Collectors.toList());
+    public void blockUserById(Long id) {
+        User user = userRepository.getOne(id);
+        user.setActive(Boolean.FALSE);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void activateUserById(Long id) {
+        User user = userRepository.getOne(id);
+        user.setActive(Boolean.TRUE);
+        userRepository.save(user);
     }
 
 }

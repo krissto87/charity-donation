@@ -24,13 +24,13 @@ public class UserController {
 
     @GetMapping("/profile")
     public String prepareEditUserDataPage(Model model) {
-        UserProfileDTO profile = userService.findUser();
-        model.addAttribute("profile", profile);
+        model.addAttribute("profile", userService.findUser());
         return "user/edit-user-profile";
     }
 
     @PostMapping("/profile")
-    public String processEditUserData(@Valid UserProfileDTO profile, BindingResult result) {
+    public String processEditUserData(@ModelAttribute("profile") @Valid UserProfileDTO profile,
+                                      BindingResult result) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
         }

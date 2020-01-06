@@ -2,7 +2,7 @@ package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.AdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
-import krissto87.charity.dtos.UserDTO;
+import krissto87.charity.dtos.EditUserDTO;
 import krissto87.charity.services.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,8 +23,7 @@ public class AdminController {
 
     @GetMapping("/admins-all")
     public String displayAllAdmins(Model model) {
-        List<AdminDTO> admins = adminService.findAll();
-        model.addAttribute("admins", admins);
+        model.addAttribute("admins", adminService.findAllAdmins());
         return "/admin/admins-all";
     }
 
@@ -47,30 +45,28 @@ public class AdminController {
 
     @GetMapping("/{id}/edit")
     public String prepareAdminEditPage(Model model, @PathVariable Long id) {
-        EditAdminDTO admin = adminService.findUserById(id);
-        model.addAttribute("admin", admin);
+        model.addAttribute("admin", adminService.findAdminById(id));
         return "admin/edit-admin";
     }
 
     @PostMapping("/{id}/edit")
-    public String processAdminUpdate(@Valid EditAdminDTO admin, BindingResult result) {
+    public String processAdminUpdate(@ModelAttribute("admin") @Valid EditAdminDTO admin, BindingResult result) {
         if (result.hasErrors()) {
             return "admin/edit-admin";
         }
-        adminService.update(admin);
+        adminService.updateAdmin(admin);
         return "redirect:/admin/admins-all";
     }
 
     @GetMapping("/{id}/delete")
-    public String prepareEditAdminPage(Model model, @PathVariable Long id) {
-        EditAdminDTO admin = adminService.findUserById(id);
-        model.addAttribute("admin", admin);
+    public String prepareDeleteAdminPage(Model model, @PathVariable Long id) {
+        model.addAttribute("admin", adminService.findAdminById(id));
         return "admin/delete-admin";
     }
 
     @PostMapping("/{id}/delete")
-    public String processDeleteAdmin(@PathVariable Long id) {
-        adminService.deleteUserById(id);
+    public String processDeleteAdmin(@ModelAttribute("admin") @PathVariable Long id) {
+        adminService.deleteAdminById(id);
         return "redirect:/admin/admins-all";
     }
 
@@ -78,5 +74,44 @@ public class AdminController {
     public String displayAllUsers(Model model) {
         model.addAttribute("users", adminService.findAllUsers());
         return "/admin/users-all";
+    }
+
+    @GetMapping("/users/{id}/edit")
+    public String prepareUserEditPage(Model model, @PathVariable Long id) {
+        model.addAttribute("user", adminService.findUserById(id));
+        return "admin/edit-user";
+    }
+
+    @PostMapping("/users/{id}/edit")
+    public String processUserUpdate(@ModelAttribute("user") @Valid EditUserDTO user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin/edit-user";
+        }
+        adminService.updateUser(user);
+        return "redirect:/admin/users-all";
+    }
+
+    @GetMapping("/users/{id}/delete")
+    public String prepareDeleteUserPage(Model model, @PathVariable Long id) {
+        model.addAttribute("user", adminService.findUserById(id));
+        return "admin/delete-user";
+    }
+
+    @PostMapping("/users/{id}/delete")
+    public String processDeleteUser(@ModelAttribute("user") @PathVariable Long id) {
+        adminService.deleteUserById(id);
+        return "redirect:/admin/users-all";
+    }
+
+    @GetMapping("/users/{id}/block")
+    public String blockUserById(@PathVariable Long id) {
+        adminService.blockUserById(id);
+        return "redirect:/admin/users-all";
+    }
+
+    @GetMapping("/users/{id}/activate")
+    public String activateUserById(@PathVariable Long id) {
+        adminService.activateUserById(id);
+        return "redirect:/admin/users-all";
     }
 }

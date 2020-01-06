@@ -3,21 +3,31 @@ package krissto87.charity.services;
 
 import krissto87.charity.dtos.AdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
-import krissto87.charity.dtos.UserDTO;
+import krissto87.charity.dtos.EditUserDTO;
 
 import java.util.List;
 
 public interface AdminService {
 
-    List<AdminDTO> findAll();
+    List<AdminDTO> findAllAdmins();
 
     void save(AdminDTO admin);
 
-    EditAdminDTO findUserById(Long id);
+    EditAdminDTO findAdminById(Long id);
 
-    void update(EditAdminDTO adminDTO);
+    void updateAdmin(EditAdminDTO adminDTO);
+
+    void deleteAdminById(Long id);
+
+    List<EditUserDTO> findAllUsers();
+
+    EditUserDTO findUserById(Long id);
+
+    void updateUser(EditUserDTO userDTO);
 
     void deleteUserById(Long id);
 
-    List<UserDTO> findAllUsers();
+    void blockUserById(Long id);
+
+    void activateUserById(Long id);
 }

@@ -23,6 +23,7 @@
                 <td><strong><spring:message code="pages.admin.users-all.email"/></strong></td>
                 <td><strong><spring:message code="pages.admin.users-all.name"/></strong></td>
                 <td><strong><spring:message code="pages.admin.users-all.surname"/></strong></td>
+                <td><strong><spring:message code="pages.admin.users-all.active"/></strong></td>
                 <td><strong><spring:message code="pages.admin.users-all.actions"/></strong></td>
             </tr>
             <for:forEach items="${users}" var="user" varStatus="stat">
@@ -32,11 +33,35 @@
                     <td>${user.name}</td>
                     <td>${user.surname}</td>
                     <td>
-                        <c:url var="updateUser" value="/admin/${user.id}/edit"/>
+                        <c:choose>
+                            <c:when test = "${user.active==true}">
+                                <p><spring:message code="pages.admin.users-all.active-user"/><p>
+                            </c:when>
+                            <c:otherwise>
+                                <p><spring:message code="pages.admin.users-all.block-user"/></p>
+                            </c:otherwise>
+                        </c:choose>
+                    <td>
+                        <c:url var="updateUser" value="/admin/users/${user.id}/edit"/>
                         <a href="${updateUser}"><spring:message code="pages.admin.institutions.edit"/></a>
-                        <c:url var="blockUser" value="/admin/${user.id}/block"/>
-                        <a href="${blockUser}"><spring:message code="pages.admin.users-all.block"/></a>
-                        <c:url var="deleteUser" value="/admin/${user.id}/delete"/>
+
+                        <c:url var="blockUser" value="/admin/users/${user.id}/block"/>
+                        <c:url var="activateUser" value="/admin/users/${user.id}/activate"/>
+                        <c:choose>
+                            <c:when test="${user.active==true}">
+                                <a href="${blockUser}">
+                                    <spring:message code="pages.admin.users-all.block"/>
+                                </a>
+                            </c:when>
+
+                            <c:otherwise>
+                                <a href="${activateUser}">
+                                    <spring:message code="pages.admin.users-all.activate"/>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <c:url var="deleteUser" value="/admin/users/${user.id}/delete"/>
                         <a href="${deleteUser}"><spring:message code="pages.admin.institutions.delete"/></a>
                     </td>
                 </tr>

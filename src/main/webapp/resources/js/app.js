@@ -180,7 +180,8 @@ document.addEventListener("DOMContentLoaded", function() {
       let time = document.getElementById('time').value;
       let comment = document.getElementById('comment').value;
 
-      document.getElementById('quantity-sum').innerText = quantity + ' worki zawierające ' + categoriesArray.join(', ');
+      document.getElementById('quantity-sum').innerText = quantity;
+      document.getElementById('categories-sum').innerText = categoriesArray.join(', ');
       document.getElementById('institution-sum').innerText = institutions;
       document.getElementById('street-sum').innerText = street;
       document.getElementById('city-sum').innerText = city;

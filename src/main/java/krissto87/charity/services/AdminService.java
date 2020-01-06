@@ -3,6 +3,7 @@ package krissto87.charity.services;
 
 import krissto87.charity.dtos.AdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
+import krissto87.charity.dtos.UserDTO;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface AdminService {
 
     void deleteUserById(Long id);
 
+    List<UserDTO> findAllUsers();
 }

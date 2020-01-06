@@ -86,7 +86,7 @@
                     <div class="form-group form-group--checkbox">
                         <label>
                             <span class="checkbox"></span>
-                            <form:checkbox path="categoriesId" element="checked"
+                            <form:checkbox path="categoriesId" checked="checked"
                                            cssClass="checkbox" value="${category.id}" />
                             <form:errors path="categoriesId" element="p"/>
                             <span class="description">${category.name}</span>
@@ -225,18 +225,25 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text" id="quantity-sum"></span>
+                                <span class="summary--text" >
+                                    <strong id="quantity-sum"></strong>
+                                    <spring:message code="pages.form.summary.first"/>
+                                    <strong id="categories-sum"></strong>
+                                </span>
                             </li>
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text" id="institution-sum"></span>
+                                <span class="summary--text">
+                                    <spring:message code="pages.form.summary.second"/>
+                                    <strong id="institution-sum"></strong>
+                                </span>
                             </li>
                         </ul>
                     </div>
 
                     <div class="form-section form-section--columns">
                         <div class="form-section--column">
-                            <h4>Adres odbioru:</h4>
+                            <h4><spring:message code="pages.form.step5.sum2"/></h4>
                             <ul>
                                 <li id="street-sum"> </li>
                                 <li id="city-sum"> </li>
@@ -246,7 +253,7 @@
                         </div>
 
                         <div class="form-section--column">
-                            <h4>Termin odbioru:</h4>
+                            <h4><spring:message code="pages.form.step5.sum3"/></h4>
                             <ul>
                                 <li id="data-sum"> </li>
                                 <li id="time-sum"> </li>

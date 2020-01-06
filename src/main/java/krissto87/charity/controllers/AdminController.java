@@ -2,6 +2,7 @@ package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.AdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
+import krissto87.charity.dtos.UserDTO;
 import krissto87.charity.services.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,5 +72,11 @@ public class AdminController {
     public String processDeleteAdmin(@PathVariable Long id) {
         adminService.deleteUserById(id);
         return "redirect:/admin/admins-all";
+    }
+
+    @GetMapping("/users-all")
+    public String displayAllUsers(Model model) {
+        model.addAttribute("users", adminService.findAllUsers());
+        return "/admin/users-all";
     }
 }

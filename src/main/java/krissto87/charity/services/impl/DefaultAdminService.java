@@ -6,6 +6,7 @@ import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.dtos.AdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
+import krissto87.charity.dtos.UserDTO;
 import krissto87.charity.services.AdminService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +39,7 @@ public class DefaultAdminService implements AdminService {
 
     @Override
     public List<AdminDTO> findAll() {
-        Role adminRole = roleRepository.getByName("ROLE_ADMIN");
-        List<User> admins = userRepository.findAllByRoles(adminRole);
+        List<User> admins = userRepository.findAllByRoles(getAdminRole());
         log.debug("Admins from db: {}", admins);
         return admins.stream().map(a -> mapper.map(a, AdminDTO.class)).collect(Collectors.toList());
     }
@@ -53,8 +53,7 @@ public class DefaultAdminService implements AdminService {
         user.setEmail(admin.getEmail());
         user.setActive(Boolean.TRUE);
         user.setPassword(encoder.encode(admin.getPassword()));
-        Role adminRole = roleRepository.getByName("ROLE_ADMIN");
-        user.getRoles().add(adminRole);
+        user.getRoles().add(getAdminRole());
         log.debug("Admin before save: {}", user);
         userRepository.save(user);
         log.info("Added new admin!");
@@ -70,15 +69,29 @@ public class DefaultAdminService implements AdminService {
         log.debug("Admin DTO: {}", adminDTO);
         User user = mapper.map(adminDTO, User.class);
         user.setActive(Boolean.TRUE);
-        Role adminRole = roleRepository.getByName("ROLE_ADMIN");
-        user.getRoles().add(adminRole);
+        user.getRoles().add(getAdminRole());
         user.setPassword(encoder.encode(adminDTO.getPassword()));
         log.debug("Admin before save to user table: {}", user);
         userRepository.save(user);
+    }
+
+    public Role getAdminRole() {
+        return roleRepository.getByName("ROLE_ADMIN");
+    }
+
+    public Role getUserRole() {
+        return roleRepository.getByName("ROLE_USER");
     }
 
     @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public List<UserDTO> findAllUsers() {
+        return userRepository.findAllByRoles(getUserRole())
+                .stream().map(m -> mapper.map(m, UserDTO.class)).collect(Collectors.toList());
+    }
+
 }

@@ -1,6 +1,6 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.domain.entities.User;
+
 import krissto87.charity.domain.entities.VerificationToken;
 import krissto87.charity.dtos.RegistrationDataDTO;
 import krissto87.charity.services.RegistrationService;
@@ -46,11 +46,11 @@ public class RegistrationController {
     }
 
     @RequestMapping("/confirm-account")
-    public String confirmRegistration(@RequestParam("token") String token) {
-        VerificationToken verificationToken = tokenService.findByToken(token);
+    public String confirmRegistration(@RequestParam("token") String tokenUrl) {
+        VerificationToken token = tokenService.findByToken(tokenUrl);
 
-        if (verificationToken != null) {
-            userService.makeUserActive(verificationToken.getUser().getId());
+        if (token != null) {
+            userService.makeUserActive(token.getUser().getId());
         }
         else {
             return "activation-failed";

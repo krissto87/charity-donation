@@ -54,4 +54,5 @@ public class DefaultUserService implements UserService {
         log.debug("User before save: {}", user);
         userRepository.save(user);
     }
+
 }

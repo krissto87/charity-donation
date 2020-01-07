@@ -55,4 +55,11 @@ public class DefaultUserService implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void makeUserActive(Long id) {
+        User user = userRepository.getOne(id);
+        user.setActive(Boolean.TRUE);
+        userRepository.save(user);
+        log.debug("User after token activation: {}", user);
+    }
 }

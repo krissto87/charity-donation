@@ -5,6 +5,7 @@ import krissto87.charity.domain.entities.User;
 import krissto87.charity.domain.entities.VerificationToken;
 import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
+import krissto87.charity.domain.repository.VerificationTokenRepository;
 import krissto87.charity.dtos.RegistrationDataDTO;
 import krissto87.charity.services.EmailService;
 import krissto87.charity.services.RegistrationService;
@@ -24,14 +25,17 @@ public class DefaultRegistrationService implements RegistrationService {
     private final RoleRepository roleRepository;
     private final ModelMapper mapper;
     private final EmailService emailService;
+    private final VerificationTokenRepository tokenRepository;
 
     public DefaultRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                                      RoleRepository roleRepository, ModelMapper mapper, EmailService emailService) {
+                                      RoleRepository roleRepository, ModelMapper mapper,
+                                      EmailService emailService, VerificationTokenRepository tokenRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.mapper = mapper;
         this.emailService = emailService;
+        this.tokenRepository = tokenRepository;
     }
 
     @Override
@@ -46,10 +50,13 @@ public class DefaultRegistrationService implements RegistrationService {
         user.getRoles().add(roleUser);
         VerificationToken verificationToken = new VerificationToken(user);
         emailService.sendSimpleMessage(user.getEmail(), "Charity donation app: Complete your Registration!",
-                "To activate your account, please click here : "
+                "To activate your account, please click here (link valid 24 hours) : "
                         +"http://localhost:8080/confirm-account?token="+verificationToken.getToken());
+        log.debug("VerificationToken object: {}", verificationToken);
         log.debug("User before save: {}", user);
         userRepository.save(user);
         log.debug("User after save: {}", user);
+        verificationToken.getUser().setId(userRepository.findUserByEmail(user.getEmail()).getId());
+        tokenRepository.save(verificationToken);
     }
 }

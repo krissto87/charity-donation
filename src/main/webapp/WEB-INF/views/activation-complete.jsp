@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <spring:message code="pages.form.finish-registration.title" var="title"/>
+    <spring:message code="pages.activation.complete.title" var="title"/>
     <jsp:include page="/WEB-INF/views/fragments/head.jsp">
         <jsp:param name="title" value="${title}"/>
     </jsp:include>
@@ -14,7 +14,7 @@
     <jsp:include page="/WEB-INF/views/fragments/header.jsp"/>
 
     <div class="slogan container container--90">
-        <h2><spring:message code="pages.form.finish-registration.header"/></h2>
+        <h2><spring:message code="pages.activation.complete.header"/></h2>
     </div>
 </header>
 

@@ -5,6 +5,7 @@ import krissto87.charity.domain.entities.User;
 import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.dtos.RegistrationDataDTO;
+import krissto87.charity.services.EmailService;
 import krissto87.charity.services.RegistrationService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -21,12 +22,15 @@ public class DefaultRegistrationService implements RegistrationService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final ModelMapper mapper;
+    private final EmailService emailService;
 
-    public DefaultRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository, ModelMapper mapper) {
+    public DefaultRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository,
+                                      RoleRepository roleRepository, ModelMapper mapper, EmailService emailService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.mapper = mapper;
+        this.emailService = emailService;
     }
 
     @Override
@@ -39,6 +43,8 @@ public class DefaultRegistrationService implements RegistrationService {
         user.setPassword(encodedPassword);
         Role roleUser = roleRepository.getByName("ROLE_USER");
         user.getRoles().add(roleUser);
+        emailService.sendSimpleMessage(user.getEmail(),
+                "Registration confirm", "Click link below to confirm registration");
         log.debug("User before save: {}", user);
         userRepository.save(user);
         log.debug("User after save: {}", user);

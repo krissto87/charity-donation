@@ -1,5 +1,6 @@
 package krissto87.charity.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleContextResolver;
@@ -37,4 +38,5 @@ public class WebConfig implements WebMvcConfigurer {
         sessionLocaleResolver.setDefaultLocale(new Locale("en"));
         return sessionLocaleResolver;
     }
+
 }

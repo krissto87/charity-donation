@@ -4,4 +4,5 @@ import krissto87.charity.dtos.RegistrationDataDTO;
 
 public interface RegistrationService {
     void register(RegistrationDataDTO registrationData);
+
 }

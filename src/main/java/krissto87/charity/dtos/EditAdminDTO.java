@@ -10,5 +10,4 @@ public class EditAdminDTO {
     private String surname;
     private String email;
     private String password;
-    private Boolean active;
 }

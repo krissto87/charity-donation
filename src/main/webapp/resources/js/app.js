@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
         categoriesArray.push(categories[i].value);
       }
       let quantity = document.getElementById('bags').value;
-      let institutions = document.querySelector('.radio:checked').value;
+      let institution = document.querySelector('.radio:checked').value;
       let street = document.getElementById('street').value;
       let city = document.getElementById('city').value;
       let zipCode = document.getElementById('zip-code').value;
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       document.getElementById('quantity-sum').innerText = quantity;
       document.getElementById('categories-sum').innerText = categoriesArray.join(', ');
-      document.getElementById('institution-sum').innerText = institutions;
+      document.getElementById('institution-sum').innerText = institution;
       document.getElementById('street-sum').innerText = street;
       document.getElementById('city-sum').innerText = city;
       document.getElementById('zip-code-sum').innerText = zipCode;

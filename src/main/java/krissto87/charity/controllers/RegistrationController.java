@@ -18,14 +18,13 @@ public class RegistrationController {
 
     private final RegistrationService registrationService;
     private final VerificationTokenService tokenService;
-    private final UserService userService;
 
 
     public RegistrationController(RegistrationService registrationService,
-                                  VerificationTokenService tokenService, UserService userService) {
+                                  VerificationTokenService tokenService) {
         this.registrationService = registrationService;
         this.tokenService = tokenService;
-        this.userService = userService;
+
     }
 
     @GetMapping("/registration")
@@ -47,12 +46,7 @@ public class RegistrationController {
 
     @RequestMapping("/confirm-account")
     public String confirmRegistration(@RequestParam("token") String tokenUrl) {
-        VerificationToken token = tokenService.findByToken(tokenUrl);
-
-        if (token != null) {
-            userService.makeUserActive(token.getUser().getId());
-        }
-        else {
+        if (tokenService.tokenValidity(tokenUrl).equals(false)) {
             return "activation-failed";
         }
         return "activation-complete";

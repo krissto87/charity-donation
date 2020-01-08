@@ -11,5 +11,4 @@ public interface UserService {
 
     void changeUserPassword(ChangePasswordDTO changePasswordDTO);
 
-    void makeUserActive(Long id);
 }

@@ -62,8 +62,7 @@ public class DefaultDonationService implements DonationService {
         donation.setPickUpComment(donationDTO.getPickUpComment());
         donation.setDonor(userRepository.findUserByEmail(GeneralUtils.getUsername()));
         log.debug("Donor: {}", donation.getDonor());
-        String now = LocalDateTime.now().format(GeneralUtils.dateTimeFormatter());
-        donation.setCreateTime(LocalDateTime.parse(now, GeneralUtils.dateTimeFormatter()));
+        donation.setCreateTime(LocalDateTime.now());
         donation.setDelivered(Boolean.FALSE);
         log.debug("Donation object before save {}", donation);
         donationRepository.save(donation);
@@ -91,8 +90,7 @@ public class DefaultDonationService implements DonationService {
     public void confirmCourierVisit(CourierStatusDTO statusDTO) {
         Donation donation = donationRepository.getOne(statusDTO.getId());
         donation.setDelivered(Boolean.TRUE);
-        String now = LocalDateTime.now().format(GeneralUtils.dateTimeFormatter());
-        donation.setDeliverTime(LocalDateTime.parse(now, GeneralUtils.dateTimeFormatter()));
+        donation.setDeliverTime(LocalDateTime.now());
         log.debug("Donation pre update: {}", donation);
         donationRepository.save(donation);
     }

@@ -3,9 +3,7 @@ package krissto87.charity.domain.entities;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -15,30 +13,29 @@ import java.util.UUID;
 @ToString @EqualsAndHashCode(of = "id")
 public class VerificationToken {
 
-    private static final int EXPIRATION = 60 * 24;
+    private static final int EXPIRATION = 24;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique=true)
     private String token;
 
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
-    private Date expiryDate;
+    private LocalDateTime expiryDate;
 
-    private Date calculateExpiryDate() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Timestamp(cal.getTime().getTime()));
-        cal.add(Calendar.MINUTE, VerificationToken.EXPIRATION);
-        return new Date(cal.getTime().getTime());
+    private LocalDateTime calculateExpiryDate() {
+
+        return LocalDateTime.now().plusHours(EXPIRATION);
     }
 
     public VerificationToken(User user) {
         this.user = user;
-        expiryDate= calculateExpiryDate();
+        expiryDate = calculateExpiryDate();
         token = UUID.randomUUID().toString();
     }
 

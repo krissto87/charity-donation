@@ -43,7 +43,7 @@ public class RegistrationController {
 
     @RequestMapping("/confirm-account")
     public String confirmRegistration(@RequestParam("token") String tokenUrl) {
-        if (tokenService.tokenValidity(tokenUrl).equals(false)) {
+        if (tokenService.makeUserActive(tokenUrl).equals(false)) {
             return "activation-failed";
         }
         return "activation-complete";

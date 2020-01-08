@@ -1,14 +1,14 @@
 package krissto87.charity.controllers;
 
+import krissto87.charity.dtos.ChangePasswordDTO;
 import krissto87.charity.dtos.RemindPasswordDTO;
 import krissto87.charity.services.UserService;
+import krissto87.charity.services.VerificationTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -17,9 +17,11 @@ import javax.validation.Valid;
 public class RemindPasswordController {
 
     private final UserService userService;
+    private final VerificationTokenService tokenService;
 
-    public RemindPasswordController(UserService userService) {
+    public RemindPasswordController(UserService userService, VerificationTokenService tokenService) {
         this.userService = userService;
+        this.tokenService = tokenService;
     }
 
     @GetMapping("/remind-password")
@@ -35,10 +37,20 @@ public class RemindPasswordController {
             return "remind-password";
         }
         else {
-            if (userService.emailValidity(remindPasswordDTO.getEmail()).equals(false)) {
+            if (userService.sendEmailToResetPassword(remindPasswordDTO.getEmail()).equals(false)) {
                 return "invalid-email";
             }
             return "remind-sending-complete";
         }
     }
+
+    @GetMapping("/reset-password")
+    public String confirmRegistration(Model model, @RequestParam("token") String tokenUrl) {
+        if (tokenService.prepareResetPasswordPage(tokenUrl).equals(false)) {
+            return "reset-password-failed";
+        }
+        model.addAttribute("passwordChange", new ChangePasswordDTO());
+        return "reset-password-form";
+    }
+
 }

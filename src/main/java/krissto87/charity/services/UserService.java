@@ -11,6 +11,6 @@ public interface UserService {
 
     void changeUserPassword(ChangePasswordDTO changePasswordDTO);
 
-    Boolean emailValidity(String email);
+    Boolean sendEmailToResetPassword(String email);
 
 }

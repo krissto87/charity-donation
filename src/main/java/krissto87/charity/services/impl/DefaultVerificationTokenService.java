@@ -23,7 +23,7 @@ public class DefaultVerificationTokenService implements VerificationTokenService
     }
 
     @Override
-    public Boolean tokenValidity(String tokenUrl) {
+    public Boolean makeUserActive(String tokenUrl) {
         VerificationToken token = tokenRepository.findByToken(tokenUrl);
         if (token != null) {
             User user = userRepository.getOne(token.getUser().getId());
@@ -34,5 +34,10 @@ public class DefaultVerificationTokenService implements VerificationTokenService
         }
         log.info("Token not found in database!");
         return false;
+    }
+
+    @Override
+    public Boolean prepareResetPasswordPage(String tokenUrl) {
+        return tokenRepository.findByToken(tokenUrl) != null;
     }
 }

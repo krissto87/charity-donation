@@ -14,6 +14,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @Transactional
@@ -64,13 +66,13 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Boolean emailValidity(String email) {
+    public Boolean sendEmailToResetPassword(String email) {
         User user = userRepository.findUserByEmail(email);
         if (user != null) {
             VerificationToken verificationToken = new VerificationToken(user);
             emailService.sendSimpleMessage(email, "Charity donation app: Reset your password!",
                     "To reset your password, please click here (link valid 24 hours) : "
-                            +"http://localhost:8080/confirm-account?token="+verificationToken.getToken());
+                            +"http://localhost:8080/reset-password?token="+verificationToken.getToken());
             verificationToken.getUser().setId(userRepository.findUserByEmail(user.getEmail()).getId());
             tokenRepository.save(verificationToken);
             log.debug("VerificationToken after save: {}", verificationToken);
@@ -78,6 +80,6 @@ public class DefaultUserService implements UserService {
         }
         log.info("Email from user not found in database!");
         return false;
-
     }
+
 }

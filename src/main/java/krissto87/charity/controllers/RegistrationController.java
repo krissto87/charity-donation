@@ -1,10 +1,7 @@
 package krissto87.charity.controllers;
 
-
-import krissto87.charity.domain.entities.VerificationToken;
 import krissto87.charity.dtos.RegistrationDataDTO;
 import krissto87.charity.services.RegistrationService;
-import krissto87.charity.services.UserService;
 import krissto87.charity.services.VerificationTokenService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

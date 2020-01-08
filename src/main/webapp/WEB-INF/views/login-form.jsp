@@ -70,11 +70,13 @@
                 <p><spring:message code="pages.login.form.login-error"/></p>
             </c:if>
         </div>
+
         <div class="form-group">
             <spring:message code="pages.login.form.password" var="passPlaceholder"/>
             <input type="password" name="password" required placeholder="${passPlaceholder}" />
-            <c:url var="changePassword" value="/user/settings/password-change"/>
-            <a href="${changePassword}" class="btn btn--small btn--without-border reset-password">
+
+            <c:url var="remindPassword" value="/remind-password"/>
+            <a href="${remindPassword}" class="btn btn--small btn--without-border reset-password">
                 <spring:message code="pages.login.remind"/>
             </a>
         </div>

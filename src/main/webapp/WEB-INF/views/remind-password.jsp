@@ -1,4 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -14,18 +17,19 @@
 
 <section class="login-page">
     <h2><spring:message code="pages.remind-password.header"/></h2>
-    <form method="post">
+    <form:form modelAttribute="remindPassword" method="post">
         <div class="form-group">
             <div class="control has-icons-left">
                 <spring:message code="pages.remind-password.email" var="emailPlaceholder"/>
-                <input type="email" name="email" placeholder="${emailPlaceholder}" />
+                <c:input path="email" placeholder="${emailPlaceholder}" />
+                <form:errors path="email" element="p"/>
             </div>
         </div>
         <div class="form-group form-group--buttons">
             <button class="btn" type="submit"><spring:message code="pages.remind-password.send"/></button>
         </div>
-<%--        <sec:csrfInput/>--%>
-    </form>
+        <sec:csrfInput/>
+    </form:form>
 </section>
 
 <footer>

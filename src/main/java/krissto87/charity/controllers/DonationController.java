@@ -49,6 +49,11 @@ public class DonationController {
         return "redirect:/user/donation/confirmation";
     }
 
+    @RequestMapping("/confirmation")
+    public String processFormConfirmation() {
+        return "/user/form-confirmation";
+    }
+
     @GetMapping("/all")
     public String displayAllUserDonation(Model model) {
         String username = GeneralUtils.getUsername();
@@ -65,7 +70,8 @@ public class DonationController {
     }
 
     @PostMapping("/pick-up-confirm/{id}")
-    public String processConfirmCourierVisit(@Valid CourierStatusDTO statusDTO, BindingResult result) {
+    public String processConfirmCourierVisit(@PathVariable Long id, @Valid CourierStatusDTO statusDTO,
+                                             BindingResult result) {
         if (result.hasErrors()) {
             return "user/donation-all";
         }

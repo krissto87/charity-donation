@@ -28,4 +28,14 @@ public class HomeController {
         model.addAttribute("countOfBags", donationService.sumBagsFromAllDonations());
         return "index";
     }
+
+    @GetMapping("/admin")
+    public String adminDashboard() {
+        return "admin/admin-homepage";
+    }
+
+    @GetMapping("/user")
+    public String userDashboard() {
+        return "/user/user-homepage";
+    }
 }

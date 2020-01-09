@@ -1,6 +1,7 @@
 package krissto87.charity.services;
 
 import krissto87.charity.dtos.ChangePasswordDTO;
+import krissto87.charity.dtos.RegistrationDataDTO;
 import krissto87.charity.dtos.UserProfileDTO;
 
 public interface UserService {
@@ -13,4 +14,5 @@ public interface UserService {
 
     Boolean sendEmailToResetPassword(String email);
 
+    void changeUserPasswordAfterRemind(ChangePasswordDTO changePassword, String tokenUrl);
 }

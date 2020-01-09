@@ -1,6 +1,7 @@
 package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.ChangePasswordDTO;
+import krissto87.charity.dtos.RegistrationDataDTO;
 import krissto87.charity.dtos.RemindPasswordDTO;
 import krissto87.charity.services.UserService;
 import krissto87.charity.services.VerificationTokenService;
@@ -45,12 +46,21 @@ public class RemindPasswordController {
     }
 
     @GetMapping("/reset-password")
-    public String confirmRegistration(Model model, @RequestParam("token") String tokenUrl) {
+    public String prepareChangePasswordForm (Model model, @RequestParam("token") String tokenUrl) {
         if (tokenService.prepareResetPasswordPage(tokenUrl).equals(false)) {
             return "reset-password-failed";
         }
         model.addAttribute("passwordChange", new ChangePasswordDTO());
         return "reset-password-form";
+    }
+
+    @PostMapping("/reset-password")
+    public String processChangePassword (@RequestParam("token") String tokenUrl, @Valid ChangePasswordDTO changePassword, BindingResult result) {
+        if (result.hasErrors()) {
+            return "reset-password-form";
+        }
+        userService.changeUserPasswordAfterRemind(changePassword, tokenUrl);
+        return "reset-password-complete";
     }
 
 }

@@ -5,6 +5,7 @@ import krissto87.charity.domain.entities.VerificationToken;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.domain.repository.VerificationTokenRepository;
 import krissto87.charity.dtos.ChangePasswordDTO;
+import krissto87.charity.dtos.RegistrationDataDTO;
 import krissto87.charity.dtos.UserProfileDTO;
 import krissto87.charity.services.EmailService;
 import krissto87.charity.services.UserService;
@@ -80,6 +81,14 @@ public class DefaultUserService implements UserService {
         }
         log.info("Email from user not found in database!");
         return false;
+    }
+
+    @Override
+    public void changeUserPasswordAfterRemind(ChangePasswordDTO changePassword, String tokenUrl) {
+        VerificationToken token = tokenRepository.findByToken(tokenUrl);
+        User user = userRepository.getOne(token.getUser().getId());
+        user.setPassword(encoder.encode(changePassword.getPassword()));
+        userRepository.save(user);
     }
 
 }

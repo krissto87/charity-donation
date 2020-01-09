@@ -29,7 +29,7 @@
                 <spring:message code="pages.reset-password.form.re-password.placeholder"
                                 var="rePasswordPlaceholder"/>
                 <form:password path="rePassword" required="true" placeholder="${rePasswordPlaceholder}"/>
-                <form:errors path="password" element="p"/>
+                <form:errors path="rePassword" element="p"/>
             </div>
         </div>
         <div class="form-group form-group--buttons">

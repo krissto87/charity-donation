@@ -1,6 +1,7 @@
 package krissto87.charity.dtos;
 
 import krissto87.charity.validation.constraints.SamePasswords;
+import krissto87.charity.validation.constraints.ValidPassword;
 import lombok.Data;
 import javax.validation.constraints.*;
 
@@ -13,8 +14,7 @@ public class RegistrationDataDTO {
     private String name;
     @NotBlank
     private String surname;
-    @NotBlank
+    @ValidPassword
     private String password;
-    @NotBlank
     private String rePassword;
 }

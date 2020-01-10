@@ -22,6 +22,8 @@
 
     <form:form method="post" modelAttribute="admin">
         <input:hidden path="id"/>
+        <input:hidden path="email"/>
+        <form:errors path="*"/>
         <div class="form-group form-group--buttons">
             <button class="btn" type="submit"><spring:message code="pages.admin.institutions.delete"/></button>
         </div>

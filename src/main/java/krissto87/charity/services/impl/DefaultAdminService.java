@@ -5,15 +5,18 @@ import krissto87.charity.domain.entities.User;
 import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.dtos.AdminDTO;
+import krissto87.charity.dtos.DeleteAdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
 import krissto87.charity.dtos.EditUserDTO;
 import krissto87.charity.services.AdminService;
 
+import krissto87.charity.validation.group.BusinessLogic;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,7 +86,7 @@ public class DefaultAdminService implements AdminService {
         return roleRepository.getByName("ROLE_USER");
     }
 
-    @Override
+    @Override @Validated({BusinessLogic.class})
     public void deleteAdminById(Long id) {
         userRepository.deleteById(id);
     }
@@ -125,6 +128,11 @@ public class DefaultAdminService implements AdminService {
         User user = userRepository.getOne(id);
         user.setActive(Boolean.TRUE);
         userRepository.save(user);
+    }
+
+    @Override
+    public DeleteAdminDTO findAdminToDeleteById(Long id) {
+        return mapper.map(userRepository.getOne(id), DeleteAdminDTO.class);
     }
 
 }

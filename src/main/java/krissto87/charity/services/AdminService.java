@@ -2,6 +2,7 @@ package krissto87.charity.services;
 
 
 import krissto87.charity.dtos.AdminDTO;
+import krissto87.charity.dtos.DeleteAdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
 import krissto87.charity.dtos.EditUserDTO;
 
@@ -30,4 +31,6 @@ public interface AdminService {
     void blockUserById(Long id);
 
     void activateUserById(Long id);
+
+    DeleteAdminDTO findAdminToDeleteById(Long id);
 }

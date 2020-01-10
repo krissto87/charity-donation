@@ -1,6 +1,7 @@
 package krissto87.charity.controllers;
 
 import krissto87.charity.dtos.AdminDTO;
+import krissto87.charity.dtos.DeleteAdminDTO;
 import krissto87.charity.dtos.EditAdminDTO;
 import krissto87.charity.dtos.EditUserDTO;
 import krissto87.charity.services.AdminService;
@@ -60,12 +61,16 @@ public class AdminController {
 
     @GetMapping("/{id}/delete")
     public String prepareDeleteAdminPage(Model model, @PathVariable Long id) {
-        model.addAttribute("admin", adminService.findAdminById(id));
+        model.addAttribute("admin", adminService.findAdminToDeleteById(id));
         return "admin/delete-admin";
     }
 
     @PostMapping("/{id}/delete")
-    public String processDeleteAdmin(@ModelAttribute("admin") @PathVariable Long id) {
+    public String processDeleteAdmin(@ModelAttribute("admin") @Valid DeleteAdminDTO admin, BindingResult result,
+                                     @PathVariable Long id) {
+        if (result.hasErrors()) {
+            return "admin/delete-admin";
+        }
         adminService.deleteAdminById(id);
         return "redirect:/admin/admins-all";
     }

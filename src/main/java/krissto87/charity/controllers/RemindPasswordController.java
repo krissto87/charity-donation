@@ -46,7 +46,7 @@ public class RemindPasswordController {
 
     @GetMapping("/reset-password")
     public String prepareChangePasswordForm (Model model, @RequestParam("token") String tokenUrl) {
-        if (tokenService.prepareResetPasswordPage(tokenUrl).equals(false)) {
+        if (tokenService.isTokenValidToRemindPassword(tokenUrl).equals(false)) {
             return "reset-password-failed";
         }
         model.addAttribute("changePassword", new ChangePasswordDTO());

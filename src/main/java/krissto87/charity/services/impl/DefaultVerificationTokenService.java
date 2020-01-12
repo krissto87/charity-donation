@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @Transactional
 @Slf4j
@@ -23,21 +25,26 @@ public class DefaultVerificationTokenService implements VerificationTokenService
     }
 
     @Override
-    public Boolean makeUserActive(String tokenUrl) {
+    public Boolean isTokenValidToActiveUser(String tokenUrl) {
         VerificationToken token = tokenRepository.findByToken(tokenUrl);
-        if (token != null) {
+        boolean validTokenTime = LocalDateTime.now().isBefore(token.getExpiryDate());
+        log.debug("Token is valid {}", validTokenTime);
+        if (validTokenTime) {
             User user = userRepository.getOne(token.getUser().getId());
             user.setActive(Boolean.TRUE);
             userRepository.save(user);
             log.debug("User after token activation: {}", user);
             return true;
         }
-        log.info("Token not found in database!");
+        log.info("Token not found in database or expired!");
         return false;
     }
 
     @Override
-    public Boolean prepareResetPasswordPage(String tokenUrl) {
-        return tokenRepository.findByToken(tokenUrl) != null;
+    public Boolean isTokenValidToRemindPassword(String tokenUrl) {
+        VerificationToken token = tokenRepository.findByToken(tokenUrl);
+        boolean validTokenTime = LocalDateTime.now().isBefore(token.getExpiryDate());
+        log.debug("Token is valid {}", validTokenTime);
+        return validTokenTime;
     }
 }

@@ -14,7 +14,7 @@ public class RegistrationDataDTO {
     private String name;
     @NotBlank
     private String surname;
-    @ValidPassword
+    @NotBlank @ValidPassword
     private String password;
     private String rePassword;
 }

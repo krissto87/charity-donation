@@ -49,12 +49,13 @@ public class RemindPasswordController {
         if (tokenService.prepareResetPasswordPage(tokenUrl).equals(false)) {
             return "reset-password-failed";
         }
-        model.addAttribute("passwordChange", new ChangePasswordDTO());
+        model.addAttribute("changePassword", new ChangePasswordDTO());
         return "reset-password-form";
     }
 
     @PostMapping("/reset-password")
-    public String processChangePassword (@RequestParam("token") String tokenUrl, @Valid ChangePasswordDTO changePassword, BindingResult result) {
+    public String processChangePassword (@ModelAttribute("changePassword") @Valid ChangePasswordDTO changePassword,
+                                         BindingResult result, @RequestParam("token") String tokenUrl) {
         if (result.hasErrors()) {
             return "reset-password-form";
         }

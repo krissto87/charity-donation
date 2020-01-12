@@ -1,10 +1,14 @@
 package krissto87.charity.dtos;
 
+import krissto87.charity.validation.constraints.SamePasswords;
 import lombok.Data;
 
-@Data
+import javax.validation.constraints.NotBlank;
+
+@Data @SamePasswords
 public class ChangePasswordDTO {
 
+    @NotBlank
     private String password;
     private String rePassword;
 }

@@ -18,7 +18,7 @@
 
 <section class="login-page">
     <h2><spring:message code="pages.reset-password.form.title"/></h2>
-    <form:form method="post" modelAttribute="passwordChange">
+    <form:form method="post" modelAttribute="changePassword">
         <div class="form-group">
             <div class="control has-icons-left">
                 <spring:message code="pages.reset-password.form.password.placeholder"

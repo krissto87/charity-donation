@@ -30,6 +30,8 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
             return true;
         }
 
+//        validator.getMessages(result).listIterator().add();
+
         List<String> messages = validator.getMessages(result);
         String messageTemplate = String.join(",", messages);
 

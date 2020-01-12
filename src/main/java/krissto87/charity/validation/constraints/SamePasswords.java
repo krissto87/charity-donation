@@ -1,5 +1,6 @@
 package krissto87.charity.validation.constraints;
 
+import krissto87.charity.validation.validators.SamePasswordsValidatorForChangePasswordDTO;
 import krissto87.charity.validation.validators.SamePasswordsValidatorForRegistrationDataDTO;
 
 import javax.validation.Constraint;
@@ -9,7 +10,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = SamePasswordsValidatorForRegistrationDataDTO.class)
+@Constraint(validatedBy = {SamePasswordsValidatorForRegistrationDataDTO.class,
+        SamePasswordsValidatorForChangePasswordDTO.class})
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SamePasswords {

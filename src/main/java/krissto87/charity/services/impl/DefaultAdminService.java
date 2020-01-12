@@ -10,8 +10,12 @@ import krissto87.charity.dtos.EditAdminDTO;
 import krissto87.charity.dtos.EditUserDTO;
 import krissto87.charity.services.AdminService;
 
+import krissto87.charity.services.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,13 +33,15 @@ public class DefaultAdminService implements AdminService {
     private final ModelMapper mapper;
     private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
+    private final EmailService emailService;
 
-    public DefaultAdminService(UserRepository userRepository, ModelMapper mapper,
-                               RoleRepository roleRepository, PasswordEncoder encoder) {
+    public DefaultAdminService(UserRepository userRepository, ModelMapper mapper, RoleRepository
+            roleRepository, PasswordEncoder encoder, EmailService emailService) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
+        this.emailService = emailService;
     }
 
     @Override
@@ -53,7 +59,16 @@ public class DefaultAdminService implements AdminService {
         user.setSurname(admin.getSurname());
         user.setEmail(admin.getEmail());
         user.setActive(Boolean.TRUE);
-        user.setPassword(encoder.encode(admin.getPassword()));
+
+        CharacterRule alphabets = new CharacterRule(EnglishCharacterData.Alphabetical);
+        CharacterRule digits = new CharacterRule(EnglishCharacterData.Digit);
+        CharacterRule special = new CharacterRule(EnglishCharacterData.Special);
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
+        String password = passwordGenerator.generatePassword(8, alphabets, digits, special);
+        user.setPassword(encoder.encode(password));
+        emailService.sendSimpleMessage(user.getEmail(), "Password for your charity admin account",
+                "Welcome "+ admin.getName() + "! Password to your charity admin account is: " + password);
+
         user.getRoles().add(getAdminRole());
         log.debug("Admin before save: {}", user);
         userRepository.save(user);

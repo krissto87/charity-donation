@@ -34,12 +34,6 @@
             <form:input path="surname" required="true" placeholder="${surnamePlaceholder}"/>
             <form:errors path="surname" element="p"/>
         </div>
-        <div class="form-group">
-            <spring:message code="pages.admin.admins-all.add.password" var="passwordPlaceholder"/>
-            <form:password path="password" required="true" placeholder="${passwordPlaceholder}"/>
-            <form:errors path="password" element="p"/>
-        </div>
-
         <div class="form-group form-group--buttons">
             <button class="btn" type="submit"><spring:message code="pages.admin.admins-all.add"/></button>
         </div>

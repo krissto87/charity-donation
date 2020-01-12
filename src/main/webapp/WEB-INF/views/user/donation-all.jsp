@@ -1,10 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -27,7 +24,7 @@
                 <td><strong><spring:message code="pages.user.donation-all.details"/></strong></td>
                 <td><strong><spring:message code="pages.user.donation-all.courier-details"/></strong></td>
             </tr>
-            <for:forEach items="${donations}" var="donation" varStatus="stat">
+            <c:forEach items="${donations}" var="donation" varStatus="stat">
                 <tr>
                     <td>${stat.count}</td>
                     <td>
@@ -59,7 +56,7 @@
                         <a href="${pickUpDetails}"><spring:message code="pages.user.donation-all.more"/></a>
                     </td>
                 </tr>
-            </for:forEach>
+            </c:forEach>
         </table>
     </section>
 </header>

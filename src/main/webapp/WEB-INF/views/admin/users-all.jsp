@@ -1,9 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -26,7 +24,7 @@
                 <td><strong><spring:message code="pages.admin.users-all.active"/></strong></td>
                 <td><strong><spring:message code="pages.admin.users-all.actions"/></strong></td>
             </tr>
-            <for:forEach items="${users}" var="user" varStatus="stat">
+            <c:forEach items="${users}" var="user" varStatus="stat">
                 <tr>
                     <td>${stat.count}</td>
                     <td>${user.email}</td>
@@ -65,7 +63,7 @@
                         <a href="${deleteUser}"><spring:message code="pages.admin.institutions.delete"/></a>
                     </td>
                 </tr>
-            </for:forEach>
+            </c:forEach>
         </table>
     </section>
 </header>

@@ -1,7 +1,7 @@
 package krissto87.charity.validation.constraints;
 
 
-import krissto87.charity.validation.validators.ActiveAdminForEditAdminDTO;
+import krissto87.charity.validation.validators.ActiveAdminForDeleteAdminDTO;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,11 +10,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = ActiveAdminForEditAdminDTO.class)
+@Constraint(validatedBy = ActiveAdminForDeleteAdminDTO.class)
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ActiveAdmin {
-    String message() default "";
+    String message() default "{krissto87.charity.validation.constraints.ActiveAdmin.message}";
 
     Class<?>[] groups() default {};
 

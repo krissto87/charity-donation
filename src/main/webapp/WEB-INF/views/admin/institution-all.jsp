@@ -1,10 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -31,7 +28,7 @@
                     <td><strong><spring:message code="pages.admin.institutions.description"/></strong></td>
                     <td><strong><spring:message code="pages.admin.institutions.action"/></strong></td>
                 </tr>
-                <for:forEach items="${institutions}" var="institution" varStatus="stat">
+                <c:forEach items="${institutions}" var="institution" varStatus="stat">
                     <tr>
                         <td>${stat.count}</td>
                         <td>${institution.name}</td>
@@ -47,7 +44,7 @@
                             </a>
                         </td>
                     </tr>
-                </for:forEach>
+                </c:forEach>
             </table>
         </section>
 </header>

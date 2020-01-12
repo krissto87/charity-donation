@@ -8,6 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
     @Override
@@ -29,8 +30,6 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         if (result.isValid()) {
             return true;
         }
-
-//        validator.getMessages(result).listIterator().add();
 
         List<String> messages = validator.getMessages(result);
         String messageTemplate = String.join(",", messages);

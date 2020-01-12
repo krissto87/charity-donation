@@ -9,7 +9,6 @@ import krissto87.charity.domain.repository.VerificationTokenRepository;
 import krissto87.charity.dtos.RegistrationDataDTO;
 import krissto87.charity.services.EmailService;
 import krissto87.charity.services.RegistrationService;
-import krissto87.charity.validation.group.BusinessLogic;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,9 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+
 @Service
 @Transactional
 @Slf4j
+@Validated
 public class DefaultRegistrationService implements RegistrationService {
 
     private final PasswordEncoder passwordEncoder;
@@ -40,8 +42,8 @@ public class DefaultRegistrationService implements RegistrationService {
         this.tokenRepository = tokenRepository;
     }
 
-    @Override @Validated({BusinessLogic.class})
-    public void register(RegistrationDataDTO registrationData) {
+    @Override
+    public void register(@Valid RegistrationDataDTO registrationData) {
         log.debug("Registration data to create user: {}", registrationData);
         User user = mapper.map(registrationData, User.class);
         log.debug("User after mapping from registrationData: {}", user);

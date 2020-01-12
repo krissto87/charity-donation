@@ -9,9 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Path;
 import javax.validation.Valid;
 
 @Controller @Slf4j
@@ -36,29 +33,11 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String processRegistrationPage(@ModelAttribute("registrationData")
-                                              @Valid RegistrationDataDTO registrationData,
-                                          BindingResult result) {
+                                              @Valid RegistrationDataDTO registrationData, BindingResult result) {
         if (result.hasErrors()) {
             return "registration-form";
         }
-        try {
             registrationService.register(registrationData);
-        } catch (
-                ConstraintViolationException cve) {
-            log.warn("Business constraints were violated for {}", registrationData);
-            for (ConstraintViolation<?> violation : cve.getConstraintViolations()) {
-                log.warn("Violation: {}", violation);
-                String field = null;
-                for (Path.Node node : violation.getPropertyPath()) {
-                    field = node.getName();
-                }
-//                Path field = violation.getPropertyPath();
-                result.rejectValue(field,
-                        violation.getConstraintDescriptor().getAnnotation().annotationType()
-                                .getSimpleName() + ".registrationData." + field);
-            }
-            return "registration-form";
-        }
         return "finish-registration";
     }
 

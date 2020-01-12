@@ -10,13 +10,11 @@ import krissto87.charity.dtos.EditAdminDTO;
 import krissto87.charity.dtos.EditUserDTO;
 import krissto87.charity.services.AdminService;
 
-import krissto87.charity.validation.group.BusinessLogic;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -86,7 +84,7 @@ public class DefaultAdminService implements AdminService {
         return roleRepository.getByName("ROLE_USER");
     }
 
-    @Override @Validated({BusinessLogic.class})
+    @Override
     public void deleteAdminById(Long id) {
         userRepository.deleteById(id);
     }

@@ -20,7 +20,7 @@ public class SamePasswordsValidatorForChangePasswordDTO implements ConstraintVal
         boolean valid = changePasswordDTO.getPassword().equals(changePasswordDTO.getRePassword());
         if (!valid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("SamePassword.changePasswordDTO.rePassword")
+            context.buildConstraintViolationWithTemplate("SamePasswords.changePasswordDTO.rePassword")
                     .addPropertyNode("rePassword").addConstraintViolation();
         }
         return valid;

@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ActiveAdmin {
-    String message() default "{krissto87.charity.validation.constraints.ActiveAdmin.message}";
+    String message() default "";
 
     Class<?>[] groups() default {};
 

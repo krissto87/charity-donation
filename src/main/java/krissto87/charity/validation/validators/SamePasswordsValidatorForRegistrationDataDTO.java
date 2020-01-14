@@ -19,7 +19,7 @@ public class SamePasswordsValidatorForRegistrationDataDTO implements ConstraintV
             boolean valid = registrationData.getPassword().equals(registrationData.getRePassword());
             if (!valid) {
                 context.disableDefaultConstraintViolation();
-                context.buildConstraintViolationWithTemplate("SamePassword.registrationData.rePassword")
+                context.buildConstraintViolationWithTemplate("SamePasswords.registrationData.rePassword")
                         .addPropertyNode("rePassword").addConstraintViolation();
             }
             return valid;

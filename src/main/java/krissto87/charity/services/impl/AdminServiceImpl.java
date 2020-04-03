@@ -4,10 +4,10 @@ import krissto87.charity.domain.entities.Role;
 import krissto87.charity.domain.entities.User;
 import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
-import krissto87.charity.dtos.AdminDTO;
-import krissto87.charity.dtos.DeleteAdminDTO;
-import krissto87.charity.dtos.EditAdminDTO;
-import krissto87.charity.dtos.EditUserDTO;
+import krissto87.charity.dtos.AdminDto;
+import krissto87.charity.dtos.DeleteAdminDto;
+import krissto87.charity.dtos.EditAdminDto;
+import krissto87.charity.dtos.EditUserDto;
 import krissto87.charity.services.AdminService;
 
 import krissto87.charity.services.EmailService;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @Slf4j
-public class DefaultAdminService implements AdminService {
+public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
     private final ModelMapper mapper;
@@ -35,7 +35,7 @@ public class DefaultAdminService implements AdminService {
     private final PasswordEncoder encoder;
     private final EmailService emailService;
 
-    public DefaultAdminService(UserRepository userRepository, ModelMapper mapper, RoleRepository
+    public AdminServiceImpl(UserRepository userRepository, ModelMapper mapper, RoleRepository
             roleRepository, PasswordEncoder encoder, EmailService emailService) {
         this.userRepository = userRepository;
         this.mapper = mapper;
@@ -45,14 +45,14 @@ public class DefaultAdminService implements AdminService {
     }
 
     @Override
-    public List<AdminDTO> findAllAdmins() {
+    public List<AdminDto> findAllAdmins() {
         List<User> admins = userRepository.findAllByRoles(getAdminRole());
         log.debug("Admins from db: {}", admins);
-        return admins.stream().map(a -> mapper.map(a, AdminDTO.class)).collect(Collectors.toList());
+        return admins.stream().map(a -> mapper.map(a, AdminDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public void save(AdminDTO admin) {
+    public void save(AdminDto admin) {
         log.debug("Admin from form: {}", admin);
         User user = new User();
         user.setName(admin.getName());
@@ -76,12 +76,12 @@ public class DefaultAdminService implements AdminService {
     }
 
     @Override
-    public EditAdminDTO findAdminById(Long id) {
-        return mapper.map(userRepository.getOne(id), EditAdminDTO.class);
+    public EditAdminDto findAdminById(Long id) {
+        return mapper.map(userRepository.getOne(id), EditAdminDto.class);
     }
 
     @Override
-    public void updateAdmin(EditAdminDTO adminDTO) {
+    public void updateAdmin(EditAdminDto adminDTO) {
         log.debug("Admin DTO: {}", adminDTO);
         User user = mapper.map(adminDTO, User.class);
         user.setActive(Boolean.TRUE);
@@ -105,18 +105,18 @@ public class DefaultAdminService implements AdminService {
     }
 
     @Override
-    public List<EditUserDTO> findAllUsers() {
+    public List<EditUserDto> findAllUsers() {
         return userRepository.findAllByRoles(getUserRole())
-                .stream().map(m -> mapper.map(m, EditUserDTO.class)).collect(Collectors.toList());
+                .stream().map(m -> mapper.map(m, EditUserDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public EditUserDTO findUserById(Long id) {
-        return mapper.map(userRepository.getOne(id), EditUserDTO.class);
+    public EditUserDto findUserById(Long id) {
+        return mapper.map(userRepository.getOne(id), EditUserDto.class);
     }
 
     @Override
-    public void updateUser(EditUserDTO userDTO) {
+    public void updateUser(EditUserDto userDTO) {
         User user = mapper.map(userDTO, User.class);
         user.setActive(Boolean.TRUE);
         user.getRoles().add(getUserRole());
@@ -144,8 +144,8 @@ public class DefaultAdminService implements AdminService {
     }
 
     @Override
-    public DeleteAdminDTO findAdminToDeleteById(Long id) {
-        return mapper.map(userRepository.getOne(id), DeleteAdminDTO.class);
+    public DeleteAdminDto findAdminToDeleteById(Long id) {
+        return mapper.map(userRepository.getOne(id), DeleteAdminDto.class);
     }
 
 }

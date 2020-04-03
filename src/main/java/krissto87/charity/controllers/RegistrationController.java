@@ -1,6 +1,6 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.dtos.RegistrationDataDTO;
+import krissto87.charity.dtos.RegistrationDataDto;
 import krissto87.charity.services.RegistrationService;
 import krissto87.charity.services.VerificationTokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,13 +27,13 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String getRegistrationPage(Model model) {
-        model.addAttribute("registrationData", new RegistrationDataDTO());
+        model.addAttribute("registrationData", new RegistrationDataDto());
         return "registration-form";
     }
 
     @PostMapping("/registration")
     public String processRegistrationPage(@ModelAttribute("registrationData")
-                                              @Valid RegistrationDataDTO registrationData, BindingResult result) {
+                                              @Valid RegistrationDataDto registrationData, BindingResult result) {
         if (result.hasErrors()) {
             return "registration-form";
         }
@@ -49,3 +49,4 @@ public class RegistrationController {
         return "activation-complete";
     }
 }
+

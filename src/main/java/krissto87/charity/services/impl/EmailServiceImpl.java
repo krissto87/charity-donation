@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @Slf4j
-public class DefaultEmailService implements EmailService {
+public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender emailSender;
 
-    public DefaultEmailService(JavaMailSender emailSender) {
+    public EmailServiceImpl(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 

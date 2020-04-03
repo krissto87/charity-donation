@@ -1,6 +1,6 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.dtos.CourierStatusDTO;
+import krissto87.charity.dtos.CourierStatusDto;
 import krissto87.charity.services.DonationService;
 import krissto87.charity.utils.GeneralUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import krissto87.charity.dtos.DonationDTO;
+import krissto87.charity.dtos.DonationDto;
 import krissto87.charity.services.CategoryService;
 import krissto87.charity.services.InstitutionService;
 
@@ -33,13 +33,13 @@ public class DonationController {
     public String prepareDonationForm(Model model) {
         model.addAttribute("categories", categoryService.findAllCategory());
         model.addAttribute("institutions", institutionService.findAllInstitutions());
-        model.addAttribute("donation", new DonationDTO());
+        model.addAttribute("donation", new DonationDto());
         return "/user/donation-form";
     }
 
     @PostMapping
     public String processDonationForm(@ModelAttribute("donation")
-                                          @Valid DonationDTO donationDTO, BindingResult result) {
+                                          @Valid DonationDto donationDTO, BindingResult result) {
         log.debug("DonationDTO data post begin: {}", donationDTO);
         if (result.hasErrors()) {
             return "user/donation-form";
@@ -57,20 +57,20 @@ public class DonationController {
     @GetMapping("/all")
     public String displayAllUserDonation(Model model) {
         String username = GeneralUtils.getUsername();
-        List<DonationDTO> donations = donationService.findAllByUser(username);
+        List<DonationDto> donations = donationService.findAllByUser(username);
         model.addAttribute("donations", donations);
         return "user/donation-all";
     }
 
     @GetMapping("/pick-up-confirm/{id}")
     public String prepareConfirmCourierVisit(Model model, @PathVariable Long id) {
-        CourierStatusDTO status = donationService.findToSetStatusById(id);
+        CourierStatusDto status = donationService.findToSetStatusById(id);
         model.addAttribute("status", status);
         return "user/pick-up-confirmation";
     }
 
     @PostMapping("/pick-up-confirm/{id}")
-    public String processConfirmCourierVisit(@PathVariable Long id, @Valid CourierStatusDTO statusDTO,
+    public String processConfirmCourierVisit(@PathVariable Long id, @Valid CourierStatusDto statusDTO,
                                              BindingResult result) {
         if (result.hasErrors()) {
             return "user/donation-all";

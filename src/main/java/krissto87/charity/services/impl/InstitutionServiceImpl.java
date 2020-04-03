@@ -1,6 +1,6 @@
 package krissto87.charity.services.impl;
 
-import krissto87.charity.dtos.InstitutionDTO;
+import krissto87.charity.dtos.InstitutionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,26 +15,26 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @Slf4j
-public class DefaultInstitutionService implements InstitutionService {
+public class InstitutionServiceImpl implements InstitutionService {
 
     private final InstitutionRepository institutionRepository;
     private final ModelMapper mapper;
 
-    public DefaultInstitutionService(InstitutionRepository institutionRepository, ModelMapper mapper) {
+    public InstitutionServiceImpl(InstitutionRepository institutionRepository, ModelMapper mapper) {
         this.institutionRepository = institutionRepository;
         this.mapper = mapper;
     }
 
     @Override
-    public List<InstitutionDTO> findAllInstitutions() {
+    public List<InstitutionDto> findAllInstitutions() {
         List<Institution> institutions = institutionRepository.findAll();
         log.debug("Institutions from db: {}", institutions);
         return institutions.stream()
-                .map(i-> mapper.map(i, InstitutionDTO.class)).collect(Collectors.toList());
+                .map(i-> mapper.map(i, InstitutionDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public void save(InstitutionDTO institutionDTO) {
+    public void save(InstitutionDto institutionDTO) {
         log.debug("InstitutionDTO {}", institutionDTO);
         Institution institution = new Institution();
         institution.setName(institutionDTO.getName());
@@ -44,12 +44,12 @@ public class DefaultInstitutionService implements InstitutionService {
     }
 
     @Override
-    public InstitutionDTO findById(Long id) {
-        return mapper.map(institutionRepository.getOne(id), InstitutionDTO.class);
+    public InstitutionDto findById(Long id) {
+        return mapper.map(institutionRepository.getOne(id), InstitutionDto.class);
     }
 
     @Override
-    public void update(InstitutionDTO institutionDTO) {
+    public void update(InstitutionDto institutionDTO) {
         institutionRepository.save(mapper.map(institutionDTO, Institution.class));
     }
 

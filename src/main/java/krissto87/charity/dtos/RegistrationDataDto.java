@@ -7,7 +7,7 @@ import lombok.Data;
 import javax.validation.constraints.*;
 
 @Data @SamePasswords
-public class RegistrationDataDTO {
+public class RegistrationDataDto {
 
     @NotBlank @Email @UniqueEmail
     private String email;

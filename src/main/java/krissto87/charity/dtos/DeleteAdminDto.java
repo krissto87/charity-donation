@@ -4,7 +4,7 @@ import krissto87.charity.validation.constraints.ActiveAdmin;
 import lombok.Data;
 
 @Data @ActiveAdmin
-public class DeleteAdminDTO {
+public class DeleteAdminDto {
 
     private Long id;
     private String email;

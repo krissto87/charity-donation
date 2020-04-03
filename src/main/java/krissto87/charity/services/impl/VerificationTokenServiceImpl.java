@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 @Service
 @Transactional
 @Slf4j
-public class DefaultVerificationTokenService implements VerificationTokenService {
+public class VerificationTokenServiceImpl implements VerificationTokenService {
 
     private final VerificationTokenRepository tokenRepository;
     private final UserRepository userRepository;
 
-    public DefaultVerificationTokenService(VerificationTokenRepository tokenRepository, UserRepository userRepository) {
+    public VerificationTokenServiceImpl(VerificationTokenRepository tokenRepository, UserRepository userRepository) {
         this.tokenRepository = tokenRepository;
         this.userRepository = userRepository;
     }

@@ -4,9 +4,8 @@ import krissto87.charity.domain.entities.User;
 import krissto87.charity.domain.entities.VerificationToken;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.domain.repository.VerificationTokenRepository;
-import krissto87.charity.dtos.ChangePasswordDTO;
-import krissto87.charity.dtos.RegistrationDataDTO;
-import krissto87.charity.dtos.UserProfileDTO;
+import krissto87.charity.dtos.ChangePasswordDto;
+import krissto87.charity.dtos.UserProfileDto;
 import krissto87.charity.services.EmailService;
 import krissto87.charity.services.UserService;
 import krissto87.charity.utils.GeneralUtils;
@@ -15,13 +14,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @Transactional
 @Slf4j
-public class DefaultUserService implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper mapper;
@@ -29,9 +26,9 @@ public class DefaultUserService implements UserService {
     private final EmailService emailService;
     private final VerificationTokenRepository tokenRepository;
 
-    public DefaultUserService(UserRepository userRepository, ModelMapper mapper,
-                              PasswordEncoder encoder, EmailService emailService,
-                              VerificationTokenRepository tokenRepository) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper mapper,
+                           PasswordEncoder encoder, EmailService emailService,
+                           VerificationTokenRepository tokenRepository) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.encoder = encoder;
@@ -40,13 +37,13 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public UserProfileDTO findUser() {
+    public UserProfileDto findUser() {
         User user = userRepository.findUserByEmail(GeneralUtils.getUsername());
-        return mapper.map(user, UserProfileDTO.class);
+        return mapper.map(user, UserProfileDto.class);
     }
 
     @Override
-    public void updateUser(UserProfileDTO profile) {
+    public void updateUser(UserProfileDto profile) {
         User user = userRepository.findUserByEmail(GeneralUtils.getUsername());
         log.debug("User from db: {}", user);
         user.setName(profile.getName());
@@ -57,7 +54,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void changeUserPassword(ChangePasswordDTO changePasswordDTO) {
+    public void changeUserPassword(ChangePasswordDto changePasswordDTO) {
         String username = GeneralUtils.getUsername();
         User user = userRepository.findUserByEmail(username);
         log.debug("User from db: {}", user);
@@ -84,7 +81,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void changeUserPasswordAfterRemind(ChangePasswordDTO changePassword, String tokenUrl) {
+    public void changeUserPasswordAfterRemind(ChangePasswordDto changePassword, String tokenUrl) {
         VerificationToken token = tokenRepository.findByToken(tokenUrl);
         User user = userRepository.getOne(token.getUser().getId());
         user.setPassword(encoder.encode(changePassword.getPassword()));

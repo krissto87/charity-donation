@@ -6,7 +6,7 @@ import krissto87.charity.domain.entities.VerificationToken;
 import krissto87.charity.domain.repository.RoleRepository;
 import krissto87.charity.domain.repository.UserRepository;
 import krissto87.charity.domain.repository.VerificationTokenRepository;
-import krissto87.charity.dtos.RegistrationDataDTO;
+import krissto87.charity.dtos.RegistrationDataDto;
 import krissto87.charity.services.EmailService;
 import krissto87.charity.services.RegistrationService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
 @Transactional
 @Slf4j
 @Validated
-public class DefaultRegistrationService implements RegistrationService {
+public class RegistrationServiceImpl implements RegistrationService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -31,9 +31,9 @@ public class DefaultRegistrationService implements RegistrationService {
     private final EmailService emailService;
     private final VerificationTokenRepository tokenRepository;
 
-    public DefaultRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                                      RoleRepository roleRepository, ModelMapper mapper,
-                                      EmailService emailService, VerificationTokenRepository tokenRepository) {
+    public RegistrationServiceImpl(PasswordEncoder passwordEncoder, UserRepository userRepository,
+                                   RoleRepository roleRepository, ModelMapper mapper,
+                                   EmailService emailService, VerificationTokenRepository tokenRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -43,7 +43,7 @@ public class DefaultRegistrationService implements RegistrationService {
     }
 
     @Override
-    public void register(@Valid RegistrationDataDTO registrationData) {
+    public void register(@Valid RegistrationDataDto registrationData) {
         log.debug("Registration data to create user: {}", registrationData);
         User user = mapper.map(registrationData, User.class);
         log.debug("User after mapping from registrationData: {}", user);

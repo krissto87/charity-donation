@@ -1,7 +1,7 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.dtos.ChangePasswordDTO;
-import krissto87.charity.dtos.RemindPasswordDTO;
+import krissto87.charity.dtos.ChangePasswordDto;
+import krissto87.charity.dtos.RemindPasswordDto;
 import krissto87.charity.services.UserService;
 import krissto87.charity.services.VerificationTokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,12 +26,12 @@ public class RemindPasswordController {
 
     @GetMapping("/remind-password")
     public String prepareRemindPasswordPage(Model model) {
-        model.addAttribute("remindPassword", new RemindPasswordDTO());
+        model.addAttribute("remindPassword", new RemindPasswordDto());
         return "remind-password";
     }
 
     @PostMapping("/remind-password")
-    public String sendEmailToResetPassword(@ModelAttribute("remindPassword") @Valid RemindPasswordDTO
+    public String sendEmailToResetPassword(@ModelAttribute("remindPassword") @Valid RemindPasswordDto
                                                        remindPasswordDTO, BindingResult result) {
         if (result.hasErrors()) {
             return "remind-password";
@@ -49,12 +49,12 @@ public class RemindPasswordController {
         if (tokenService.isTokenValidToRemindPassword(tokenUrl).equals(false)) {
             return "reset-password-failed";
         }
-        model.addAttribute("changePassword", new ChangePasswordDTO());
+        model.addAttribute("changePassword", new ChangePasswordDto());
         return "reset-password-form";
     }
 
     @PostMapping("/reset-password")
-    public String processChangePassword (@ModelAttribute("changePassword") @Valid ChangePasswordDTO changePassword,
+    public String processChangePassword (@ModelAttribute("changePassword") @Valid ChangePasswordDto changePassword,
                                          BindingResult result, @RequestParam("token") String tokenUrl) {
         if (result.hasErrors()) {
             return "reset-password-form";

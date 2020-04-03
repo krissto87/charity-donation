@@ -3,7 +3,7 @@ package krissto87.charity.dtos;
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class EditAdminDto {
 
     private Long id;
     private String name;

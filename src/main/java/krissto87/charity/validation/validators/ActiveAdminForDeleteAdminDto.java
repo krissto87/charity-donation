@@ -1,13 +1,13 @@
 package krissto87.charity.validation.validators;
 
-import krissto87.charity.dtos.DeleteAdminDTO;
+import krissto87.charity.dtos.DeleteAdminDto;
 import krissto87.charity.utils.GeneralUtils;
 import krissto87.charity.validation.constraints.ActiveAdmin;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ActiveAdminForDeleteAdminDTO implements ConstraintValidator<ActiveAdmin, DeleteAdminDTO> {
+public class ActiveAdminForDeleteAdminDto implements ConstraintValidator<ActiveAdmin, DeleteAdminDto> {
 
     @Override
     public void initialize(ActiveAdmin constraint) {
@@ -15,7 +15,7 @@ public class ActiveAdminForDeleteAdminDTO implements ConstraintValidator<ActiveA
     }
 
     @Override
-    public boolean isValid(DeleteAdminDTO adminDTO, ConstraintValidatorContext context) {
+    public boolean isValid(DeleteAdminDto adminDTO, ConstraintValidatorContext context) {
             boolean valid = adminDTO.getEmail().equals(GeneralUtils.getUsername());
             if (valid) {
                 context.disableDefaultConstraintViolation();

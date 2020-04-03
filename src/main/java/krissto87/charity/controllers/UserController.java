@@ -1,7 +1,7 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.dtos.ChangePasswordDTO;
-import krissto87.charity.dtos.UserProfileDTO;
+import krissto87.charity.dtos.ChangePasswordDto;
+import krissto87.charity.dtos.UserProfileDto;
 import krissto87.charity.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/profile")
-    public String processEditUserData(@ModelAttribute("profile") @Valid UserProfileDTO profile,
+    public String processEditUserData(@ModelAttribute("profile") @Valid UserProfileDto profile,
                                       BindingResult result) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";
@@ -45,12 +45,12 @@ public class UserController {
 
     @GetMapping("settings/password-change")
     public String prepareUserPasswordChange(Model model){
-        model.addAttribute("user", new ChangePasswordDTO());
+        model.addAttribute("user", new ChangePasswordDto());
         return "user/password-change";
     }
 
     @PostMapping("settings/password-change")
-    public String processPasswordChange(@ModelAttribute("user") @Valid ChangePasswordDTO changePassword,
+    public String processPasswordChange(@ModelAttribute("user") @Valid ChangePasswordDto changePassword,
                                         BindingResult result) {
         if (result.hasErrors()) {
             return "user/edit-user-profile";

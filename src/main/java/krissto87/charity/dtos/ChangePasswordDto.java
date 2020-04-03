@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data @SamePasswords
-public class ChangePasswordDTO {
+public class ChangePasswordDto {
 
     @NotBlank
     private String password;

@@ -1,9 +1,9 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.dtos.AdminDTO;
-import krissto87.charity.dtos.DeleteAdminDTO;
-import krissto87.charity.dtos.EditAdminDTO;
-import krissto87.charity.dtos.EditUserDTO;
+import krissto87.charity.dtos.AdminDto;
+import krissto87.charity.dtos.DeleteAdminDto;
+import krissto87.charity.dtos.EditAdminDto;
+import krissto87.charity.dtos.EditUserDto;
 import krissto87.charity.services.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,13 +30,13 @@ public class AdminController {
 
     @GetMapping("/add")
     public String prepareNewAdminForm(Model model) {
-        model.addAttribute("admin", new AdminDTO());
+        model.addAttribute("admin", new AdminDto());
         return "/admin/admin-form";
     }
 
     @PostMapping("/add")
     public String processCreateNewAdmin(@ModelAttribute("admin")
-                                            @Valid AdminDTO admin, BindingResult result){
+                                            @Valid AdminDto admin, BindingResult result){
         if (result.hasErrors()) {
             return "admin/admin-form";
         }
@@ -51,7 +51,7 @@ public class AdminController {
     }
 
     @PostMapping("/{id}/edit")
-    public String processAdminUpdate(@ModelAttribute("admin") @Valid EditAdminDTO admin, BindingResult result) {
+    public String processAdminUpdate(@ModelAttribute("admin") @Valid EditAdminDto admin, BindingResult result) {
         if (result.hasErrors()) {
             return "admin/edit-admin";
         }
@@ -66,7 +66,7 @@ public class AdminController {
     }
 
     @PostMapping("/{id}/delete")
-    public String processDeleteAdmin(@ModelAttribute("admin") @Valid DeleteAdminDTO admin, BindingResult result,
+    public String processDeleteAdmin(@ModelAttribute("admin") @Valid DeleteAdminDto admin, BindingResult result,
                                      @PathVariable Long id) {
         if (result.hasErrors()) {
             return "admin/delete-admin";
@@ -88,7 +88,7 @@ public class AdminController {
     }
 
     @PostMapping("/users/{id}/edit")
-    public String processUserUpdate(@ModelAttribute("user") @Valid EditUserDTO user, BindingResult result) {
+    public String processUserUpdate(@ModelAttribute("user") @Valid EditUserDto user, BindingResult result) {
         if (result.hasErrors()) {
             return "admin/edit-user";
         }

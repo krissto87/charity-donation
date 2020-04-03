@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class DefaultValidationService implements ValidationService {
+public class ValidationServiceImpl implements ValidationService {
 
     private final UserRepository userRepository;
 

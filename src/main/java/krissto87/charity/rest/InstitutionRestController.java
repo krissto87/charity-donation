@@ -1,6 +1,6 @@
 package krissto87.charity.rest;
 
-import krissto87.charity.dtos.InstitutionDTO;
+import krissto87.charity.dtos.InstitutionDto;
 import krissto87.charity.services.InstitutionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +22,14 @@ public class InstitutionRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<InstitutionDTO>> getAllInstitutions() {
-        List<InstitutionDTO> institutions = institutionService.findAllInstitutions();
+    public ResponseEntity<List<InstitutionDto>> getAllInstitutions() {
+        List<InstitutionDto> institutions = institutionService.findAllInstitutions();
         return new ResponseEntity<>(institutions, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getInstitution(@PathVariable Long id) {
-        InstitutionDTO institution = institutionService.findById(id);
+        InstitutionDto institution = institutionService.findById(id);
         if (institution == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

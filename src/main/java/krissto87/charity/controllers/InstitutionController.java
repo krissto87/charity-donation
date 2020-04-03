@@ -1,6 +1,6 @@
 package krissto87.charity.controllers;
 
-import krissto87.charity.dtos.InstitutionDTO;
+import krissto87.charity.dtos.InstitutionDto;
 import krissto87.charity.services.InstitutionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,20 +23,20 @@ public class InstitutionController {
 
     @GetMapping
     public String displayAllInstitutionPage(Model model) {
-        List<InstitutionDTO> institutions = institutionService.findAllInstitutions();
+        List<InstitutionDto> institutions = institutionService.findAllInstitutions();
         model.addAttribute("institutions", institutions);
         return "admin/institution-all";
     }
 
     @GetMapping("/add")
     public String prepareNewInstitutionPage(Model model) {
-        model.addAttribute("institution", new InstitutionDTO());
+        model.addAttribute("institution", new InstitutionDto());
         return "admin/institution-form";
     }
 
     @PostMapping("/add")
     public String processCreateNewInstitution(@ModelAttribute("institution")
-                                                  @Valid InstitutionDTO institution, BindingResult result) {
+                                                  @Valid InstitutionDto institution, BindingResult result) {
         log.debug("InstitutionDTO data: {}", institution);
         if (result.hasErrors()) {
             return "admin/institution-form";
@@ -48,13 +48,13 @@ public class InstitutionController {
 
     @GetMapping("/{id}/edit")
     public String prepareInstitutionEditPage(Model model, @PathVariable Long id) {
-        InstitutionDTO institution = institutionService.findById(id);
+        InstitutionDto institution = institutionService.findById(id);
         model.addAttribute("institution", institution);
         return "admin/edit-institution";
     }
 
     @PostMapping("/{id}/edit")
-    public String processInstitutionUpdate(@Valid InstitutionDTO institutionDTO, BindingResult result) {
+    public String processInstitutionUpdate(@Valid InstitutionDto institutionDTO, BindingResult result) {
         if (result.hasErrors()) {
             return "admin/edit-institution";
         }
@@ -64,7 +64,7 @@ public class InstitutionController {
 
     @GetMapping("/{id}/delete")
     public String prepareEditInstitutionPage(Model model, @PathVariable Long id) {
-        InstitutionDTO institution = institutionService.findById(id);
+        InstitutionDto institution = institutionService.findById(id);
         model.addAttribute("institution", institution);
         return "admin/delete-institution";
     }

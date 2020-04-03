@@ -1,24 +1,24 @@
 package krissto87.charity.services;
 
-import krissto87.charity.dtos.CourierStatusDTO;
-import krissto87.charity.dtos.DonationDTO;
-import krissto87.charity.dtos.DonationDetailsDTO;
+import krissto87.charity.dtos.CourierStatusDto;
+import krissto87.charity.dtos.DonationDto;
+import krissto87.charity.dtos.DonationDetailsDto;
 
 import java.util.List;
 
 public interface DonationService {
     Long sumBagsFromAllDonations();
 
-    void saveDonation(DonationDTO donationDTO);
+    void saveDonation(DonationDto donationDTO);
 
     Long countOfInstitutionsWithDonations();
 
-    List<DonationDTO> findAllByUser(String username);
+    List<DonationDto> findAllByUser(String username);
 
-    CourierStatusDTO findToSetStatusById(Long id);
+    CourierStatusDto findToSetStatusById(Long id);
 
-    void confirmCourierVisit(CourierStatusDTO statusDTO);
+    void confirmCourierVisit(CourierStatusDto statusDTO);
 
-    DonationDetailsDTO findById(Long id);
+    DonationDetailsDto findById(Long id);
 }
 

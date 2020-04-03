@@ -1,18 +1,17 @@
 package krissto87.charity.services;
 
-import krissto87.charity.dtos.ChangePasswordDTO;
-import krissto87.charity.dtos.RegistrationDataDTO;
-import krissto87.charity.dtos.UserProfileDTO;
+import krissto87.charity.dtos.ChangePasswordDto;
+import krissto87.charity.dtos.UserProfileDto;
 
 public interface UserService {
 
-    UserProfileDTO findUser();
+    UserProfileDto findUser();
 
-    void updateUser(UserProfileDTO profile);
+    void updateUser(UserProfileDto profile);
 
-    void changeUserPassword(ChangePasswordDTO changePasswordDTO);
+    void changeUserPassword(ChangePasswordDto changePasswordDTO);
 
     Boolean sendEmailToResetPassword(String email);
 
-    void changeUserPasswordAfterRemind(ChangePasswordDTO changePassword, String tokenUrl);
+    void changeUserPasswordAfterRemind(ChangePasswordDto changePassword, String tokenUrl);
 }
